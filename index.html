@@ -1976,7 +1976,8 @@ window.saveEmailConfig = function(){
   document.getElementById('email-cfg-status').innerHTML='<span style="color:var(--green)">✅ Configuración guardada exitosamente.</span>';
 };
 
-// ========= EVENT Hfunction renderSidebar() {
+// ========= SIDEBAR =========
+function renderSidebar() {
   const u = state.user;
   const nameStr = u ? `${u.nombre} ${u.apellido}` : "Invitado";
   const licStr = u ? u.licencia : "Sin registro";
