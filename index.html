@@ -1303,21 +1303,49 @@ window.setView = (v) => {
   render();
 };
 
+window.goIntro = () => setView('intro');
+window.goRegister = () => setView('register');
+window.startCourse = () => setView('map');
 
-// ========= RENDER =========
-function render(){
-  const root=document.getElementById('root');
-  if(state.view==='intro') root.innerHTML=renderIntro();
-  else if(state.view==='register') root.innerHTML=renderRegister();
-  else if(state.view==='module') root.innerHTML=renderModule();
-  else if(state.view==='moduleExam') root.innerHTML=renderModuleExam();
-  else if(state.view==='examResult') root.innerHTML=renderExamResult();
-  else if(state.view==='map') root.innerHTML=renderMap();
-  else if(state.view==='finalExam') root.innerHTML=renderFinalExam();
-  else if(state.view==='finalResult') root.innerHTML=renderFinalResult();
-  if(state.adminOpen) showAdminPanel();
+window.guestMode = () => {
+  state.user = null;
   saveState();
-}
+  setView('map');
+};
+
+window.logout = () => {
+  state.user = null;
+  state.completedModules = [];
+  state.moduleScores = {};
+  state.checkedItems = {};
+  saveState();
+  setView('intro');
+};
+
+window.submitRegister = () => {
+  const nombre = document.getElementById('reg-nombre').value.trim();
+  const apellido = document.getElementById('reg-apellido').value.trim();
+  const licencia = document.getElementById('reg-licencia').value.trim();
+  const email = document.getElementById('reg-email').value.trim();
+  const errDiv = document.getElementById('reg-error');
+  
+  if (!nombre || !apellido || !licencia || !email) {
+    errDiv.style.display = 'block';
+    errDiv.textContent = 'Por favor, complete todos los campos obligatorios.';
+    return;
+  }
+  
+  if (!email.includes('@') || !email.includes('.')) {
+    errDiv.style.display = 'block';
+    errDiv.textContent = 'Por favor, ingrese un correo electrónico válido.';
+    return;
+  }
+  
+  errDiv.style.display = 'none';
+  state.user = { nombre, apellido, licencia, email };
+  saveState();
+  setView('map');
+};
 
 function renderIntro(){
   const greeting = state.user ? `<div class="badge badge-green" style="margin-bottom:10px;font-size:12px">✓ Bienvenido, ${state.user.nombre} ${state.user.apellido}</div>` : '';
