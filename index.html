@@ -1316,6 +1316,7 @@ window.setView = (v) => {
 window.goIntro = () => setView('intro');
 window.goRegister = () => setView('register');
 window.startCourse = () => setView('map');
+window.goMap = () => setView('map');
 
 window.guestMode = () => {
   state.user = null;
@@ -1355,6 +1356,176 @@ window.submitRegister = () => {
   state.user = { nombre, apellido, licencia, email };
   saveState();
   setView('map');
+};
+
+window.goModule = (i) => {
+  state.currentModule = i;
+  state.currentChapter = 0;
+  state.view = 'module';
+  render();
+};
+
+window.setChapter = (i) => {
+  state.currentChapter = i;
+  render();
+};
+
+window.prevChapter = () => {
+  if (state.currentChapter > 0) {
+    state.currentChapter--;
+    render();
+  }
+};
+
+window.nextChapter = () => {
+  const m = MODULES[state.currentModule];
+  if (state.currentChapter < m.chapters.length - 1) {
+    state.currentChapter++;
+    render();
+  }
+};
+
+window.goExam = () => {
+  state.examAnswers = [];
+  state.examQ = 0;
+  state.examReviewed = false;
+  state.view = 'moduleExam';
+  render();
+};
+
+window.backToModule = () => {
+  state.view = 'module';
+  render();
+};
+
+window.setExamQ = (i) => {
+  state.examQ = i;
+  render();
+};
+
+window.prevExamQ = () => {
+  if (state.examQ > 0) {
+    state.examQ--;
+    render();
+  }
+};
+
+window.nextExamQ = () => {
+  const m = MODULES[state.currentModule];
+  if (state.examQ < m.quiz.length - 1) {
+    state.examQ++;
+    render();
+  }
+};
+
+window.selectAnswer = (oi) => {
+  if (!state.examReviewed) {
+    state.examAnswers[state.examQ] = oi;
+    render();
+  }
+};
+
+window.submitExam = () => {
+  state.examReviewed = true;
+  render();
+};
+
+window.showExamResult = () => {
+  const m = MODULES[state.currentModule];
+  const correct = m.quiz.filter((q, i) => state.examAnswers[i] === q.ans).length;
+  if (correct >= 4 && !state.completedModules.includes(state.currentModule)) {
+    state.completedModules.push(state.currentModule);
+    state.moduleScores[state.currentModule] = correct;
+  }
+  state.view = 'examResult';
+  render();
+};
+
+window.retryExam = () => {
+  state.examAnswers = [];
+  state.examQ = 0;
+  state.examReviewed = false;
+  state.view = 'moduleExam';
+  render();
+};
+
+window.nextModule = () => {
+  const next = state.currentModule + 1;
+  if (next < MODULES.length) {
+    state.currentModule = next;
+    state.currentChapter = 0;
+    state.examAnswers = [];
+    state.examQ = 0;
+    state.examReviewed = false;
+    state.view = 'module';
+    render();
+  } else {
+    state.view = 'map';
+    render();
+  }
+};
+
+window.startFinal = () => {
+  state.finalAnswers = [];
+  state.finalQ = 0;
+  state.finalReviewed = false;
+  state.view = 'finalExam';
+  render();
+};
+
+window.setFinalQ = (i) => {
+  state.finalQ = i;
+  render();
+};
+
+window.prevFinalQ = () => {
+  if (state.finalQ > 0) {
+    state.finalQ--;
+    render();
+  }
+};
+
+window.nextFinalQ = () => {
+  if (state.finalQ < 29) {
+    state.finalQ++;
+    render();
+  }
+};
+
+window.selectFinalAnswer = (oi) => {
+  if (!state.finalReviewed) {
+    state.finalAnswers[state.finalQ] = oi;
+    render();
+  }
+};
+
+window.submitFinal = () => {
+  state.finalReviewed = true;
+  render();
+};
+
+window.showFinalResult = () => {
+  state.view = 'finalResult';
+  render();
+};
+
+window.retryFinal = () => {
+  state.finalAnswers = [];
+  state.finalQ = 0;
+  state.finalReviewed = false;
+  state.view = 'finalExam';
+  render();
+};
+
+window.openAdmin = () => {
+  state.adminOpen = true;
+  render();
+};
+
+window.closeAdmin = () => {
+  state.adminOpen = false;
+  const el = document.getElementById('admin-modal');
+  if (el) el.remove();
 };
 
 function renderIntro(){
