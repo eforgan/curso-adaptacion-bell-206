@@ -2145,34 +2145,34 @@ function renderWeightBalance() {
     
     <div class="wb-grid">
       <div class="card">
-        <h3 style="margin-bottom:12px;color:var(--amber2)">📥 Datos de Carga (Libras)</h3>
+        <h3 style="margin-bottom:12px;color:var(--amber2)">📥 Datos de Carga / Load Data (Imperial & Métrico)</h3>
         
         <div class="wb-input-group">
           <div class="wb-row">
             <div class="wb-col">
-              <label>Peso Vacío Básico (lbs)</label>
+              <label>Peso Vacío Básico (lbs / ${(emptyW * 0.45359).toFixed(1)} kg)</label>
               <input type="number" id="wb-empty-weight" value="${wb.empty_weight}" oninput="updateWB('empty_weight', this.value)" />
             </div>
             <div class="wb-col">
-              <label>Estación CG (in)</label>
+              <label>Estación CG (in / ${(parseFloat(wb.empty_arm) * 2.54).toFixed(1)} cm)</label>
               <input type="number" step="0.1" id="wb-empty-arm" value="${wb.empty_arm}" oninput="updateWB('empty_arm', this.value)" />
             </div>
           </div>
           
           <div class="wb-row">
             <div class="wb-col">
-              <label>Piloto (Cabina Der) (lbs)</label>
+              <label>Piloto (Cabina Der) (lbs / ${(pilotW * 0.45359).toFixed(1)} kg)</label>
               <input type="number" id="wb-pilot" value="${wb.pilot}" oninput="updateWB('pilot', this.value)" />
             </div>
             <div class="wb-col">
-              <label>Copiloto / Pasajero Del. (lbs)</label>
+              <label>Copiloto / Pasajero Del. (lbs / ${(copilotW * 0.45359).toFixed(1)} kg)</label>
               <input type="number" id="wb-copilot" value="${wb.copilot}" oninput="updateWB('copilot', this.value)" />
             </div>
           </div>
           
           <div class="wb-row">
             <div class="wb-col">
-              <label>Pasajeros Traseros (Izq / Centro / Der) (lbs)</label>
+              <label>Pasajeros Traseros (lbs / ${((rlW + rcW + rrW) * 0.45359).toFixed(1)} kg total)</label>
               <div style="display:flex;gap:4px">
                 <input type="number" placeholder="Izq" value="${wb.rear_left}" oninput="updateWB('rear_left', this.value)" style="flex:1;margin-bottom:0" />
                 <input type="number" placeholder="Cen" value="${wb.rear_center}" oninput="updateWB('rear_center', this.value)" style="flex:1;margin-bottom:0" />
@@ -2185,23 +2185,23 @@ function renderWeightBalance() {
             <div class="wb-col">
               <label>Combustible (Galones - Máx 91)</label>
               <input type="number" id="wb-fuel" value="${wb.fuel}" max="91" oninput="updateWB('fuel', this.value)" />
-              <span class="metric" style="font-size:11px">Equivale a ${(parseFloat(wb.fuel)*6.7).toFixed(1)} lbs</span>
+              <span class="metric" style="font-size:11px">Equivale a: ${(parseFloat(wb.fuel)*6.7).toFixed(1)} lbs / ${(parseFloat(wb.fuel)*3.04).toFixed(1)} kg / ${(parseFloat(wb.fuel)*3.785).toFixed(1)} L</span>
             </div>
             <div class="wb-col">
-              <label>Equipaje (lbs - Máx 250)</label>
+              <label>Equipaje (lbs / ${(baggageW * 0.45359).toFixed(1)} kg - Máx 250 lbs / 113 kg)</label>
               <input type="number" id="wb-baggage" value="${wb.baggage}" max="250" oninput="updateWB('baggage', this.value)" />
             </div>
           </div>
           
           <div class="wb-row">
             <div class="wb-col">
-              <label>Carga Externa en Gancho (lbs - Máx 1200)</label>
+              <label>Carga en Gancho (lbs / ${(hookW * 0.45359).toFixed(1)} kg - Máx 1200 lbs / 544 kg)</label>
               <input type="number" id="wb-hook" value="${wb.cargo_hook}" max="1200" oninput="updateWB('cargo_hook', this.value)" />
             </div>
             <div class="wb-col">
               <label>Aceite de Motor (Galones)</label>
               <input type="number" step="0.1" id="wb-oil" value="${wb.oil_qty}" oninput="updateWB('oil_qty', this.value)" />
-              <span class="metric" style="font-size:11px">Equivale a ${(parseFloat(wb.oil_qty)*7.5).toFixed(1)} lbs</span>
+              <span class="metric" style="font-size:11px">Equivale a: ${(parseFloat(wb.oil_qty)*7.5).toFixed(1)} lbs / ${(parseFloat(wb.oil_qty)*3.4).toFixed(1)} kg / ${(parseFloat(wb.oil_qty)*3.785).toFixed(1)} L</span>
             </div>
           </div>
         </div>
@@ -2279,25 +2279,28 @@ function renderWeightBalance() {
       <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px">
         <div style="background:var(--bg3);border-radius:var(--radius);padding:10px">
           <div class="tag">Peso Bruto Total</div>
-          <div style="font-size:18px;font-weight:700;color:var(--text)">${totalW.toFixed(1)} lbs</div>
-          <span style="font-size:11px;color:var(--text3)">Límite: ${maxStructuralW} lbs ${hookW>0?'(Carga Externa)':'(Interno)'}</span>
+          <div style="font-size:16px;font-weight:700;color:var(--text)">${totalW.toFixed(1)} lbs</div>
+          <div style="font-size:12px;color:var(--blue2);font-weight:500">${(totalW * 0.45359237).toFixed(1)} kg</div>
+          <span style="font-size:10px;color:var(--text3)">Límite: ${maxStructuralW} lbs / ${(maxStructuralW * 0.45359237).toFixed(0)} kg</span>
         </div>
         
         <div style="background:var(--bg3);border-radius:var(--radius);padding:10px">
           <div class="tag">CG Longitudinal</div>
-          <div style="font-size:18px;font-weight:700;color:var(--text)">${cgLong.toFixed(2)} in</div>
-          <span style="font-size:11px;color:var(--text3)">Límites: ${cgLongMin.toFixed(1)} - ${cgLongMax.toFixed(2)} in</span>
+          <div style="font-size:16px;font-weight:700;color:var(--text)">${cgLong.toFixed(2)} in</div>
+          <div style="font-size:12px;color:var(--blue2);font-weight:500">${(cgLong * 25.4).toFixed(0)} mm</div>
+          <span style="font-size:10px;color:var(--text3)">Límites: ${cgLongMin.toFixed(1)} - ${cgLongMax.toFixed(2)} in / ${(cgLongMin*25.4).toFixed(0)} - ${(cgLongMax*25.4).toFixed(0)} mm</span>
         </div>
         
         <div style="background:var(--bg3);border-radius:var(--radius);padding:10px">
           <div class="tag">CG Lateral</div>
-          <div style="font-size:18px;font-weight:700;color:var(--text)">${cgLat.toFixed(2)} in</div>
-          <span style="font-size:11px;color:var(--text3)">Límites: -3.0L - +4.0R in</span>
+          <div style="font-size:16px;font-weight:700;color:var(--text)">${cgLat.toFixed(2)} in</div>
+          <div style="font-size:12px;color:var(--blue2);font-weight:500">${(cgLat * 25.4).toFixed(1)} mm</div>
+          <span style="font-size:10px;color:var(--text3)">Límites: -3.0L - +4.0R in / -76L - +101R mm</span>
         </div>
       </div>
       
-      ${baggageW > 250 ? `<div class="danger-box" style="margin-top:10px"><p>⚠ EXCESO DE PESO EN PORTAEQUIPAJES: El compartimento intermedio está limitado a un máximo estricto de <strong>250 lbs</strong>.</p></div>`:''}
-      ${parseFloat(wb.fuel) > 91 ? `<div class="danger-box" style="margin-top:10px"><p>⚠ EXCESO DE COMBUSTIBLE: La capacidad máxima del tanque de vejiga es de <strong>91 galones</strong>.</p></div>`:''}
+      ${baggageW > 250 ? `<div class="danger-box" style="margin-top:10px"><p>⚠ EXCESO DE PESO EN PORTAEQUIPAJES: El compartimento intermedio está limitado a un máximo estricto de <strong>250 lbs (113.4 kg)</strong>.</p></div>`:''}
+      ${parseFloat(wb.fuel) > 91 ? `<div class="danger-box" style="margin-top:10px"><p>⚠ EXCESO DE COMBUSTIBLE: La capacidad máxima del tanque de vejiga es de <strong>91 galones (344.5 litros)</strong>.</p></div>`:''}
     </div>
   </div>`;
 }
@@ -2402,7 +2405,7 @@ function renderPerformance() {
   <div class="view-enter">
     <div class="flex-between" style="margin-bottom:14px">
       <h2>📊 Cálculos de Rendimiento (Performance)</h2>
-      <span class="badge badge-blue">Peso actual para cálculo: ${currentWeight.toFixed(0)} lbs</span>
+      <span class="badge badge-blue">Peso actual: ${currentWeight.toFixed(0)} lbs / ${(currentWeight * 0.45359237).toFixed(1)} kg</span>
     </div>
     
     <div class="perf-grid">
@@ -2410,7 +2413,7 @@ function renderPerformance() {
         <h3 style="margin-bottom:12px;color:var(--amber2)">📥 Parámetros Atmosféricos</h3>
         
         <div class="wb-input-group">
-          <label>Altitud de Presión (ft)</label>
+          <label>Altitud de Presión (ft / ${(pressAlt * 0.3048).toFixed(0)} m)</label>
           <input type="number" value="${perf.alt_press}" oninput="updatePerf('alt_press', this.value)" style="margin-bottom:8px" />
           
           <label>Temperatura Exterior (OAT °C)</label>
@@ -2424,9 +2427,9 @@ function renderPerformance() {
           <label>Configuración de Puertas</label>
           <select id="perf-doors" onchange="updatePerf('doors', this.value)" style="background:var(--bg3);border:1.5px solid var(--border2);border-radius:var(--radius);padding:11px 16px;color:var(--text);font-size:14px;width:100%;margin-bottom:14px">
             <option value="installed" ${perf.doors==='installed'?'selected':''}>Todas instaladas</option>
-            <option value="rear_off" ${perf.doors==='rear_off'?'selected':''}>Puertas traseras quitadas (-350 ft/min R/C)</option>
-            <option value="front_off" ${perf.doors==='front_off'?'selected':''}>Puertas delanteras quitadas (-450 ft/min R/C)</option>
-            <option value="all_off" ${perf.doors==='all_off'?'selected':''}>Todas las puertas quitadas (-600 ft/min R/C)</option>
+            <option value="rear_off" ${perf.doors==='rear_off'?'selected':''}>Puertas traseras quitadas (-350 ft/min / -1.78 m/s R/C)</option>
+            <option value="front_off" ${perf.doors==='front_off'?'selected':''}>Puertas delanteras quitadas (-450 ft/min / -2.29 m/s R/C)</option>
+            <option value="all_off" ${perf.doors==='all_off'?'selected':''}>Todas las puertas quitadas (-600 ft/min / -3.05 m/s R/C)</option>
           </select>
         </div>
       </div>
@@ -2437,22 +2440,22 @@ function renderPerformance() {
           
           <div class="data-row">
             <span class="data-label">Altitud de Densidad</span>
-            <span class="data-value" style="color:var(--text)">${densAlt.toFixed(0)} pies</span>
+            <span class="data-value" style="color:var(--text)">${densAlt.toFixed(0)} pies / ${(densAlt * 0.3048).toFixed(0)} m</span>
           </div>
           
           <div class="data-row">
             <span class="data-label">Techo Estacionario IGE (Máx Peso)</span>
-            <span class="data-value" style="color:${canHoverIGE?'var(--green)':'var(--red)'}">${maxIGE.toFixed(0)} lbs</span>
+            <span class="data-value" style="color:${canHoverIGE?'var(--green)':'var(--red)'}">${maxIGE.toFixed(0)} lbs / ${(maxIGE * 0.45359237).toFixed(0)} kg</span>
           </div>
           
           <div class="data-row">
             <span class="data-label">Techo Estacionario OGE (Máx Peso)</span>
-            <span class="data-value" style="color:${canHoverOGE?'var(--green)':'var(--red)'}">${maxOGE.toFixed(0)} lbs</span>
+            <span class="data-value" style="color:${canHoverOGE?'var(--green)':'var(--red)'}">${maxOGE.toFixed(0)} lbs / ${(maxOGE * 0.45359237).toFixed(0)} kg</span>
           </div>
           
           <div class="data-row">
             <span class="data-label">Razón de Ascenso (R/C Máx)</span>
-            <span class="data-value" style="color:var(--text)">${climbRate > 0 ? climbRate.toFixed(0) + ' ft/min' : 'No es posible el ascenso'}</span>
+            <span class="data-value" style="color:var(--text)">${climbRate > 0 ? climbRate.toFixed(0) + ' ft/min / ' + (climbRate * 0.00508).toFixed(2) + ' m/s' : 'No es posible el ascenso'}</span>
           </div>
           
           <div class="data-row">
@@ -2464,7 +2467,7 @@ function renderPerformance() {
         <div class="card">
           <h3 style="font-size:13px;margin-bottom:8px">Análisis de Capacidad Operativa</h3>
           <p style="font-size:13px;line-height:1.6">
-            Para el peso actual de <strong>${currentWeight.toFixed(0)} lbs</strong> en la atmósfera especificada:<br>
+            Para el peso actual de <strong>${currentWeight.toFixed(0)} lbs (${(currentWeight * 0.45359237).toFixed(0)} kg)</strong> en la atmósfera especificada:<br>
             • Estacionario IGE: ${canHoverIGE?'<span style="color:var(--green)">✓ Posible</span>':'<span style="color:var(--red)">✗ Peso excede capacidad IGE</span>'}<br>
             • Estacionario OGE: ${canHoverOGE?'<span style="color:var(--green)">✓ Posible</span>':'<span style="color:var(--red)">✗ Peso excede capacidad OGE</span>'}<br>
             • Límite de Torque: ${powerOk?'<span style="color:var(--green)">✓ Dentro de límites motor</span>':'<span style="color:var(--red)">✗ Excede 100% Torque (¡Peligro!)</span>'}
@@ -2599,7 +2602,7 @@ function renderHVDiagram() {
         </svg>
         
         <div style="margin-top:14px;font-size:11px;color:var(--text3);text-align:center">
-          Eje X: Velocidad (MPH) | Eje Y: Altura sobre el suelo (Pies)
+          Eje X: Velocidad (MPH / km/h) | Eje Y: Altura sobre el suelo (Pies / Metros)
         </div>
       </div>
       
@@ -2610,13 +2613,13 @@ function renderHVDiagram() {
           
           <div class="wb-input-group">
             <div style="display:flex;justify-content:space-between">
-              <label>Velocidad: <strong>${flightSpeed} MPH</strong></label>
-              <span class="metric">${(flightSpeed*0.868976).toFixed(0)} nudos</span>
+              <label>Velocidad: <strong>${flightSpeed} MPH / ${(flightSpeed*1.60934).toFixed(0)} km/h</strong></label>
+              <span class="metric">${(flightSpeed*0.868976).toFixed(0)} nudos (kts)</span>
             </div>
             <input type="range" min="0" max="120" value="${flightSpeed}" oninput="updatePerf('flight_speed', this.value)" style="margin-bottom:12px;width:100%" />
             
             <div style="display:flex;justify-content:space-between">
-              <label>Altura: <strong>${flightHeight} FT</strong></label>
+              <label>Altura: <strong>${flightHeight} FT / ${(flightHeight*0.3048).toFixed(0)} m</strong></label>
               <span class="metric">${(flightHeight*0.3048).toFixed(1)} metros</span>
             </div>
             <input type="range" min="0" max="600" step="5" value="${flightHeight}" oninput="updatePerf('flight_height', this.value)" style="width:100%" />
@@ -2633,7 +2636,7 @@ function renderHVDiagram() {
               : 'Te encuentras en una zona segura de operación. En caso de falla de motor, dispones de la altura necesaria para acelerar o la velocidad necesaria para ejecutar una guiñada y planeo correctos hacia un aterrizaje forzoso controlado.'}
           </p>
           <div style="background:var(--bg3);border-radius:var(--radius);padding:8px;margin-top:10px;font-size:11px;color:var(--text3)">
-            Factor de Ensanchamiento de Curva: <strong>${F.toFixed(2)}x</strong> (Escala según altitud de densidad y peso bruto actual).
+            Factor de Ensanchamiento de Curva: <strong>${F.toFixed(2)}x</strong> (Escala según altitud de densidad y peso bruto actual: ${currentWeight.toFixed(0)} lbs / ${(currentWeight*0.453592).toFixed(0)} kg y altitud ${densAlt.toFixed(0)} ft / ${(densAlt*0.3048).toFixed(0)} m).
           </div>
         </div>
       </div>
@@ -2739,22 +2742,17 @@ function renderBody() {
 function render(){
   const root=document.getElementById('root');
   
-  if (state.view === 'intro' || state.view === 'register') {
-    root.className = 'app';
-    root.innerHTML = renderBody();
-  } else {
-    root.className = 'app app-container';
-    root.innerHTML = renderSidebar() + `<div class="main-content" style="flex:1">${renderBody()}</div>`;
-    
-    // Auto-trigger score pops / confetti on results
-    if (state.view === 'examResult') {
-      const m=MODULES[state.currentModule];
-      const correct=m.quiz.filter((q,i)=>state.examAnswers[i]===q.ans).length;
-      if(correct>=4) setTimeout(launchConfetti, 300);
-    } else if (state.view === 'finalResult') {
-      const correct=FINAL_EXAM.filter((q,i)=>state.finalAnswers[i]===q.ans).length;
-      if(correct>=24) setTimeout(()=>launchConfetti(true), 400);
-    }
+  root.className = 'app app-container';
+  root.innerHTML = renderSidebar() + `<div class="main-content" style="flex:1">${renderBody()}</div>`;
+  
+  // Auto-trigger score pops / confetti on results
+  if (state.view === 'examResult') {
+    const m=MODULES[state.currentModule];
+    const correct=m.quiz.filter((q,i)=>state.examAnswers[i]===q.ans).length;
+    if(correct>=4) setTimeout(launchConfetti, 300);
+  } else if (state.view === 'finalResult') {
+    const correct=FINAL_EXAM.filter((q,i)=>state.finalAnswers[i]===q.ans).length;
+    if(correct>=24) setTimeout(()=>launchConfetti(true), 400);
   }
 
   if(state.adminOpen) showAdminPanel();
