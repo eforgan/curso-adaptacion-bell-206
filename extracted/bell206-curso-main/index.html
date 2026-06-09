@@ -1,0 +1,1272 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Curso de Adaptación — Bell 206B JetRanger III</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0f1117;--bg2:#161b24;--bg3:#1e2535;--bg4:#252d40;--amber:#e8a020;--amber2:#f5c842;--blue:#3a7bd5;--blue2:#5a9bf0;--green:#2ecc71;--red:#e74c3c;--text:#e8eaf0;--text2:#9aa5b8;--text3:#6b7a94;--border:#2a3347;--border2:#3a4a66;--radius:8px;--radius2:12px;}
+body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh}
+.app{min-height:600px;max-width:820px;margin:0 auto;padding:16px 12px}
+.btn{padding:10px 20px;border-radius:var(--radius);border:1.5px solid var(--amber);background:transparent;color:var(--amber);cursor:pointer;font-size:14px;font-weight:500;transition:all .2s;font-family:inherit}
+.btn:hover{background:var(--amber);color:#000}
+.btn-primary{background:var(--amber);color:#000;border-color:var(--amber)}
+.btn-primary:hover{background:var(--amber2)}
+.btn-sm{padding:7px 14px;font-size:13px}
+.btn-danger{border-color:var(--red);color:var(--red)}.btn-danger:hover{background:var(--red);color:#fff}
+.btn-green{border-color:var(--green);color:var(--green)}.btn-green:hover{background:var(--green);color:#000}
+.btn-blue{border-color:var(--blue2);color:var(--blue2)}.btn-blue:hover{background:var(--blue2);color:#fff}
+.card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius2);padding:20px}
+.badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:500}
+.badge-amber{background:#3a2800;color:var(--amber);border:1px solid var(--amber)}
+.badge-green{background:#0a2e1a;color:var(--green);border:1px solid var(--green)}
+.badge-red{background:#2e0a0a;color:var(--red);border:1px solid var(--red)}
+.badge-blue{background:#0a1e3a;color:var(--blue2);border:1px solid var(--blue2)}
+.badge-gray{background:var(--bg3);color:var(--text3);border:1px solid var(--border)}
+.tag{font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px}
+.sep{height:1px;background:var(--border);margin:16px 0}
+.progress-bar{height:4px;background:var(--bg3);border-radius:2px;overflow:hidden;margin:8px 0}
+.progress-fill{height:100%;background:var(--amber);border-radius:2px;transition:width .4s}
+.flex{display:flex;align-items:center;gap:10px}.flex-between{display:flex;align-items:center;justify-content:space-between}
+h1{font-size:22px;font-weight:500;color:var(--amber2)}h2{font-size:18px;font-weight:500}
+h3{font-size:15px;font-weight:500;color:var(--amber)}
+p{font-size:14px;line-height:1.7;color:var(--text2)}ul{padding-left:18px}li{font-size:14px;line-height:1.8;color:var(--text2)}
+.warn-box{background:#1e1500;border:1px solid #5a3800;border-left:3px solid var(--amber);border-radius:var(--radius);padding:12px 14px;margin:10px 0}
+.warn-box p{font-size:13px;color:#d4a030}
+.info-box{background:#0a1e35;border:1px solid #1e3a5a;border-left:3px solid var(--blue2);border-radius:var(--radius);padding:12px 14px;margin:10px 0}
+.info-box p{font-size:13px;color:#7ab8f5}
+.danger-box{background:#1e0a0a;border:1px solid #5a1a1a;border-left:3px solid var(--red);border-radius:var(--radius);padding:12px 14px;margin:10px 0}
+.danger-box p{font-size:13px;color:#f07070}
+.data-row{display:flex;justify-content:space-between;align-items:baseline;padding:6px 0;border-bottom:1px solid var(--border)}
+.data-row:last-child{border-bottom:none}
+.data-label{font-size:13px;color:var(--text2)}.data-value{font-size:13px;font-weight:500;color:var(--amber2);text-align:right;max-width:60%}
+.chapter-title{font-size:14px;font-weight:500;color:var(--blue2);margin-bottom:8px;padding-bottom:6px;border-bottom:1px solid var(--border)}
+.opt{background:var(--bg3);border:1.5px solid var(--border2);border-radius:var(--radius);padding:12px 14px;cursor:pointer;transition:all .2s;font-size:14px;color:var(--text2);margin-bottom:8px;text-align:left;width:100%;font-family:inherit}
+.opt:hover{border-color:var(--amber);color:var(--text)}.opt.selected{border-color:var(--amber);background:#2a1e00;color:var(--amber2)}
+.opt.correct{border-color:var(--green);background:#0a2010;color:var(--green)}.opt.incorrect{border-color:var(--red);background:#2a0a0a;color:var(--red)}
+.ep-dot{width:28px;height:28px;border-radius:50%;border:1.5px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:11px;cursor:pointer;color:var(--text3);transition:all .2s}
+.ep-dot.answered{border-color:var(--blue2);background:#0a1e3a;color:var(--blue2)}.ep-dot.current{border-color:var(--amber);background:#2a1e00;color:var(--amber);font-weight:600}
+.ep-dot.correct{border-color:var(--green);background:#0a2010;color:var(--green)}.ep-dot.incorrect{border-color:var(--red);background:#2a0a0a;color:var(--red)}
+.module-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius2);padding:16px;cursor:pointer;transition:all .2s;margin-bottom:10px}
+.module-card:hover{border-color:var(--border2);background:var(--bg3)}.module-card.locked{opacity:.5;cursor:not-allowed}
+.module-card.completed{border-color:#1e4a2a}.module-card.active{border-color:var(--amber)}
+.scroll-area{max-height:420px;overflow-y:auto;padding-right:4px}
+.scroll-area::-webkit-scrollbar{width:4px}.scroll-area::-webkit-scrollbar-track{background:var(--bg)}.scroll-area::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px}
+.fig-img{width:100%;border:1px solid var(--border);border-radius:var(--radius);margin:14px 0;background:#fff;display:block}
+.fig-caption{text-align:center;font-size:12px;color:var(--text3);margin:-10px 0 14px;font-style:italic}
+input[type=text],input[type=email],input[type=password]{background:var(--bg3);border:1.5px solid var(--border2);border-radius:var(--radius);padding:10px 14px;color:var(--text);font-size:14px;width:100%;margin-bottom:12px;font-family:inherit}
+input:focus{outline:none;border-color:var(--amber)}
+label{font-size:13px;color:var(--text2);display:block;margin-bottom:4px}
+.modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.75);display:flex;align-items:center;justify-content:center;z-index:100}
+.modal{background:var(--bg2);border:1px solid var(--border2);border-radius:var(--radius2);padding:28px;width:min(480px,95vw);max-height:85vh;overflow-y:auto}
+.admin-link{position:fixed;bottom:16px;right:16px;font-size:18px;cursor:pointer;opacity:.2;transition:opacity .2s;background:none;border:none;color:var(--text3)}
+.admin-link:hover{opacity:.7}
+
+/* DAY MODE */
+body.day{--bg:#eef1f5;--bg2:#fff;--bg3:#e4e8ef;--bg4:#d6dbe6;
+  --amber:#8a6000;--amber2:#6e4c00;--blue:#1565c0;--blue2:#0d47a1;
+  --green:#1b5e20;--red:#b71c1c;
+  --text:#1a1a2e;--text2:#2c3450;--text3:#5a6478;
+  --border:#bec8d8;--border2:#8a96aa;}
+body,.card,input{transition:background .25s,color .25s,border-color .25s}
+.metric{color:var(--blue2);font-size:.88em;font-style:italic}
+body.day .metric{color:var(--blue)}
+#theme-btn{position:fixed;top:13px;right:13px;z-index:999;width:38px;height:38px;
+  border-radius:50%;border:1.5px solid var(--border2);background:var(--bg3);
+  cursor:pointer;font-size:17px;display:flex;align-items:center;justify-content:center;
+  box-shadow:0 2px 8px rgba(0,0,0,.25);color:var(--text);transition:transform .15s}
+#theme-btn:hover{transform:scale(1.12);border-color:var(--amber)}
+</style>
+</head>
+<body>
+<div class="app" id="root"></div>
+<button class="admin-link" onclick="openAdmin()" title="Panel Administrador">⚙</button>
+<script>
+
+const IMGS={
+  heli_overview:"img/heli_overview.jpg",
+  dimensions:"img/dimensions.jpg",
+  data_table:"img/data_table.jpg",
+  instrument_panel:"img/instrument_panel.jpg",
+  pitot_static:"img/pitot_static.jpg",
+  limitations:"img/limitations.jpg",
+  engine_gear:"img/engine_gear.jpg",
+  fuel_system:"img/fuel_system.jpg",
+  transmission:"img/transmission.jpg",
+  hydraulic:"img/hydraulic.jpg",
+  power_check:"img/power_check.jpg",
+  rate_of_climb:"img/rate_of_climb.jpg",
+  wind_azimuth:"img/wind_azimuth.jpg",
+  hover_ige:"img/hover_ige.jpg",
+  hover_oge:"img/hover_oge.jpg",
+  height_velocity:"img/height_velocity.jpg",
+  weight_balance:"img/weight_balance.jpg",
+  emergency:"img/emergency.jpg",
+  firma:"img/firma.png"
+}
+
+// ========= EMAIL CONFIG =========
+const EMAIL_CFG = {
+  publicKey:  localStorage.getItem('ejsPK')  || '',
+  serviceId:  localStorage.getItem('ejsSVC') || '',
+  templateId: localStorage.getItem('ejsTID') || '',
+  ccEmail:    'eforgan@gruppomodena.com'
+};
+if(EMAIL_CFG.publicKey){
+  try{ emailjs.init({publicKey: EMAIL_CFG.publicKey}); }catch(e){}
+}
+
+// ========= COURSE DATA =========
+const MODULES = [
+{id:1,title:"Descripción General y Tripulación",subtitle:"Secciones 1 y 2 — Airframe, rotores, compartimientos",icon:"✈",
+chapters:[
+{title:"1.1 — El JetRanger III: Descripción General",
+content:`<p>El <strong style="color:var(--amber2)">Bell Model 206B JetRanger III</strong> es un helicóptero utilitario de motor sencillo diseñado para despegar y aterrizar en cualquier terreno razonablemente nivelado. La configuración estándar es para un piloto y cuatro pasajeros.</p>
+<img src="${IMGS.heli_overview}" class="fig-img" alt="Helicóptero JetRanger III">
+<p class="fig-caption">Figura 1-1. Helicóptero JetRanger III — Secciones del fuselaje</p>
+<div class="info-box"><p>Esta publicación es exclusivamente para capacitación en el Bell Model 206B-3. Para procedimientos y limitaciones actualizados, consultar los Manuales de Vuelo vigentes (BHT-206B-FM-1).</p></div>
+<div class="chapter-title" style="margin-top:12px">Datos Técnicos Principales</div>
+<div class="data-row"><span class="data-label">Motor</span><span class="data-value">Allison 250-C20J (Rolls Royce)</span></div>
+<div class="data-row"><span class="data-label">Potencia nominal</span><span class="data-value">420 SHP <span class='metric'>(313 kW)</span></span></div>
+<div class="data-row"><span class="data-label">Potencia despegue (limitada)</span><span class="data-value">317 SHP <span class='metric'>(236 kW)</span> — 5 min</span></div>
+<div class="data-row"><span class="data-label">Potencia continua (limitada)</span><span class="data-value">270 SHP <span class='metric'>(201 kW)</span></span></div>
+<div class="data-row"><span class="data-label">Peso vacío promedio</span><span class="data-value">1,604 libras</span></div>
+<div class="data-row"><span class="data-label">Peso bruto máximo (interno)</span><span class="data-value">3,200 libras</span></div>
+<div class="data-row"><span class="data-label">Peso bruto máximo (externo)</span><span class="data-value">3,350 libras</span></div>
+<img src="${IMGS.data_table}" class="fig-img" alt="Información General 206B-III">
+<p class="fig-caption">Información General 206B-III — Velocidades, altitudes y pesos</p>`},
+{title:"1.2 — Rotor Principal y de Cola",
+content:`<div class="chapter-title">Rotor Principal</div>
+<p>El rotor principal es <strong style="color:var(--amber2)">semi-rígido de subibaja (seesaw/underslung)</strong>, con el eje de cambio de paso por debajo del eje de aleteo. Tiene <strong style="color:var(--amber2)">dos palas de metal intercambiables individualmente</strong>. Cada pala unida al cubo por horquilla, cojinetes de cambio de paso y barra de tensión-torsión.</p>
+<div class="data-row"><span class="data-label">Número de palas</span><span class="data-value">2</span></div>
+<div class="data-row"><span class="data-label">Diámetro</span><span class="data-value">33 pies 4" <span class='metric'>(10,16 m)</span></span></div>
+<div class="data-row"><span class="data-label">Cuerda</span><span class="data-value">13 pulgadas</span></div>
+<div class="data-row"><span class="data-label">Torcimiento</span><span class="data-value">-10 grados</span></div>
+<div class="data-row"><span class="data-label">Proporción motor/rotor</span><span class="data-value">15.23 a 1</span></div>
+<div class="data-row"><span class="data-label">RPM a 100%</span><span class="data-value">395</span></div>
+<div class="chapter-title" style="margin-top:12px">Rotor de Cola</div>
+<div class="data-row"><span class="data-label">Número de palas</span><span class="data-value">2 — semi-rígido subibaja</span></div>
+<div class="data-row"><span class="data-label">Diámetro</span><span class="data-value">5 pies 5" <span class='metric'>(1,65 m)</span></span></div>
+<div class="data-row"><span class="data-label">RPM a 100%</span><span class="data-value">2,560</span></div>
+<div class="warn-box"><p>Las RPM del rotor de cola no son indicadas directamente al piloto. Se controlan a través del régimen del motor N2.</p></div>`},
+{title:"1.3 — Fuselaje y Dimensiones",
+content:`<p>El fuselaje se divide en tres secciones:</p>
+<div class="data-row"><span class="data-label">Sección Delantera</span><span class="data-value">Honeycomb aluminio — máx. resistencia y bajo ruido</span></div>
+<div class="data-row"><span class="data-label">Sección Intermedia</span><span class="data-value">Semimonocasco — plataforma motor + carga + equipo</span></div>
+<div class="data-row"><span class="data-label">Cono de Cola</span><span class="data-value">Monocasco — soporta eje, rotor cola, estabilizadores</span></div>
+<img src="${IMGS.dimensions}" class="fig-img" alt="Dimensiones Principales 206B">
+<p class="fig-caption">Figura 1-3. Dimensiones Principales del Bell 206B JetRanger III</p>
+<div class="data-row"><span class="data-label">Largo total fuselaje</span><span class="data-value">39 pies 1" <span class='metric'>(11,91 m)</span></span></div>
+<div class="data-row"><span class="data-label">Altura total</span><span class="data-value">9 pies 7.5" <span class='metric'>(2,94 m)</span></span></div>
+<div class="data-row"><span class="data-label">Separación patines (3,200 lb)</span><span class="data-value">6 pies 3.5" <span class='metric'>(1,92 m)</span></span></div>
+<div class="data-row"><span class="data-label">Compartimiento principal de carga</span><span class="data-value">40 ft³ <span class='metric'>(1,13 m³)</span></span></div>
+<div class="data-row"><span class="data-label">Compartimiento de equipaje</span><span class="data-value">16 ft³ <span class='metric'>(0,45 m³)</span> — máx. 250 libras</span></div>`},
+{title:"1.4 — Compartimiento de Tripulación y Estabilizadores",
+content:`<div class="chapter-title">Compartimiento de Tripulación</div>
+<p>La sección delantera tiene aproximadamente <strong style="color:var(--amber2)">40 ft³ <span class='metric'>(1,13 m³)</span></strong> para acomodar pasajeros o carga. Las puertas traseras pueden quitarse para llevar objetos largos. Hay 16 ft³ <span class='metric'>(0,45 m³)</span> adicionales en la sección intermedia donde se pueden llevar 250 libras de equipaje.</p>
+<div class="chapter-title" style="margin-top:12px">Estabilizadores</div>
+<p><strong style="color:var(--amber2)">Estabilizador horizontal:</strong> Construido de aluminio, unido al cono de cola. Mantiene actitud casi nivelada a cualquier velocidad.</p>
+<p style="margin-top:8px"><strong style="color:var(--amber2)">Estabilizador vertical:</strong> La orilla de ataque está desviada <strong>5.5°</strong> hacia el exterior para reducir el empuje del rotor de cola en vuelos de avance, mejorando la habilidad de aterrizajes por pérdida de pedal. Es de núcleo de panal de abeja de aluminio y piel de aluminio.</p>
+<div class="info-box"><p>El combustible y pasajeros se ubican <strong>debajo del rotor principal</strong> para minimizar los cambios en el centro de gravedad durante el consumo de combustible.</p></div>`}
+],
+quiz:[
+{q:"¿Cuál es la configuración estándar del Bell 206B JetRanger III?",opts:["2 pilotos y 3 pasajeros","1 piloto y 4 pasajeros","2 pilotos y 4 pasajeros","1 piloto y 3 pasajeros"],ans:1},
+{q:"¿Qué tipo de rotor principal tiene el JetRanger III?",opts:["Articulado, de 4 palas","Rígido, de 2 palas","Semi-rígido de subibaja (seesaw), de 2 palas","Semi-rígido articulado, de 3 palas"],ans:2},
+{q:"¿Dónde se ubica el tanque de combustible para minimizar cambios en el CG?",opts:["Arriba del motor","En el morro del helicóptero","Debajo y detrás del asiento del pasajero","En el cono de cola"],ans:2},
+{q:"¿Cuál es la capacidad máxima del compartimiento de equipaje en la sección intermedia?",opts:["40 ft³ <span class='metric'>(1,13 m³)</span> / sin límite de peso","500 libras — 16 ft³ <span class='metric'>(0,45 m³)</span>","250 libras — 16 ft³ <span class='metric'>(0,45 m³)</span>","350 libras — 25 pies cúbicos"],ans:2},
+{q:"¿Cuántos grados está desviada la orilla de ataque del estabilizador vertical hacia el exterior?",opts:["3°","10°","5.5°","7°"],ans:2}
+]},
+{id:2,title:"Limitaciones de Operación",subtitle:"Sección 3 — Velocidades, altitudes, tipo de vuelo",icon:"⚠",
+chapters:[
+{title:"2.1 — Tipo de Operación y Tripulación",
+content:`<p>El helicóptero básico está aprobado para <strong style="color:var(--amber2)">5 pasajeros</strong> y certificado para operaciones <strong style="color:var(--amber2)">diurnas y nocturnas VFR cuando no hay hielo</strong>.</p>
+<div class="chapter-title">Panel de Instrumentos</div>
+<img src="${IMGS.instrument_panel}" class="fig-img" alt="Panel de instrumentos">
+<p class="fig-caption">Figura 2-1. Panel de instrumentos estándar — The Standard JetRanger instrument panel and radio pedestal</p>
+<div class="chapter-title" style="margin-top:12px">Tripulación de Vuelo</div>
+<p>La tripulación mínima consiste de <strong style="color:var(--amber2)">un piloto, sentado en el asiento de la derecha</strong>. El asiento de la izquierda puede ser para un piloto adicional solo cuando están instalados los controles dobles aprobados.</p>
+<div class="warn-box"><p>Las operaciones nocturnas se limitan a condiciones de contacto visual. La orientación debe mantenerse por referencia visual con objetos en tierra, por luces terrestres o adecuada iluminación celeste.</p></div>`},
+{title:"2.2 — Sistema Pitot/Estático",
+content:`<p>El tubo pitot está montado en la parte más delantera de la nariz de la cabina, al lado derecho de la línea central del helicóptero. La presión del aire estático se obtiene de dos ventilas estáticas localizadas en los paneles izquierdo y derecho abajo de la ventana inferior de la cabina.</p>
+<img src="${IMGS.pitot_static}" class="fig-img" alt="Sistema Pitot/Estático">
+<p class="fig-caption">Figura 2-2. Sistema Pitot/Estático</p>
+<div class="chapter-title" style="margin-top:12px">Instrumentos de Propulsión</div>
+<ul>
+<li>Indicador tacómetro doble del rotor y N2</li>
+<li>Indicador temperatura/presión aceite del motor</li>
+<li>Indicador tacómetro productora de gas N1</li>
+<li>Indicador presión/temp. aceite de transmisión</li>
+<li>Indicador de presión de combustible</li>
+<li>Torquímetro del motor</li>
+<li>Indicador de cantidad de combustible</li>
+<li>Indicador TOT (Temperatura de salida de turbina)</li>
+</ul>`},
+{title:"2.3 — Limitaciones de Velocidad (VNE) y Altitud",
+content:`<div class="chapter-title">Peso bruto 3,000 lb o menos</div>
+<div class="data-row"><span class="data-label">VNE nivel del mar a 3,000 ft densidad</span><span class="data-value">150 MPH <span class='metric'>(241 km/h)</span> IAS (130 KIAS)</span></div>
+<div class="data-row"><span class="data-label">Reducción c/1,000 ft sobre 3,000 ft dens.</span><span class="data-value">4.0 MPH (3.5 KIAS)</span></div>
+<div class="data-row"><span class="data-label">Altitud máxima</span><span class="data-value">20,000 pies <span class='metric'>(6.096 m)</span> <span class='metric'>(6.096 m)</span> presión altitud</span></div>
+<div class="chapter-title" style="margin-top:12px">Peso bruto por encima de 3,000 lb</div>
+<div class="data-row"><span class="data-label">VNE nivel del mar a 3,000 ft densidad</span><span class="data-value">140 MPH <span class='metric'>(225 km/h)</span> IAS (122 nudos)</span></div>
+<div class="data-row"><span class="data-label">Reducción c/1,000 ft sobre 3,000 ft dens.</span><span class="data-value">8.0 MPH (7.0 nudos)</span></div>
+<div class="data-row"><span class="data-label">Altitud máxima</span><span class="data-value">13,500 pies <span class='metric'>(4.115 m)</span> <span class='metric'>(4.115 m)</span> densidad altitud</span></div>
+<div class="chapter-title" style="margin-top:12px">Otras Velocidades Limitantes</div>
+<div class="data-row"><span class="data-label">Velocidad máxima para autorrotación estable</span><span class="data-value">115 MPH <span class='metric'>(185 km/h)</span> (100 nudos)</span></div>
+<div class="data-row"><span class="data-label">Velocidad máxima con puertas traseras quitadas</span><span class="data-value">87 nudos (100 mph)</span></div>
+<div class="data-row"><span class="data-label">Velocidad máxima con puertas delanteras quitadas</span><span class="data-value">69 nudos (80 mph)</span></div>
+<div class="warn-box"><p>Se prohíbe usar intencionalmente los límites transitorios. Encender la luz anticolisión al volar cerca de o en humedad visible para evitar reflejos y vértigo.</p></div>`},
+{title:"2.4 — Limitaciones CG, Motor y Condiciones Especiales",
+content:`<img src="${IMGS.limitations}" class="fig-img" alt="Limitaciones de CG y Motor">
+<p class="fig-caption">Limitaciones del Centro de Gravedad y Planta de Potencia</p>
+<div class="chapter-title">Límites del CG Lateral</div>
+<div class="data-row"><span class="data-label">Límite izquierdo (-)</span><span class="data-value">3.0 pulgadas (76.2 mm) de línea central</span></div>
+<div class="data-row"><span class="data-label">Límite derecho (+)</span><span class="data-value">4.0 pulgadas (101.6 mm) de línea central</span></div>
+<div class="chapter-title" style="margin-top:12px">Turbina de Potencia N2 — Límites RPM en Operación</div>
+<div class="data-row"><span class="data-label">Mínimo (encendido)</span><span class="data-value">97%</span></div>
+<div class="data-row"><span class="data-label">Máximo (encendido)</span><span class="data-value">100%</span></div>
+<div class="danger-box"><p>NO SE AUTORIZA USAR EL ACELERADOR PARA CONTROLAR RPM (excepciones: ver Sección 15, Procedimientos en Emergencias y Fallas).</p></div>
+<div class="chapter-title" style="margin-top:12px">Vuelo Sin Puertas</div>
+<div class="data-row"><span class="data-label">Carga externa máxima</span><span class="data-value">3,350 libras (1,519.6 kg)</span></div>
+<div class="data-row"><span class="data-label">Se prohíbe</span><span class="data-value">Vuelo extendido de reversa o lateral</span></div>`}
+],
+quiz:[
+{q:"¿Cuál es la velocidad VNE para peso bruto de 3,000 libras o menos, a nivel del mar hasta 3,000 pies de densidad altitud?",opts:["140 MPH <span class='metric'>(225 km/h)</span> IAS (122 nudos)","150 MPH <span class='metric'>(241 km/h)</span> IAS (130 KIAS)","130 MPH IAS (113 nudos)","160 MPH IAS (139 nudos)"],ans:1},
+{q:"¿Cuál es la altitud máxima de operación para pesos brutos menores de 3,000 libras?",opts:["13,500 pies <span class='metric'>(4.115 m)</span> <span class='metric'>(4.115 m)</span> densidad altitud","15,000 pies <span class='metric'>(1.524 m)</span> presión altitud","20,000 pies <span class='metric'>(6.096 m)</span> <span class='metric'>(6.096 m)</span> presión altitud","25,000 pies <span class='metric'>(1.524 m)</span> presión altitud"],ans:2},
+{q:"¿Para qué tipo de operación está certificado el Bell 206B en su configuración básica?",opts:["VFR y IFR, día y noche","VFR día y noche sin hielo","IFR día únicamente","VFR día solamente"],ans:1},
+{q:"¿En qué asiento debe sentarse el piloto mínimo requerido para operar el JetRanger III?",opts:["Asiento de la izquierda","Asiento trasero central","Asiento de la derecha","Cualquiera de los asientos delanteros"],ans:2},
+{q:"¿Cuál es la carga externa máxima al volar sin puertas?",opts:["2,500 libras (1,133 kg)","3,350 libras (1,519.6 kg)","3,000 libras (1,360.8 kg)","4,000 libras (1,814 kg)"],ans:1}
+]},
+{id:3,title:"Planta de Potencia y Combustible",subtitle:"Secciones 5 y 6 — Motor Allison 250-C20J, sistema de combustible",icon:"⚙",
+chapters:[
+{title:"3.1 — Motor Allison 250-C20J: Descripción y Componentes",
+content:`<p>El JetRanger III está equipado con el motor turboeje <strong style="color:var(--amber2)">Allison 250-C20J</strong>, fabricado por Allison Engine Company, División de Rolls Royce. El motor tiene una capacidad de <strong style="color:var(--amber2)">420 SHP <span class='metric'>(313 kW)</span></strong>, limitado para la operación.</p>
+<div class="chapter-title">Componentes accionados por N1 (productora de gas):</div>
+<ul>
+<li>Generador tacómetro de la productora de gas</li>
+<li>Conjunto de la bomba de combustible</li>
+<li>Generador/Arrancador</li>
+<li>Control de combustible de la productora de gas N1</li>
+<li>Conjunto de la bomba de aceite</li>
+</ul>
+<img src="${IMGS.engine_gear}" class="fig-img" alt="N2 Tren de engranajes de turbina de potencia">
+<p class="fig-caption">Figura 5-4. N2 Tren de engranajes de turbina de potencia</p>
+<div class="info-box"><p>El tren N2 da una reducción en la velocidad de N2 de 33,290 RPM en el rotor de la turbina de potencia a 6,016 RPM de salida a la unidad de rueda libre.</p></div>`},
+{title:"3.2 — Limitaciones del Motor",
+content:`<div class="chapter-title">Límites TOT (Temperatura de Salida de Turbina)</div>
+<div class="data-row"><span class="data-label">TOT máximo DESPEGUE (5 min)</span><span class="data-value" style="color:var(--red)">810°C</span></div>
+<div class="data-row"><span class="data-label">TOT máximo CONTINUO</span><span class="data-value">738°C</span></div>
+<div class="data-row"><span class="data-label">TOT máximo TRANSITORIO (5 seg)</span><span class="data-value">927°C</span></div>
+<div class="chapter-title" style="margin-top:12px">Límites RPM y Torque</div>
+<div class="data-row"><span class="data-label">N1 máximo</span><span class="data-value">105%</span></div>
+<div class="data-row"><span class="data-label">Torque máximo despegue</span><span class="data-value">100% (5 minutos)</span></div>
+<div class="data-row"><span class="data-label">Torque máximo transitorio</span><span class="data-value">110% (5 segundos)</span></div>
+<div class="data-row"><span class="data-label">Potencia máxima continua (85% torque)</span><span class="data-value">270 SHP <span class='metric'>(201 kW)</span></span></div>
+<div class="danger-box"><p>NUNCA exceder los límites del motor. El TOT por encima del máximo continuo puede dañar irreparablemente los álabes de la turbina.</p></div>
+<div class="warn-box"><p>Días fríos → torque será el factor limitante. Días cálidos/grandes alturas → TOT será el factor limitante.</p></div>`},
+{title:"3.3 — Sistema de Combustible",
+content:`<img src="${IMGS.fuel_system}" class="fig-img" alt="Sección 6 — Sistema de Combustible">
+<p class="fig-caption">Sistema de Combustible — Sección 6: celda vejiga debajo y detrás del asiento de pasajero</p>
+<div class="data-row"><span class="data-label">Capacidad total tanque (S/N 3567+)</span><span class="data-value">91 gal <span class='metric'>(344 L)</span></span></div>
+<div class="data-row"><span class="data-label">Capacidad usable</span><span class="data-value">76 gal <span class='metric'>(288 L)</span></span></div>
+<div class="data-row"><span class="data-label">Tipo de tanque</span><span class="data-value">Vejiga, resistente a impactos</span></div>
+<div class="data-row"><span class="data-label">Llenado</span><span class="data-value">Desde el lado derecho</span></div>
+<div class="data-row"><span class="data-label">Bombas reforzadoras</span><span class="data-value">2 bombas eléctricas en el fondo de la celda</span></div>
+<div class="chapter-title" style="margin-top:12px">Combustibles Aprobados</div>
+<div class="data-row"><span class="data-label">Principal</span><span class="data-value">ASTM Tipo Jet B (JP-4) — cualquier temperatura</span></div>
+<div class="data-row"><span class="data-label">Alternativo &gt; 0°F (-17.8°C)</span><span class="data-value">ASTM Tipo Jet A o A-1 (JP-5 o JP-8)</span></div>
+<div class="data-row"><span class="data-label">Alternativo &lt; 0°F (-17.8°C)</span><span class="data-value">Mezcla 80/87 AVGAS y Tipo Jet A y A-1</span></div>`},
+{title:"3.4 — Procedimiento de Drenaje de Combustible",
+content:`<p>Antes del primer vuelo del día se debe drenar y revisar la muestra de combustible del sumidero de la celda y del filtro del fuselaje.</p>
+<div class="data-row"><span class="data-label">Paso 1</span><span class="data-value">Rompe-circuitos FUEL BOOST AFT y FWD — Fuera</span></div>
+<div class="data-row"><span class="data-label">Paso 2</span><span class="data-value">Interruptor BAT — ON</span></div>
+<div class="data-row"><span class="data-label">Paso 3</span><span class="data-value">Interruptor FUEL VALVE — OFF</span></div>
+<div class="data-row"><span class="data-label">Paso 4</span><span class="data-value">Botón drenaje de combustible — Oprimir, tomar muestra, soltar</span></div>
+<div class="chapter-title" style="margin-top:12px">Filtro de Combustible del Fuselaje</div>
+<div class="data-row"><span class="data-label">Paso 1</span><span class="data-value">Interruptor FUEL VALVE — ON</span></div>
+<div class="data-row"><span class="data-label">Paso 2</span><span class="data-value">Rompe-circuitos FUEL BOOST AFT y FWD — Adentro</span></div>
+<div class="data-row"><span class="data-label">Paso 3</span><span class="data-value">Rompe circuito CAUTION LT — Adentro</span></div>
+<div class="data-row"><span class="data-label">Paso 4</span><span class="data-value">Válvula de drenaje del filtro — Abrir, obtener muestra, cerrar</span></div>
+<div class="warn-box"><p>No arrancar el motor si la muestra de combustible tiene agua, sedimentos o contaminación. Consultar a mantenimiento antes de proceder.</p></div>`}
+],
+quiz:[
+{q:"¿Cuál es el modelo y fabricante del motor del Bell 206B JetRanger III?",opts:["Pratt & Whitney PT6B-37A","Turbomeca Arrius 2B1","Allison 250-C20J, División de Rolls Royce","General Electric CT7-2D"],ans:2},
+{q:"¿A cuántos SHP está limitado el motor para la operación de despegue?",opts:["420 SHP <span class='metric'>(313 kW)</span>","250 SHP","270 SHP <span class='metric'>(201 kW)</span>","317 SHP <span class='metric'>(236 kW)</span>"],ans:3},
+{q:"¿Cuál es la capacidad total del tanque de combustible (S/N 3567 en adelante)?",opts:["76 gal <span class='metric'>(288 L)</span>","91 gal <span class='metric'>(344 L)</span>","100 galones","83 galones"],ans:1},
+{q:"¿Cuál es el TOT máximo permitido durante el despegue?",opts:["738°C","927°C","810°C","850°C"],ans:2},
+{q:"¿Cuál es el porcentaje máximo de N1 (turbina productora de gas)?",opts:["100%","110%","107%","105%"],ans:3}
+]},
+{id:4,title:"Fuselaje, Transmisión y Sistemas",subtitle:"Secciones 4, 7, 8, 9, 10, 11 — Estructura, hidráulico, eléctrico",icon:"🔧",
+chapters:[
+{title:"4.1 — Transmisión y Tren Impulsor",
+content:`<p>El sistema de transmisión transmite la potencia del motor al rotor principal y de cola. El eje impulsor principal conecta la salida del motor con la caja de engranajes de la transmisión principal.</p>
+<img src="${IMGS.transmission}" class="fig-img" alt="Transmisión y tren impulsor">
+<p class="fig-caption">Transmisión y tren impulsor — inspección de componentes críticos</p>
+<div class="chapter-title">Puntos Críticos de Inspección en Preflight</div>
+<div class="data-row"><span class="data-label">Pasador de arrastre</span><span class="data-value">Seguridad y evidencia de contacto con placa tape estático</span></div>
+<div class="data-row"><span class="data-label">Acople delantero eje impulsor</span><span class="data-value">Condición y fugas de grasa — tiras café = calor excesivo</span></div>
+<div class="data-row"><span class="data-label">Transmisión — aceite</span><span class="data-value">Nivel y fugas en el área</span></div>
+<div class="data-row"><span class="data-label">Montaje aislante</span><span class="data-value">Condición</span></div>
+<div class="warn-box"><p>Las tiras indicadoras de calentamiento excesivo de color café en el acople delantero del eje impulsor principal indican posible falla grave. Reportar inmediatamente a mantenimiento, no realizar el vuelo.</p></div>`},
+{title:"4.2 — Fuselaje: Sección Intermedia y Cono de Cola",
+content:`<p>La <strong style="color:var(--amber2)">sección intermedia</strong> es semimonocasco con plataforma del motor, compartimiento equipaje y compartimiento equipo. Cubierta por pieles de aleación de aluminio y carenaje de fibra de vidrio en el extremo inferior trasero.</p>
+<p style="margin-top:8px">Hay un <strong style="color:var(--amber2)">recipiente de titanio</strong> debajo del motor que sirve para recibir el goteo y como pared de fuego. Es curvo para permitir quitar accesorios sin remover el motor.</p>
+<div class="chapter-title" style="margin-top:12px">Puerta de Carga</div>
+<p>Tiene un <strong style="color:var(--amber2)">microswitch</strong> hacia la luz de aviso. Está a la izquierda del fuselaje con bisagras en el extremo delantero. Se abre a todo lo ancho y alto. Asegurada con dos cerraduras de botones y una cerradura con llave.</p>
+<div class="chapter-title" style="margin-top:12px">Cono de Cola</div>
+<p>Estructura monocasco. Soporta al <strong style="color:var(--amber2)">eje impulsor del rotor de cola, rotor de cola, caja de engranajes, estabilizador vertical y estabilizador horizontal</strong>.</p>
+<div class="data-row"><span class="data-label">Cubierta caja engranajes rotor cola</span><span class="data-value">Aleación de aluminio</span></div>
+<div class="data-row"><span class="data-label">Estabilizador horizontal</span><span class="data-value">Aluminio — costilla interior fija al cono de cola</span></div>`},
+{title:"4.3 — Sistema Hidráulico",
+content:`<p>El sistema hidráulico del JetRanger proporciona asistencia hidráulica a los <strong style="color:var(--amber2)">controles cíclico y colectivo</strong>, reduciendo el esfuerzo del piloto.</p>
+<img src="${IMGS.hydraulic}" class="fig-img" alt="Verificación del sistema hidráulico">
+<p class="fig-caption">Verificación preliminar del sistema hidráulico — procedimiento correcto</p>
+<div class="chapter-title">Verificación Hidráulica en Corrida de Motor</div>
+<div class="data-row"><span class="data-label">Acelerador</span><span class="data-value">Abierto a 70% RPM productora de gas</span></div>
+<div class="data-row"><span class="data-label">Gobernador N2</span><span class="data-value">Verificar rango 97 a 100% RPM</span></div>
+<div class="data-row"><span class="data-label">Interruptor HYD SYSTEM o CTRL BOOST</span><span class="data-value">OFF — luego ON</span></div>
+<div class="info-box"><p>Si el control cíclico se mueve por sí mismo o motoriza con el sistema hidráulico apagado, ello puede indicar una falla del sistema hidráulico. Consultar a mantenimiento.</p></div>
+<div class="chapter-title" style="margin-top:12px">Lubricante aprobado (sistema hidráulico)</div>
+<div class="data-row"><span class="data-label">Especificación</span><span class="data-value">MIL-H-5606 — 1 pinta en depósito, 1 pinta en sistema</span></div>`},
+{title:"4.4 — Sistema Eléctrico y Controles de Vuelo",
+content:`<div class="chapter-title">Sistema Eléctrico</div>
+<div class="data-row"><span class="data-label">Interruptor BAT</span><span class="data-value">Alimentación principal de batería</span></div>
+<div class="data-row"><span class="data-label">Interruptor GEN</span><span class="data-value">Generador — carga normal 10-20%</span></div>
+<div class="data-row"><span class="data-label">Carga máxima normal pre-despegue</span><span class="data-value">Por debajo del 70%</span></div>
+<div class="data-row"><span class="data-label">Interruptor INST LT (reóstato)</span><span class="data-value">Iluminación de instrumentos</span></div>
+<div class="chapter-title" style="margin-top:12px">Controles de Vuelo</div>
+<div class="data-row"><span class="data-label">Cíclico</span><span class="data-value">Control de actitud y velocidad horizontal. Fricción ajustable.</span></div>
+<div class="data-row"><span class="data-label">Colectivo</span><span class="data-value">Control de paso colectivo y potencia. Fricción ajustable.</span></div>
+<div class="data-row"><span class="data-label">Pedales</span><span class="data-value">Control de paso del rotor de cola (guiñada)</span></div>
+<div class="data-row"><span class="data-label">Acelerador</span><span class="data-value">En mango del colectivo, controla N2/RPM del motor</span></div>
+<div class="info-box"><p>El torquímetro indica el porcentaje de torque del motor. Es el instrumento primario para verificación de potencia junto con el TOT e indicadores N1 y N2.</p></div>`}
+],
+quiz:[
+{q:"¿Para qué sirve el recipiente de titanio ubicado debajo del motor?",opts:["Almacenar aceite extra de reserva","Recibir el goteo y actuar como pared de fuego","Soporte estructural del motor","Ventilación del compartimiento motor"],ans:1},
+{q:"¿Qué tipo de estructura es el cono de cola del JetRanger III?",opts:["Semimonocasco","Monocasco","Estructura de panal de abeja","Largueros y costillas"],ans:1},
+{q:"¿Qué indica una tira indicadora de color café en el acople delantero del eje impulsor?",opts:["Que el aceite debe cambiarse","Evidencia de calentamiento excesivo — no volar","Lubricación insuficiente reciente","Alineación incorrecta del eje"],ans:1},
+{q:"¿Cuántos cojinetes y pernos conectan cada pala del rotor de cola al yugo común?",opts:["3 cojinetes y 2 pernos","2 cojinetes y 2 pernos","4 cojinetes y 4 pernos","1 cojinete y 4 pernos"],ans:1},
+{q:"¿Cuál es la carga normal del generador durante la operación?",opts:["50 al 70%","Por encima del 80%","10 al 20%","30 al 50%"],ans:2}
+]},
+{id:5,title:"Rendimiento, Peso y Balance",subtitle:"Secciones 12 y 13 — Verificación de potencia, datos de desempeño",icon:"📊",
+chapters:[
+{title:"5.1 — Verificación de Potencia",
+content:`<p>Los datos de rendimiento se aplican al motor <strong style="color:var(--amber2)">250-C20B/C20J</strong>. La gráfica indica el porcentaje mínimo de torque que debe haber disponible de un motor que cumple los requerimientos mínimos de Allison.</p>
+<img src="${IMGS.power_check}" class="fig-img" alt="Power Check Chart">
+<p class="fig-caption">Figura 12-1. Gráfica de Verificación de Potencia — Motor Allison 250-C20B/C20J</p>
+<div class="chapter-title">Método preferido — ascenso a 60 MPH (52 nudos)</div>
+<p>Se pueden hacer verificaciones de potencia exactas en un ascenso a <strong style="color:var(--amber2)">60 mph <span class='metric'>(97 km/h)</span> (52 nudos) IAS</strong> agregando <strong style="color:var(--amber2)">2% a la lectura de la gráfica de porcentaje de torque</strong>.</p>
+<div class="warn-box"><p>Para verificación de potencia, asegurar que ENGINE DEICING/ANTI-ICING y el switch GEN estén OFF. Levantar colectivo hasta TOT estabilizado o alcanzar límite de torque. Anotar OAT, TOT, presión, altitud, torque y N1.</p></div>`},
+{title:"5.2 — Régimen de Ascenso",
+content:`<p>El <strong style="color:var(--amber2)">régimen de ascenso</strong> en la gráfica se denomina "TAPELINE RATE OF CLIMB". Mide el régimen real en un día estándar con gradiente vertical de temperatura estándar.</p>
+<img src="${IMGS.rate_of_climb}" class="fig-img" alt="Rate of Climb Chart">
+<p class="fig-caption">Figura 12-2. Rate of Climb — Máximo, potencia de despegue, Anti-ice OFF o ON (unidades inglesas)</p>
+<div class="chapter-title">Corrección por Anti-Hielo</div>
+<div class="data-row"><span class="data-label">Anti-Hielo OFF — R/C base</span><span class="data-value">Leer directamente de la gráfica</span></div>
+<div class="data-row"><span class="data-label">Con Anti-Hielo ON (en el ejemplo)</span><span class="data-value">Disminuir ΔR/C = 240 ft/min</span></div>
+<div class="data-row"><span class="data-label">Ejemplo: Anti-ice OFF 890 ft/min</span><span class="data-value">Anti-ice ON = 890 − 240 = 650 ft/min <span class='metric'>(198 m/min)</span></span></div>
+<div class="data-row"><span class="data-label">Operación sin puertas</span><span class="data-value">Reducir datos base en 350 ft/min</span></div>
+<div class="info-box"><p>Generador: 22.3 Amps. Condición: N2 = 100% RPM, V IND = 60 MPH (52 KIAS).</p></div>`},
+{title:"5.3 — Techo de Vuelo Estacionario: IGE y OGE",
+content:`<p>Las gráficas de Techo de Vuelo Estacionario muestran el desempeño en vuelo estacionario (peso bruto permitido) en condiciones de presión altitud y OAT. Se dividen en dos áreas:</p>
+<ul>
+<li><strong style="color:var(--amber2)">ÁREA A (blanca):</strong> Control demostrado con vientos de lado y de cola de hasta 20 mph (17 nudos)</li>
+<li><strong style="color:var(--amber2)">ÁREA B (sombreada):</strong> Solo vientos calmados o fuera del Área Crítica de Viento Azimuth</li>
+</ul>
+<img src="${IMGS.wind_azimuth}" class="fig-img" alt="Critical Wind Azimuth">
+<p class="fig-caption">Figura 12-3. Área crítica de viento relativo Azimuth</p>
+<div class="danger-box"><p>El TOT del motor se incrementa notablemente en vuelo estacionario a favor del viento (downwind). Evitar este vuelo al operar cerca de los límites de TOT.</p></div>
+<img src="${IMGS.hover_ige}" class="fig-img" alt="Hover Ceiling IGE">
+<p class="fig-caption">Figura 12-4. Techo de vuelo estacionario con efecto en tierra (IGE) — Potencia de despegue, 0° a 46°C, Anti-ice OFF</p>
+<img src="${IMGS.hover_oge}" class="fig-img" alt="Hover Ceiling OGE">
+<p class="fig-caption">Figura 12-5. Techo de vuelo estacionario fuera del efecto en tierra (OGE) — Potencia de despegue, 0° a 46°C, Anti-ice OFF</p>
+<div class="warn-box"><p>Con Anti-Hielo ON: IGE restar 220 lb (99.8 kg) — OGE restar 295 lb (133.8 kg) del peso bruto. Condiciones: Generador 22.3 A, altura de patines 2 ft (IGE) y 40 ft (OGE), N2 100%.</p></div>`},
+{title:"5.4 — Diagrama Altura-Velocidad y Peso/Balance",
+content:`<p>El <strong style="color:var(--amber2)">Diagrama Altura-Velocidad (H-V)</strong> define las condiciones desde las cuales se puede hacer un aterrizaje seguro en superficie plana, nivelada y firme después de una falla del motor. Es válido solo cuando el peso bruto no excede los límites de Altitud vs Peso Bruto.</p>
+<img src="${IMGS.height_velocity}" class="fig-img" alt="Height-Velocity Diagram">
+<p class="fig-caption">Figura 12-6. Diagrama Altura-Velocidad — Superficies lisas, niveladas y firmes</p>
+<div class="danger-box"><p>EVITAR OPERAR EN EL ÁREA SOMBREADA. Las condiciones dentro del área sombreada no permiten garantizar un aterrizaje seguro después de una falla del motor.</p></div>
+<div class="chapter-title" style="margin-top:12px">Peso y Balance — Ejemplo de Cálculo</div>
+<img src="${IMGS.weight_balance}" class="fig-img" alt="Tabla Peso y Balance">
+<p class="fig-caption">Sección 13. Tabla de Peso y Balance — Ejemplo de vuelo de salida y retorno (PESO / CG / MOMENTO)</p>
+<div class="data-row"><span class="data-label">Peso bruto máximo (interno)</span><span class="data-value">3,200 libras (1,451.5 kg)</span></div>
+<div class="data-row"><span class="data-label">Peso bruto máximo (externo)</span><span class="data-value">3,350 libras (1,519.6 kg)</span></div>
+<div class="data-row"><span class="data-label">CG lateral máximo izquierdo</span><span class="data-value">3.0 pulgadas (76.2 mm)</span></div>
+<div class="data-row"><span class="data-label">CG lateral máximo derecho</span><span class="data-value">4.0 pulgadas (101.6 mm)</span></div>
+<div class="info-box"><p>El CG se mueve agregando o quitando peso. Siempre verificar el Manual de Peso y Balance específico de la aeronave para los límites exactos del CG y la envolvente de vuelo aprobada.</p></div>`}
+],
+quiz:[
+{q:"¿Cuál es el peso bruto máximo del Bell 206B JetRanger III (operación interna)?",opts:["2,850 libras","3,000 libras","3,200 libras (1,451.5 kg)","3,500 libras"],ans:2},
+{q:"¿Cuál es el límite de torque para la operación de despegue?",opts:["85% tiempo ilimitado","100% máximo 5 minutos","95% máximo 10 minutos","110% máximo 2 minutos"],ans:1},
+{q:"Para una verificación de potencia más exacta en ascenso, ¿qué velocidad y corrección se aplica?",opts:["80 mph (69 nudos) sin corrección","100 mph menos 5% de torque","60 mph <span class='metric'>(97 km/h)</span> (52 nudos) agregando 2% al torque leído","70 mph sin corrección"],ans:2},
+{q:"¿Cuál es el TOT máximo para operación continua?",opts:["810°C","850°C","700°C","738°C"],ans:3},
+{q:"Para pesos superiores a 3,000 libras, ¿cuál es la altitud máxima de densidad?",opts:["20,000 pies <span class='metric'>(6.096 m)</span>","15,000 pies <span class='metric'>(1.524 m)</span>","13,500 pies <span class='metric'>(4.115 m)</span>","10,000 pies"],ans:2}
+]},
+{id:6,title:"Procedimientos Normales y de Emergencia",subtitle:"Secciones 14 y 15 — Arranque, vuelo, autorrotación, fallas",icon:"🚁",
+chapters:[
+{title:"6.1 — Inspección Preflight (Puntos Clave)",
+content:`<p>La inspección preflight es obligatoria antes de cada vuelo. Incluye verificaciones sistemáticas de todos los sistemas.</p>
+<div class="chapter-title">Área de Transmisión</div>
+<div class="data-row"><span class="data-label">Transmisión</span><span class="data-value">Nivel de aceite y fugas</span></div>
+<div class="data-row"><span class="data-label">Montaje aislante</span><span class="data-value">Condición</span></div>
+<div class="data-row"><span class="data-label">Pasador de arrastre</span><span class="data-value">Seguridad y evidencia de contacto con placa tape estático</span></div>
+<div class="data-row"><span class="data-label">Acople delantero eje impulsor</span><span class="data-value">Condición, fugas de grasa, tiras indicadoras</span></div>
+<div class="data-row"><span class="data-label">Cubierta de inducción de aire</span><span class="data-value">Asegurada</span></div>
+<div class="data-row"><span class="data-label">Toma y cámara del motor</span><span class="data-value">Condición, libre de obstrucciones</span></div>
+<div class="data-row"><span class="data-label">Tapa de la toma de combustible</span><span class="data-value">Revisar nivel visualmente, asegurar la tapa</span></div>
+<div class="data-row"><span class="data-label">Puerta de acceso</span><span class="data-value">Asegurada</span></div>
+<div class="warn-box"><p>Instalar los amarres del rotor principal y de cola si hay: pronóstico de vientos fuertes, otros helicópteros operando en el área, o si se va a dejar el helicóptero desatendido.</p></div>`},
+{title:"6.2 — Arranque del Motor y Pre-Despegue",
+content:`<div class="chapter-title">Secuencia Antes de Despegar</div>
+<div class="data-row"><span class="data-label">Equipo eléctrico</span><span class="data-value">Verificar y restablecer (reset) según se requiera</span></div>
+<div class="data-row"><span class="data-label">Iluminación — INST LT (reóstato)</span><span class="data-value">Según se desee</span></div>
+<div class="data-row"><span class="data-label">Radio</span><span class="data-value">Probar que funcione</span></div>
+<div class="data-row"><span class="data-label">Acelerador</span><span class="data-value">TODO ABIERTO</span></div>
+<div class="data-row"><span class="data-label">Instrumentos de potencia y vuelo</span><span class="data-value">En el rango normal de operación</span></div>
+<div class="data-row"><span class="data-label">Carga del generador</span><span class="data-value">Abajo de 70% (normal: 10-20%)</span></div>
+<div class="data-row"><span class="data-label">Turbina de potencia N2</span><span class="data-value">100% con el colectivo abajo</span></div>
+<div class="chapter-title" style="margin-top:12px">Despegue</div>
+<div class="data-row"><span class="data-label">Colectivo</span><span class="data-value">Aumentar para pasar a vuelo estacionario</span></div>
+<div class="data-row"><span class="data-label">Control direccional</span><span class="data-value">Mantener el rumbo deseado</span></div>
+<div class="data-row"><span class="data-label">Cíclico</span><span class="data-value">Aplicar lo necesario para acelerar suavemente</span></div>
+<div class="data-row"><span class="data-label">Colectivo</span><span class="data-value">Aplicar lo necesario para obtener razón de ascenso y velocidad deseada — monitorear límites del motor</span></div>`},
+{title:"6.3 — Falla del Motor y Autorrotación",
+content:`<div class="danger-box"><p>REDUCIR LA VELOCIDAD DE AVANCE A LA VELOCIDAD DESEADA. VELOCIDAD MÍNIMA DESCENSO: 60 MPH (52 NUDOS) IAS. VELOCIDAD MÁXIMA DISTANCIA DE PLANEO: 80 MPH (69 NUDOS) IAS.</p></div>
+<img src="${IMGS.emergency}" class="fig-img" alt="Procedimientos de emergencia">
+<p class="fig-caption">Sección 15 — Procedimientos de emergencia: fallas del motor y autorrotación</p>
+<div class="chapter-title">Procedimiento de Falla del Motor y Autorrotación</div>
+<div class="data-row"><span class="data-label">Paso del colectivo</span><span class="data-value">Ajustar para mantener RPM rotor 90% a 107%</span></div>
+<div class="data-row"><span class="data-label">A baja altura</span><span class="data-value">Cerrar acelerador y ejecutar el flare para reducir velocidad</span></div>
+<div class="data-row"><span class="data-label">Durante el flare</span><span class="data-value">Aplicar pitch al colectivo para reducir aún más la velocidad</span></div>
+<div class="data-row"><span class="data-label">Toque nivelado</span><span class="data-value">Antes de pasar el 70% de RPM del rotor</span></div>
+<div class="data-row"><span class="data-label">Velocidad máx. autorrotación estable</span><span class="data-value">115 MPH <span class='metric'>(185 km/h)</span> (100 nudos)</span></div>
+<div class="warn-box"><p>Se recomienda hacer un toque nivelado antes de pasar el 70% de RPM del rotor. Al tocar tierra, el paso del colectivo debe reducirse suavemente mientras se mantiene el cíclico en neutral o centrado. DEBE EVITARSE CORRIDA EXCESIVA EN TIERRA CON EL COLECTIVO ARRIBA, O CUALQUIER TENDENCIA A FLOTAR POR LARGA DISTANCIA ANTES DE TOCAR EL SUELO.</p></div>`},
+{title:"6.4 — Fallas Especiales y Post-Aterrizaje",
+content:`<div class="chapter-title">Arranque del Motor en el Aire</div>
+<div class="danger-box"><p>Cuando se cree que la causa de la falla del motor es mecánica, NO intente volver a arrancar.</p></div>
+<div class="data-row"><span class="data-label">Solo intentar si</span><span class="data-value">La falla NO parece ser mecánica</span></div>
+<div class="data-row"><span class="data-label">Precaución</span><span class="data-value">NO intentar arrancar arriba de 12,000 pies <span class='metric'>(610 m)</span> <span class='metric'>(3.658 m)</span> (TOT aumenta demasiado rápido)</span></div>
+<div class="chapter-title" style="margin-top:12px">Falla del Control de Combustible/Gobernador</div>
+<div class="data-row"><span class="data-label">Si motor se acelera</span><span class="data-value">Controlar potencia con el acelerador</span></div>
+<div class="data-row"><span class="data-label">Si motor se desacelera</span><span class="data-value">Mantener RPM con el paso del colectivo</span></div>
+<div class="chapter-title" style="margin-top:12px">Falla del Rotor de Cola — Pérdida Total de Empuje</div>
+<div class="data-row"><span class="data-label">Acción inmediata</span><span class="data-value">Reducir acelerador a marcha lenta, entrar en autorrotación</span></div>
+<div class="data-row"><span class="data-label">Velocidad mínima durante descenso</span><span class="data-value">50 nudos <span class='metric'>(93 km/h)</span> (58 mph) IAS</span></div>
+<div class="chapter-title" style="margin-top:12px">Después del Aterrizaje Forzoso</div>
+<p>El piloto debe <strong style="color:var(--amber2)">permanecer en los controles hasta que el rotor se haya detenido totalmente</strong>. Al salir, instalar amarres y cubiertas protectoras (toma del motor, escape y tubo pitot).</p>`}
+],
+quiz:[
+{q:"Durante la autorrotación, ¿cuál es el rango de RPM de rotor que se debe mantener?",opts:["80% a 100%","100% a 110%","90% a 107%","85% a 95%"],ans:2},
+{q:"¿Cuál es la velocidad aérea mínima para el descenso en autorrotación?",opts:["40 MPH (35 nudos) IAS","60 MPH <span class='metric'>(97 km/h)</span> (52 nudos) IAS","80 MPH <span class='metric'>(129 km/h)</span> (69 nudos) IAS","100 MPH <span class='metric'>(161 km/h)</span> (87 nudos) IAS"],ans:1},
+{q:"Según el procedimiento pre-despegue, ¿en qué posición debe estar el acelerador?",opts:["Media apertura","70% apertura","Todo abierto","Lo necesario para mantener RPM 100%"],ans:2},
+{q:"¿Cuándo se debe intentar un arranque del motor en el aire?",opts:["Siempre que el rotor esté girando","Solo si la falla NO parece ser mecánica","Siempre que la altitud lo permita","Solo debajo de 2,000 pies <span class='metric'>(610 m)</span> AGL"],ans:1},
+{q:"¿Qué debe hacer el piloto después de un aterrizaje de emergencia?",opts:["Salir inmediatamente del helicóptero","Cortar el motor y salir de inmediato","Permanecer en los controles hasta que el rotor se haya detenido totalmente","Abrir las puertas y esperar ayuda"],ans:2}
+]}
+];
+
+const FINAL_EXAM = [
+{q:"¿Cuál es el combustible usable del tanque tipo vejiga del JetRanger III (S/N 3567+)?",opts:["91 gal <span class='metric'>(344 L)</span>","83 galones","76 gal <span class='metric'>(288 L)</span>","70 galones"],ans:2},
+{q:"¿Cuál es la potencia máxima continua del motor Allison 250-C20J (limitada para operación)?",opts:["317 SHP <span class='metric'>(236 kW)</span>","420 SHP <span class='metric'>(313 kW)</span>","270 SHP <span class='metric'>(201 kW)</span>","350 SHP"],ans:2},
+{q:"La sección delantera del fuselaje tiene una capacidad aproximada de:",opts:["16 ft³ <span class='metric'>(0,45 m³)</span>","25 pies cúbicos","40 ft³ <span class='metric'>(1,13 m³)</span>","50 pies cúbicos"],ans:2},
+{q:"¿Cuándo se deben instalar los amarres del rotor principal y de cola?",opts:["Solo si hay tormenta eléctrica","Con pronóstico de vientos fuertes, otros helicópteros en el área, o helicóptero desatendido","Nunca, los rotores no necesitan amarre","Solo en mantenimiento programado"],ans:1},
+{q:"La velocidad aérea máxima para autorrotación estable es:",opts:["80 MPH <span class='metric'>(129 km/h)</span> (69 nudos) IAS","100 MPH <span class='metric'>(161 km/h)</span> (87 nudos) IAS","115 MPH <span class='metric'>(185 km/h)</span> (100 nudos) IAS","130 MPH (113 nudos) IAS"],ans:2},
+{q:"Para vuelo con nieve volando o cayendo se debe tener instalado:",opts:["Solo calefacción para el motor","Sistema de separación de partículas y deflector","Parabrisas especial blindado","Protección de hielo para los rotores"],ans:1},
+{q:"El estabilizador horizontal del JetRanger está construido de:",opts:["Fibra de carbono","Aluminio","Acero inoxidable","Material compuesto de fibra de vidrio"],ans:1},
+{q:"Durante las operaciones nocturnas, ¿cómo se debe mantener la orientación?",opts:["Exclusivamente por instrumentos","Por referencia visual con objetos en tierra, luces terrestres o iluminación celeste","Usando GPS y piloto automático","No se permite vuelo nocturno en este helicóptero"],ans:1},
+{q:"El recipiente de titanio debajo del motor sirve para:",opts:["Almacenar aceite extra de reserva","Recibir el goteo y actuar como pared de fuego","Soporte estructural del motor","Ventilación del compartimiento motor"],ans:1},
+{q:"Para VNE con peso superior a 3,000 lb, por cada 1,000 ft de densidad altitud sobre 3,000 ft se disminuye:",opts:["4.0 MPH <span class='metric'>(6.4 km/h)</span> (3.5 KIAS)","6.0 MPH IAS","8.0 MPH <span class='metric'>(12.9 km/h)</span> (7.0 nudos)","10 MPH IAS"],ans:2},
+{q:"¿Qué indica una tira indicadora de calentamiento excesivo de color café en el acople delantero del eje impulsor?",opts:["Que el aceite debe cambiarse","Evidencia de calentamiento excesivo — consultar a mantenimiento","Lubricación insuficiente reciente","Alineación incorrecta del eje"],ans:1},
+{q:"En la inspección preflight, ¿qué se verifica de la tapa de la toma de combustible?",opts:["Solo que no gotee","Revisar visualmente el nivel y asegurar la tapa","Abrirla para airear el tanque","No requiere verificación diaria"],ans:1},
+{q:"La turbina N2 de potencia debe estar al 100% de RPM antes del despegue:",opts:["Durante el crucero a velocidad de crucero","Con el colectivo abajo, como parte del pre-despegue","Solo para despegues de alta altitud","Al inicio del arranque del motor"],ans:1},
+{q:"El pasador de arrastre del eje impulsor principal debe inspeccionarse buscando:",opts:["Solo oxidación superficial","Fugas de aceite por el sello","Seguridad y evidencia de contacto con la placa de tape estático","Solo desgaste por fricción"],ans:2},
+{q:"Después de un aterrizaje forzoso, el piloto debe permanecer en los controles hasta que:",opts:["El pasajero haya salido del helicóptero","El rotor se haya detenido totalmente","La luz de advertencia se apague","Llegue el servicio de emergencia"],ans:1},
+{q:"La cubierta de la caja de engranajes del rotor de cola está hecha de:",opts:["Fibra de vidrio","Acero inoxidable","Aleación de aluminio","Material compuesto"],ans:2},
+{q:"Para una verificación de potencia inaceptable en tierra, ¿cuándo se recomienda realizarla en vuelo?",opts:["En cualquier condición de temperatura","Cuando la altura, temperatura y peso permiten un vuelo estacionario seguro","Solo en días fríos con temperatura negativa","A máxima altitud posible"],ans:1},
+{q:"El sistema hidráulico del JetRanger asiste principalmente a:",opts:["Los frenos del tren de aterrizaje","Los controles cíclico y colectivo (y pedales)","Las puertas del compartimiento de carga","El sistema de combustible"],ans:1},
+{q:"Para drenar muestra del sumidero de combustible, el interruptor FUEL VALVE debe estar en posición:",opts:["ON con el BAT OFF","OFF, mientras BAT está ON y se sacan rompe-circuitos FUEL BOOST","En cualquier posición","Solo OFF durante el vuelo"],ans:1},
+{q:"Al volar sin las puertas traseras, la carga externa máxima es:",opts:["2,500 libras (1,133 kg)","Peso bruto máximo normal (3,200 lb)","3,350 libras (1,519.6 kg)","Sin restricción adicional"],ans:2},
+{q:"Una advertencia WARNING en el manual del Bell 206B indica:",opts:["Una nota de información general importante","Un procedimiento que puede resultar en daño al equipo","Un procedimiento que si no se sigue correctamente puede resultar en lesiones o muerte","Una limitación operacional secundaria"],ans:2},
+{q:"El cono de cola del JetRanger soporta al:",opts:["Motor y transmisión principal","Eje rotor de cola, rotor de cola, caja de engranajes, estabilizador vertical y horizontal","Solo al estabilizador horizontal","Sistema eléctrico trasero"],ans:1},
+{q:"La puerta de carga del compartimiento de equipaje tiene un microswitch que activa:",opts:["El cierre automático","La luz de aviso en cabina","La alarma de peso excesivo","El interruptor de fuego"],ans:1},
+{q:"El combustible y los pasajeros están ubicados debajo del rotor principal para:",opts:["Mejorar la aerodinámica de la aeronave","Facilitar el abordaje de pasajeros","Minimizar los cambios en el centro de gravedad","Proteger a los pasajeros del calor del motor"],ans:2},
+{q:"La velocidad de máxima distancia de planeo (máximo planeo) en autorrotación es:",opts:["60 MPH <span class='metric'>(97 km/h)</span> (52 nudos) IAS","80 MPH <span class='metric'>(129 km/h)</span> (69 nudos) IAS","100 MPH <span class='metric'>(161 km/h)</span> (87 nudos) IAS","115 MPH <span class='metric'>(185 km/h)</span> (100 nudos) IAS"],ans:1},
+{q:"Las palas del rotor principal del JetRanger III son:",opts:["De fibra de carbono y no intercambiables","De metal, individualmente intercambiables","De aluminio en pares intercambiables únicamente","De material compuesto permanentes"],ans:1},
+{q:"Se prohíbe el vuelo extendido de reversa o lateral sin puertas porque:",opts:["Aumenta excesivamente el consumo de combustible","Existen restricciones de CG y límites de velocidad aerodinámica","Se pueden perder objetos de la cabina","El sistema hidráulico no opera correctamente"],ans:1},
+{q:"Un CAUTION (precaución) en el manual indica:",opts:["Lesiones personales o muerte si no se cumple","Un procedimiento que si no se observa puede resultar en daño o destrucción del equipo","Una nota informativa de operación","Un requisito reglamentario"],ans:1},
+{q:"La carga del generador antes del despegue debe estar:",opts:["Por encima del 80%","Entre el 50% y 70%","Por debajo del 70% — carga normal: 10 al 20%","En 0% (apagado)"],ans:2},
+{q:"¿Qué se recomienda hacer antes de que el rotor toque el suelo en autorrotación?",opts:["Aplicar colectivo al máximo","Un toque nivelado antes de pasar el 70% de RPM del rotor, reduciendo el colectivo suavemente","Aplicar freno de rotor inmediatamente","Cerrar el acelerador completamente al tocar"],ans:1}
+];
+
+// ========= STATE =========
+let state = {
+  view:'intro', user:null, currentModule:0, currentChapter:0,
+  completedModules:[], moduleScores:{},
+  examAnswers:[], examReviewed:false, examQ:0,
+  finalAnswers:[], finalReviewed:false, finalQ:0,
+  adminOpen:false
+};
+
+function loadState(){
+  try{
+    const s = localStorage.getItem('bell206_state');
+    if(s){const parsed=JSON.parse(s);Object.assign(state,parsed);}
+  }catch(e){}
+}
+function saveState(){
+  try{
+    const {adminOpen,...toSave}=state;
+    localStorage.setItem('bell206_state',JSON.stringify(toSave));
+  }catch(e){}
+}
+loadState();
+
+// ========= RENDER =========
+function render(){
+  const root=document.getElementById('root');
+  if(state.view==='intro') root.innerHTML=renderIntro();
+  else if(state.view==='register') root.innerHTML=renderRegister();
+  else if(state.view==='module') root.innerHTML=renderModule();
+  else if(state.view==='moduleExam') root.innerHTML=renderModuleExam();
+  else if(state.view==='examResult') root.innerHTML=renderExamResult();
+  else if(state.view==='map') root.innerHTML=renderMap();
+  else if(state.view==='finalExam') root.innerHTML=renderFinalExam();
+  else if(state.view==='finalResult') root.innerHTML=renderFinalResult();
+  if(state.adminOpen) showAdminPanel();
+  saveState();
+}
+
+function renderIntro(){
+  const greeting = state.user ? `<div class="badge badge-green" style="margin-bottom:8px">Bienvenido, ${state.user.nombre} ${state.user.apellido}</div>` : '';
+  return `
+  <div style="text-align:center;padding:24px 0 16px">
+    <div style="font-size:52px;margin-bottom:12px">🚁</div>
+    <div class="tag">República Argentina — Regulación ANAC/RAAC</div>
+    <h1 style="margin:8px 0 4px">Curso de Adaptación</h1>
+    <h2 style="color:var(--text2);font-weight:400;font-size:16px">Bell Model 206B JetRanger III — B3</h2>
+    ${greeting}
+    <div style="margin-top:10px">
+      <span class="badge badge-amber">6 Módulos</span>
+      <span class="badge badge-blue" style="margin:0 6px">Examen Final 30 preguntas</span>
+      <span class="badge badge-green">Certificado PDF</span>
+    </div>
+  </div>
+  <div class="card" style="margin:14px 0">
+    <h3 style="margin-bottom:10px">🎯 Objetivo del Curso</h3>
+    <p>Capacitar al piloto para la operación segura y eficiente del helicóptero <strong style="color:var(--amber2)">Bell Model 206B JetRanger III</strong> conforme a los estándares de la <strong style="color:var(--amber2)">ANAC</strong> y los Reglamentos Aeronáuticos de la República Argentina (RAAC), mediante el dominio integral de los sistemas de la aeronave, sus limitaciones de operación, procedimientos normales y de emergencia, y datos de rendimiento.</p>
+    <p style="margin-top:8px">Al completar el curso satisfactoriamente, el piloto estará en condiciones de realizar el vuelo de adaptación con un instructor habilitado para obtener la habilitación en tipo.</p>
+  </div>
+  <div class="card" style="margin:14px 0">
+    <h3 style="margin-bottom:10px">📋 Requisitos para Realizar el Curso</h3>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px">
+      <div style="background:var(--bg3);border-radius:var(--radius);padding:12px;border:1px solid var(--border)">
+        <div class="tag">Licencia</div>
+        <p style="font-size:13px;margin-top:4px">Licencia de Piloto de Helicóptero vigente (ANAC) — Habilitación categoría helicóptero</p>
+      </div>
+      <div style="background:var(--bg3);border-radius:var(--radius);padding:12px;border:1px solid var(--border)">
+        <div class="tag">Experiencia</div>
+        <p style="font-size:13px;margin-top:4px">Mínimo 50 horas de vuelo en helicóptero certificadas. Experiencia previa en turbina recomendada.</p>
+      </div>
+      <div style="background:var(--bg3);border-radius:var(--radius);padding:12px;border:1px solid var(--border)">
+        <div class="tag">Certificado Médico</div>
+        <p style="font-size:13px;margin-top:4px">Certificado de aptitud psicofísica vigente, clase según corresponda a la licencia habilitante.</p>
+      </div>
+      <div style="background:var(--bg3);border-radius:var(--radius);padding:12px;border:1px solid var(--border)">
+        <div class="tag">Documentación</div>
+        <p style="font-size:13px;margin-top:4px">Lectura previa del Manual de Vuelo vigente BHT-206B-FM-1 y suplementos aplicables.</p>
+      </div>
+    </div>
+    <div class="warn-box"><p>Este curso es complementario al Manual de Vuelo oficial. Los datos se basan en el Manual de Procedimientos en Tierra y Vuelo para Pilotos (206BIII P/G SPN 10/98). Siempre consultar los documentos vigentes aprobados por ANAC.</p></div>
+  </div>
+  <div style="text-align:center;margin-top:20px;margin-bottom:24px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+    ${state.user 
+      ? `<button class="btn btn-primary" onclick="startCourse()" style="padding:12px 32px;font-size:15px">🚁 Continuar Curso</button>
+         <button class="btn btn-sm" onclick="logout()">Cerrar sesión</button>`
+      : `<button class="btn btn-primary" onclick="goRegister()" style="padding:12px 32px;font-size:15px">📝 Registrarse</button>
+         <button class="btn" onclick="guestMode()" style="padding:12px 32px;font-size:15px">👤 Continuar como Invitado</button>`}
+  </div>
+  <div style="text-align:center;margin:0 0 24px">
+    <a href="manual.pdf" target="_blank" style="display:inline-flex;align-items:center;gap:8px;padding:10px 22px;border-radius:var(--radius);border:1.5px solid var(--border2);background:var(--bg3);color:var(--text2);text-decoration:none;font-size:13px;transition:all .2s" onmouseover="this.style.borderColor='#5a9bf0';this.style.color='#5a9bf0'" onmouseout="this.style.borderColor='';this.style.color=''"> 📖 Ver Manual Completo Bell 206B JetRanger III (PDF)</a>
+  </div>`;
+}
+
+function renderRegister(){
+  return `
+  <div style="max-width:440px;margin:0 auto;padding:20px 0">
+    <div style="text-align:center;margin-bottom:20px">
+      <div style="font-size:32px">📝</div>
+      <h2 style="margin-top:8px">Registro de Cursante</h2>
+      <p style="font-size:13px;color:var(--text3);margin-top:4px">Los cursantes registrados recibirán un certificado PDF al aprobar</p>
+    </div>
+    <div class="card">
+      <label>Nombre *</label>
+      <input type="text" id="reg-nombre" placeholder="Nombre" />
+      <label>Apellido *</label>
+      <input type="text" id="reg-apellido" placeholder="Apellido" />
+      <label>Nro. de Licencia ANAC *</label>
+      <input type="text" id="reg-licencia" placeholder="Ej: I.V.H. Lic. 12.345" />
+      <label>Correo Electrónico *</label>
+      <input type="email" id="reg-email" placeholder="piloto@ejemplo.com" />
+      <div id="reg-error" style="color:var(--red);font-size:13px;margin-bottom:10px;display:none"></div>
+      <div style="display:flex;gap:10px;margin-top:4px">
+        <button class="btn btn-primary" onclick="submitRegister()" style="flex:1">Registrarse →</button>
+        <button class="btn btn-sm" onclick="goIntro()">Cancelar</button>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:12px">
+      <button class="btn btn-sm" onclick="guestMode()">Continuar como Invitado sin registro</button>
+    </div>
+  </div>`;
+}
+
+function renderMap(){
+  const allDone = state.completedModules.length === MODULES.length;
+  return `
+  <div class="flex-between" style="margin-bottom:16px">
+    <h2>🗺 Progreso del Curso</h2>
+    <div class="flex" style="gap:8px">
+      ${state.user?`<span class="badge badge-green">${state.user.nombre} ${state.user.apellido}</span>`:'<span class="badge badge-gray">Invitado</span>'}
+      <span class="badge badge-amber">${state.completedModules.length}/${MODULES.length}</span>
+    </div>
+  </div>
+  <div class="progress-bar"><div class="progress-fill" style="width:${(state.completedModules.length/MODULES.length)*100}%"></div></div>
+  <div style="margin:16px 0">
+  ${MODULES.map((m,i)=>{
+    const done=state.completedModules.includes(i);
+    const locked=i>0&&!state.completedModules.includes(i-1)&&!done;
+    const score=state.moduleScores[i];
+    return `<div class="module-card ${done?'completed':''} ${locked?'locked':''} ${(!done&&!locked)?'active':''}" ${!locked?`onclick="goModule(${i})"`:''}> 
+      <div class="flex-between">
+        <div class="flex">
+          <div style="font-size:22px">${m.icon}</div>
+          <div>
+            <div style="font-size:14px;font-weight:500;color:${done?'#2ecc71':'var(--text)'}">${m.title}</div>
+            <div style="font-size:12px;color:var(--text3)">${m.subtitle}</div>
+          </div>
+        </div>
+        <div style="text-align:right">
+          ${done?`<span class="badge badge-green">✓ ${score!==undefined?score+'/5':''}</span>`:
+          locked?`<span class="badge badge-gray">🔒</span>`:
+          `<span class="badge badge-amber">→</span>`}
+        </div>
+      </div>
+    </div>`;
+  }).join('')}
+  </div>
+  ${allDone?`
+  <div style="background:#1e2e1a;border:1px solid #2a5a2a;border-radius:var(--radius2);padding:18px;text-align:center;margin-top:8px">
+    <div style="font-size:28px;margin-bottom:8px">🏆</div>
+    <h3 style="color:var(--green);margin-bottom:8px">¡Todos los módulos completados!</h3>
+    <p style="margin-bottom:14px">Está habilitado para rendir el Examen Final Integrador (30 preguntas)</p>
+    <button class="btn btn-green" onclick="startFinal()">Rendir Examen Final ★</button>
+  </div>`:`
+  <div class="info-box" style="margin-top:8px"><p>Complete todos los módulos para acceder al Examen Final. Debe aprobar cada examen de módulo con mínimo 4/5 respuestas correctas para avanzar.</p></div>`}
+  `;
+}
+
+function renderModule(){
+  const m=MODULES[state.currentModule];
+  const ch=m.chapters[state.currentChapter];
+  return `
+  <div class="flex-between" style="margin-bottom:14px">
+    <button class="btn btn-sm" onclick="goMap()">← Mapa</button>
+    <span class="badge badge-amber">Módulo ${m.id} / ${MODULES.length}</span>
+  </div>
+  <div style="margin-bottom:12px">
+    <div class="tag">${m.subtitle}</div>
+    <h2>${m.icon} ${m.title}</h2>
+  </div>
+  <div style="display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap">
+  ${m.chapters.map((c,i)=>`
+    <button onclick="setChapter(${i})" style="padding:6px 12px;border-radius:20px;border:1.5px solid ${i===state.currentChapter?'var(--amber)':'var(--border2)'};background:${i===state.currentChapter?'#2a1e00':'var(--bg3)'};color:${i===state.currentChapter?'var(--amber)':'var(--text3)'};cursor:pointer;font-size:12px;font-family:inherit">${i+1}. ${c.title.split('—')[1]?.trim()||c.title}</button>
+  `).join('')}
+  </div>
+  <div class="card">
+    <div class="chapter-title" style="margin-bottom:12px">${ch.title}</div>
+    <div class="scroll-area">${ch.content}</div>
+  </div>
+  <div class="flex-between" style="margin-top:14px">
+    <button class="btn btn-sm" onclick="prevChapter()" ${state.currentChapter===0?'disabled style="opacity:.4"':''}>← Anterior</button>
+    ${state.currentChapter<m.chapters.length-1
+      ?`<button class="btn btn-sm btn-primary" onclick="nextChapter()">Siguiente →</button>`
+      :`<button class="btn btn-primary" onclick="goExam()">Ir al Examen del Módulo 📝</button>`}
+  </div>`;
+}
+
+function renderModuleExam(){
+  const m=MODULES[state.currentModule];
+  const q=m.quiz[state.examQ];
+  const reviewed=state.examReviewed;
+  return `
+  <div class="flex-between" style="margin-bottom:14px">
+    <button class="btn btn-sm" onclick="backToModule()">← Volver al módulo</button>
+    <span class="badge badge-amber">Examen — Módulo ${m.id}</span>
+  </div>
+  <h3 style="margin-bottom:4px">📝 Examen de Módulo ${m.id}: ${m.title}</h3>
+  <p style="font-size:12px;color:var(--text3);margin-bottom:12px">Responda las 5 preguntas. Necesita mínimo 4 correctas para aprobar y avanzar al siguiente módulo.</p>
+  <div style="display:flex;gap:4px;flex-wrap:wrap;margin:12px 0">
+  ${m.quiz.map((_,i)=>{
+    let cls='ep-dot';
+    if(reviewed){cls+=state.examAnswers[i]===m.quiz[i].ans?' correct':' incorrect';}
+    else if(state.examAnswers[i]!==undefined) cls+=' answered';
+    if(i===state.examQ) cls+=' current';
+    return `<div class="${cls}" onclick="setExamQ(${i})">${i+1}</div>`;
+  }).join('')}
+  </div>
+  <div class="card" style="margin-bottom:12px">
+    <div class="flex-between" style="margin-bottom:12px">
+      <span style="font-size:12px;color:var(--text3)">Pregunta ${state.examQ+1} de ${m.quiz.length}</span>
+      ${state.examAnswers[state.examQ]!==undefined?`<span class="badge badge-blue">Respondida</span>`:''}
+    </div>
+    <p style="font-size:15px;font-weight:500;color:var(--text);margin-bottom:16px;line-height:1.6">${q.q}</p>
+    ${q.opts.map((o,oi)=>{
+      let cls='opt';
+      if(reviewed){
+        if(oi===q.ans) cls+=' correct';
+        else if(oi===state.examAnswers[state.examQ]&&oi!==q.ans) cls+=' incorrect';
+      }else if(state.examAnswers[state.examQ]===oi) cls+=' selected';
+      return `<button class="${cls}" ${reviewed?'disabled':''} onclick="selectAnswer(${oi})"><strong style="margin-right:8px;color:var(--text3)">${String.fromCharCode(65+oi)}.</strong>${o}</button>`;
+    }).join('')}
+    ${reviewed&&state.examAnswers[state.examQ]!==q.ans?`<div class="info-box" style="margin-top:8px"><p>✓ Respuesta correcta: <strong>${String.fromCharCode(65+q.ans)}. ${q.opts[q.ans]}</strong></p></div>`:''}
+  </div>
+  <div class="flex-between">
+    <button class="btn btn-sm" onclick="prevExamQ()" ${state.examQ===0?'disabled style="opacity:.4"':''}>← Anterior</button>
+    <div class="flex" style="gap:8px">
+    ${!reviewed&&state.examAnswers.filter(a=>a!==undefined).length===m.quiz.length
+      ?`<button class="btn btn-primary" onclick="submitExam()">Finalizar Examen ✓</button>`
+      :reviewed?`<button class="btn btn-sm btn-green" onclick="showExamResult()">Ver Resultado →</button>`
+      :`<button class="btn btn-sm btn-primary" onclick="nextExamQ()" ${state.examQ===m.quiz.length-1?'disabled style="opacity:.4"':''}>Siguiente →</button>`}
+    </div>
+  </div>`;
+}
+
+function renderExamResult(){
+  const m=MODULES[state.currentModule];
+  const correct=m.quiz.filter((q,i)=>state.examAnswers[i]===q.ans).length;
+  const passed=correct>=4;
+  return `
+  <div style="text-align:center;padding:20px 0 16px">
+    <div style="font-size:48px">${passed?'✅':'❌'}</div>
+    <h2 style="margin:10px 0 4px;color:${passed?'var(--green)':'var(--red)'}">${passed?'¡Módulo Aprobado!':'Módulo No Aprobado'}</h2>
+    <div style="font-size:36px;font-weight:500;color:${passed?'var(--green)':'var(--red)'};margin:12px 0">${correct}/5</div>
+    <p>${passed?'Ha superado el examen con '+correct+' respuestas correctas.':'Obtuvo '+correct+' respuestas correctas. Necesita mínimo 4 para aprobar. Revise el contenido e intente nuevamente.'}</p>
+  </div>
+  <div class="card" style="margin:14px 0">
+    <h3 style="margin-bottom:10px">Revisión de Respuestas</h3>
+    ${m.quiz.map((q,i)=>{
+      const ok=state.examAnswers[i]===q.ans;
+      return `<div style="padding:10px 0;border-bottom:1px solid var(--border)">
+        <div style="display:flex;gap:8px;align-items:flex-start">
+          <div style="font-size:16px;margin-top:1px">${ok?'✅':'❌'}</div>
+          <div style="flex:1">
+            <div style="font-size:13px;color:var(--text);margin-bottom:4px">${i+1}. ${q.q}</div>
+            ${!ok?`<div style="font-size:12px;color:var(--red)">Su resp.: ${String.fromCharCode(65+state.examAnswers[i])}. ${q.opts[state.examAnswers[i]]}</div>`:''}
+            <div style="font-size:12px;color:${ok?'var(--green)':'var(--amber)'}">Correcta: ${String.fromCharCode(65+q.ans)}. ${q.opts[q.ans]}</div>
+          </div>
+        </div>
+      </div>`;
+    }).join('')}
+  </div>
+  <div style="text-align:center;margin-top:16px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+    ${passed
+      ?`<button class="btn btn-green" onclick="nextModule()">Siguiente Módulo →</button>
+        <button class="btn btn-sm" onclick="goMap()">Ver Mapa del Curso</button>`
+      :`<button class="btn btn-primary" onclick="retryExam()">🔄 Reintentar Examen</button>
+        <button class="btn btn-sm" onclick="backToModule()">← Repasar Módulo</button>`}
+  </div>`;
+}
+
+function renderFinalExam(){
+  const q=FINAL_EXAM[state.finalQ];
+  const reviewed=state.finalReviewed;
+  return `
+  <div class="flex-between" style="margin-bottom:14px">
+    <button class="btn btn-sm" onclick="goMap()">← Mapa</button>
+    <span class="badge badge-amber">Examen Final — ${state.finalQ+1}/30</span>
+  </div>
+  <h3 style="margin-bottom:4px">⭐ Examen Final Integrador</h3>
+  <p style="font-size:12px;color:var(--text3);margin-bottom:12px">30 preguntas sobre todo el manual. Mínimo 21/30 (70%) para aprobar.</p>
+  <div style="display:flex;gap:4px;flex-wrap:wrap;margin:8px 0 12px">
+  ${FINAL_EXAM.map((_,i)=>{
+    let cls='ep-dot';
+    if(reviewed){cls+=state.finalAnswers[i]===FINAL_EXAM[i].ans?' correct':' incorrect';}
+    else if(state.finalAnswers[i]!==undefined) cls+=' answered';
+    if(i===state.finalQ) cls+=' current';
+    return `<div class="${cls}" onclick="setFinalQ(${i})">${i+1}</div>`;
+  }).join('')}
+  </div>
+  <div class="flex-between" style="margin-bottom:8px">
+    <span style="font-size:12px;color:var(--text3)">Respondidas: ${state.finalAnswers.filter(a=>a!==undefined).length}/30</span>
+    <span style="font-size:12px;color:var(--text3)">Faltantes: ${30-state.finalAnswers.filter(a=>a!==undefined).length}</span>
+  </div>
+  <div class="progress-bar"><div class="progress-fill" style="width:${(state.finalAnswers.filter(a=>a!==undefined).length/30)*100}%"></div></div>
+  <div class="card" style="margin:12px 0">
+    <div class="flex-between" style="margin-bottom:12px">
+      <span style="font-size:12px;color:var(--text3)">Pregunta ${state.finalQ+1} de 30</span>
+      ${state.finalAnswers[state.finalQ]!==undefined?`<span class="badge badge-blue">Respondida</span>`:''}
+    </div>
+    <p style="font-size:15px;font-weight:500;color:var(--text);margin-bottom:16px;line-height:1.6">${q.q}</p>
+    ${q.opts.map((o,oi)=>{
+      let cls='opt';
+      if(reviewed){
+        if(oi===q.ans) cls+=' correct';
+        else if(oi===state.finalAnswers[state.finalQ]&&oi!==q.ans) cls+=' incorrect';
+      }else if(state.finalAnswers[state.finalQ]===oi) cls+=' selected';
+      return `<button class="${cls}" ${reviewed?'disabled':''} onclick="selectFinalAnswer(${oi})"><strong style="margin-right:8px;color:var(--text3)">${String.fromCharCode(65+oi)}.</strong>${o}</button>`;
+    }).join('')}
+    ${reviewed&&state.finalAnswers[state.finalQ]!==q.ans?`<div class="info-box" style="margin-top:8px"><p>✓ Respuesta correcta: <strong>${String.fromCharCode(65+q.ans)}. ${q.opts[q.ans]}</strong></p></div>`:''}
+  </div>
+  <div class="flex-between">
+    <button class="btn btn-sm" onclick="prevFinalQ()" ${state.finalQ===0?'disabled style="opacity:.4"':''}>← Anterior</button>
+    <div class="flex" style="gap:8px">
+    ${!reviewed&&state.finalAnswers.filter(a=>a!==undefined).length===30
+      ?`<button class="btn btn-primary" onclick="submitFinal()">Finalizar Examen Final ✓</button>`
+      :reviewed?`<button class="btn btn-sm btn-green" onclick="showFinalResult()">Ver Resultado →</button>`
+      :`<button class="btn btn-sm btn-primary" onclick="nextFinalQ()" ${state.finalQ===29?'disabled style="opacity:.4"':''}>Siguiente →</button>`}
+    </div>
+  </div>`;
+}
+
+function renderFinalResult(){
+  const correct=FINAL_EXAM.filter((q,i)=>state.finalAnswers[i]===q.ans).length;
+  const pct=Math.round((correct/30)*100);
+  const passed=correct>=21;
+  return `
+  <div style="text-align:center;padding:20px 0 14px">
+    <div style="font-size:48px">${passed?'🏆':'📋'}</div>
+    <h1 style="margin:10px 0 4px;color:${passed?'var(--amber2)':'var(--red)'}">${passed?'¡CURSO COMPLETADO!':'Examen No Aprobado'}</h1>
+    <div style="font-size:44px;font-weight:500;color:${passed?'var(--amber2)':'var(--red)'};margin:12px 0">${correct}/30</div>
+    <div style="font-size:24px;font-weight:500;color:${passed?'var(--green)':'var(--red)'}">${pct}%</div>
+    <p style="margin-top:8px">${passed?'Ha completado satisfactoriamente el Curso de Adaptación al Bell 206B JetRanger III.':'Obtuvo '+pct+'%. Necesita 70% (21/30) para aprobar.'}</p>
+  </div>
+  ${passed?`
+  <div style="background:#1e2a10;border:1px solid #3a5a20;border-radius:var(--radius2);padding:18px;margin:14px 0">
+    <h3 style="color:var(--green);margin-bottom:10px">📜 Condición de Completitud</h3>
+    <div class="data-row"><span class="data-label">Aeronave</span><span class="data-value">Bell Model 206B JetRanger III</span></div>
+    <div class="data-row"><span class="data-label">Módulos completados</span><span class="data-value">6/6 Aprobados</span></div>
+    <div class="data-row"><span class="data-label">Examen Final</span><span class="data-value">${correct}/30 (${pct}%)</span></div>
+    <div class="data-row"><span class="data-label">Condición</span><span class="data-value" style="color:var(--green)">APROBADO ✓</span></div>
+    ${state.user?`
+    <div class="data-row"><span class="data-label">Cursante</span><span class="data-value">${state.user.nombre} ${state.user.apellido}</span></div>
+    <div class="data-row"><span class="data-label">Licencia</span><span class="data-value">${state.user.licencia}</span></div>
+    `:'<div class="warn-box"><p>Para obtener el certificado PDF debe estar registrado. Si cursó como invitado, regístrese e ingrese nuevamente para obtener su certificado.</p></div>'}
+    <div class="warn-box" style="margin-top:12px"><p>Esta constancia acredita la parte teórica del Curso de Adaptación. Para la habilitación en tipo deberá completar el vuelo de adaptación con un Instructor de Vuelo habilitado conforme RAAC Parte 61.</p></div>
+  </div>
+  ${state.user?`<div style="text-align:center;margin-top:12px"><button class="btn btn-primary" onclick="generateCertificate(${correct},${pct})" style="padding:12px 28px;font-size:15px">📄 Descargar y Enviar Certificado</button></div><div id="email-status-msg" class="email-status" style="display:none"></div>`:''}`:''}
+  <div class="card" style="margin:14px 0">
+    <div class="flex-between" style="margin-bottom:10px">
+      <h3>Revisión Completa</h3>
+      <span class="badge ${passed?'badge-green':'badge-red'}">${correct} correctas / ${30-correct} incorrectas</span>
+    </div>
+    <div class="scroll-area" style="max-height:300px">
+    ${FINAL_EXAM.map((q,i)=>{
+      const ok=state.finalAnswers[i]===q.ans;
+      return `<div style="padding:8px 0;border-bottom:1px solid var(--border)">
+        <div style="display:flex;gap:8px;align-items:flex-start">
+          <div style="font-size:14px;margin-top:1px;min-width:18px">${ok?'✅':'❌'}</div>
+          <div style="flex:1">
+            <div style="font-size:12px;color:var(--text);margin-bottom:3px">${i+1}. ${q.q}</div>
+            ${!ok?`<div style="font-size:11px;color:var(--red)">Su resp: ${String.fromCharCode(65+state.finalAnswers[i])}. ${q.opts[state.finalAnswers[i]]}</div>`:''}
+            <div style="font-size:11px;color:${ok?'var(--green)':'var(--amber)'}">Correcta: ${String.fromCharCode(65+q.ans)}. ${q.opts[q.ans]}</div>
+          </div>
+        </div>
+      </div>`;
+    }).join('')}
+    </div>
+  </div>
+  <div style="text-align:center;margin-top:16px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+    ${!passed?`<button class="btn btn-primary" onclick="retryFinal()">🔄 Reintentar Examen Final</button>`:''}
+    <button class="btn btn-sm" onclick="goMap()">← Mapa del Curso</button>
+  </div>`;
+}
+
+// ========= ADMIN PANEL =========
+function showAdminPanel(){
+  if(document.getElementById('admin-modal')) return;
+  const el=document.createElement('div');
+  el.id='admin-modal';
+  el.className='modal-overlay';
+  el.innerHTML=`
+  <div class="modal">
+    <div class="flex-between" style="margin-bottom:16px">
+      <h3>⚙ Panel de Administrador</h3>
+      <button class="btn btn-sm btn-danger" onclick="closeAdmin()">✕ Cerrar</button>
+    </div>
+    <div id="admin-content">
+      <label>Contraseña de Administrador</label>
+      <input type="password" id="admin-pwd" placeholder="Ingrese contraseña" />
+      <button class="btn btn-primary" onclick="checkAdmin()" style="width:100%">Ingresar</button>
+      <div id="admin-error" style="color:var(--red);font-size:13px;margin-top:8px;display:none">Contraseña incorrecta</div>
+    </div>
+  </div>`;
+  document.body.appendChild(el);
+}
+
+function checkAdmin(){
+  const pwd=document.getElementById('admin-pwd').value;
+  if(btoa(pwd)==='QmVsbDIwNkIzX0FkbWlu'){
+    document.getElementById('admin-content').innerHTML=renderAdminKeys();
+  }else{
+    document.getElementById('admin-error').style.display='block';
+  }
+}
+
+function renderAdminKeys(){
+  const pkVal = localStorage.getItem('ejsPK')||'';
+  const svcVal = localStorage.getItem('ejsSVC')||'';
+  const tidVal = localStorage.getItem('ejsTID')||'';
+  const configured = pkVal && svcVal && tidVal;
+  let html=`
+  <div style="background:#0a1e10;border:1px solid #1a5a2a;border-radius:var(--radius);padding:14px;margin-bottom:16px">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+      <div style="font-size:14px;font-weight:500;color:var(--green)">📧 Configuración EmailJS</div>
+      <span class="badge ${configured?'badge-green':'badge-red'}">${configured?'✓ Configurado':'Sin configurar'}</span>
+    </div>
+    <div style="font-size:12px;color:var(--text3);margin-bottom:10px">
+      1. Crear cuenta gratis en <strong style="color:var(--blue2)">emailjs.com</strong><br>
+      2. Conectar servicio Gmail/Outlook en <strong>Email Services</strong><br>
+      3. Crear plantilla con las variables indicadas abajo en <strong>Email Templates</strong><br>
+      4. Copiar las claves de <strong>Account &gt; API Keys</strong>
+    </div>
+    <label style="font-size:12px;color:var(--text2);margin-bottom:3px">Public Key (Account → API Keys)</label>
+    <input type="text" id="ejs-pk" value="${pkVal}" placeholder="Ej: AbCdEfGhIjKlMnOp" style="margin-bottom:8px;font-size:13px" />
+    <label style="font-size:12px;color:var(--text2);margin-bottom:3px">Service ID (Email Services → Service ID)</label>
+    <input type="text" id="ejs-svc" value="${svcVal}" placeholder="Ej: service_xxxxxxx" style="margin-bottom:8px;font-size:13px" />
+    <label style="font-size:12px;color:var(--text2);margin-bottom:3px">Template ID (Email Templates → Template ID)</label>
+    <input type="text" id="ejs-tid" value="${tidVal}" placeholder="Ej: template_xxxxxxx" style="margin-bottom:8px;font-size:13px" />
+    <button class="btn btn-sm btn-green" onclick="saveEmailConfig()" style="width:100%;margin-bottom:8px">💾 Guardar configuración EmailJS</button>
+    <div id="email-cfg-status" style="font-size:12px;text-align:center;color:var(--text3)"></div>
+    <div style="background:var(--bg3);border-radius:var(--radius);padding:10px;margin-top:8px;font-size:11px;color:var(--text3)">
+      <strong style="color:var(--amber)">Variables de la plantilla EmailJS:</strong><br>
+      <code style="color:var(--blue2)">{{to_name}}</code> — Nombre del cursante<br>
+      <code style="color:var(--blue2)">{{to_email}}</code> — Email destinatario<br>
+      <code style="color:var(--blue2)">{{licencia}}</code> — Nro. de licencia ANAC<br>
+      <code style="color:var(--blue2)">{{score}}</code> — Resultado (ej: 25/30 — 83%)<br>
+      <code style="color:var(--blue2)">{{fecha}}</code> — Fecha de aprobación<br>
+      <code style="color:var(--blue2)">{{aeronave}}</code> — Bell Model 206B JetRanger III<br>
+      <code style="color:var(--blue2)">{{instructor}}</code> — Eduardo J. Forgan<br>
+      <code style="color:var(--blue2)">{{pdf_base64}}</code> — Certificado PDF adjunto (base64)
+    </div>
+  </div>
+  <h3 style="color:var(--amber);margin-bottom:12px">🔑 Clave de Respuestas Correctas</h3>`;
+  MODULES.forEach((m,mi)=>{
+    html+=`<div style="margin-bottom:12px"><div class="chapter-title">Módulo ${m.id}: ${m.title}</div>`;
+    m.quiz.forEach((q,qi)=>{
+      html+=`<div style="font-size:12px;padding:4px 0;border-bottom:1px solid var(--border)">
+        <span style="color:var(--text3)">M${m.id}.${qi+1}</span>
+        <span style="color:var(--text2);margin:0 6px">${q.q.substring(0,60)}...</span>
+        <span class="badge badge-green" style="font-size:10px">Resp: ${String.fromCharCode(65+q.ans)}</span>
+      </div>`;
+    });
+    html+='</div>';
+  });
+  html+='<div class="chapter-title" style="margin-top:12px">Examen Final (30 preguntas)</div>';
+  FINAL_EXAM.forEach((q,i)=>{
+    html+=`<div style="font-size:12px;padding:4px 0;border-bottom:1px solid var(--border)">
+      <span style="color:var(--text3)">F${i+1}</span>
+      <span style="color:var(--text2);margin:0 6px">${q.q.substring(0,55)}...</span>
+      <span class="badge badge-green" style="font-size:10px">Resp: ${String.fromCharCode(65+q.ans)}</span>
+    </div>`;
+  });
+  html+=`<button class="btn btn-sm" onclick="downloadAdminKeys()" style="margin-top:14px;width:100%">⬇ Descargar clave completa .txt</button>`;
+  return html;
+}
+
+function downloadAdminKeys(){
+  const lines=[];
+  lines.push('CLAVE DE RESPUESTAS — CURSO DE ADAPTACIÓN BELL 206B JETRANGER III');
+  lines.push('DOCUMENTO CONFIDENCIAL — SOLO PARA EL ADMINISTRADOR DEL CURSO');
+  lines.push('='.repeat(70));
+  lines.push('Basado en: Bell 206BIII P/G SPN 10/98');
+  lines.push('Referencia regulatoria: ANAC Argentina / RAAC Parte 61 y 91');
+  lines.push('');
+  MODULES.forEach((m,mi)=>{
+    lines.push('');lines.push('='.repeat(70));
+    lines.push(`MÓDULO ${m.id}: ${m.title.toUpperCase()}`);lines.push('='.repeat(70));
+    m.quiz.forEach((q,qi)=>{
+      lines.push(`\nPregunta M${m.id}.${qi+1}: ${q.q}`);
+      q.opts.forEach((o,oi)=>lines.push(`  ${String.fromCharCode(65+oi)}. ${o}${oi===q.ans?' ◄ CORRECTA':''}`));
+    });
+  });
+  lines.push('');lines.push('='.repeat(70));
+  lines.push('EXAMEN FINAL INTEGRADOR (30 PREGUNTAS)');lines.push('='.repeat(70));
+  FINAL_EXAM.forEach((q,i)=>{
+    lines.push(`\nPregunta F${i+1}: ${q.q}`);
+    q.opts.forEach((o,oi)=>lines.push(`  ${String.fromCharCode(65+oi)}. ${o}${oi===q.ans?' ◄ CORRECTA':''}`));
+  });
+  const blob=new Blob([lines.join('\n')],{type:'text/plain;charset=utf-8'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=url;a.download='Bell206B3_ClaveAdmin_CONFIDENCIAL.txt';
+  document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);
+}
+
+// ========= CERTIFICATE =========
+function generateCertificate(score, pct){
+  const {jsPDF}=window.jspdf;
+  const doc=new jsPDF({orientation:'landscape',unit:'mm',format:'a4'});
+  const W=297,H=210;
+  
+  // Background deep navy
+  doc.setFillColor(12,16,30);
+  doc.rect(0,0,W,H,'F');
+  
+  // Outer border gold double line
+  doc.setDrawColor(220,160,30);doc.setLineWidth(1.2);
+  doc.rect(8,8,W-16,H-16);
+  doc.setLineWidth(0.4);
+  doc.rect(11,11,W-22,H-22);
+  
+  // Top decorative bar
+  doc.setFillColor(220,160,30);doc.rect(8,8,W-16,8,'F');
+  doc.setFillColor(12,16,30);doc.rect(11,11,W-22,2,'F');
+  
+  // Bottom bar
+  doc.setFillColor(220,160,30);doc.rect(8,H-16,W-16,8,'F');
+  
+  // Header text in gold bar
+  doc.setTextColor(12,16,30);
+  doc.setFontSize(9);doc.setFont('helvetica','bold');
+  doc.text('MODENA AIR SERVICE — CENTRO DE CAPACITACIÓN Y ENTRENAMIENTO — ANAC ARGENTINA',W/2,13.5,{align:'center'});
+  
+  // Course type tag
+  doc.setFillColor(30,40,70);
+  doc.roundedRect(W/2-60,22,120,8,2,2,'F');
+  doc.setTextColor(150,180,255);doc.setFontSize(8);doc.setFont('helvetica','normal');
+  doc.text('CERTIFICADO DE APROBACIÓN — FASE TEÓRICA',W/2,27.5,{align:'center'});
+  
+  // Main title
+  doc.setTextColor(220,160,30);doc.setFontSize(28);doc.setFont('helvetica','bold');
+  doc.text('Curso de Adaptación',W/2,50,{align:'center'});
+  
+  // Helicopter model
+  doc.setTextColor(245,200,66);doc.setFontSize(20);
+  doc.text('Bell Model 206B JetRanger III',W/2,62,{align:'center'});
+  
+  // Divider line
+  doc.setDrawColor(220,160,30);doc.setLineWidth(0.5);
+  doc.line(40,68,W-40,68);
+  
+  // "Se certifica que" text
+  doc.setTextColor(180,190,210);doc.setFontSize(12);doc.setFont('helvetica','normal');
+  doc.text('Se certifica que el/la piloto',W/2,78,{align:'center'});
+  
+  // Name
+  const nombre=`${state.user.nombre} ${state.user.apellido}`;
+  doc.setTextColor(255,255,255);doc.setFontSize(22);doc.setFont('helvetica','bold');
+  doc.text(nombre,W/2,92,{align:'center'});
+  
+  // License
+  doc.setTextColor(180,190,210);doc.setFontSize(11);doc.setFont('helvetica','normal');
+  doc.text(`Licencia ANAC N°: ${state.user.licencia}`,W/2,101,{align:'center'});
+  
+  // Completion text
+  doc.setFontSize(11);
+  doc.text('ha completado satisfactoriamente la Fase Teórica del Curso de Adaptación al',W/2,112,{align:'center'});
+  doc.setTextColor(245,200,66);doc.setFont('helvetica','bold');
+  doc.text('helicóptero Bell Model 206B JetRanger III (B3)',W/2,120,{align:'center'});
+  
+  // Score box
+  doc.setFillColor(25,35,60);doc.setDrawColor(100,140,220);doc.setLineWidth(0.5);
+  doc.roundedRect(W/2-50,125,100,16,3,3,'FD');
+  doc.setTextColor(150,180,255);doc.setFontSize(9);doc.setFont('helvetica','normal');
+  doc.text('Resultado Examen Final Integrador',W/2,131,{align:'center'});
+  doc.setTextColor(100,220,140);doc.setFontSize(14);doc.setFont('helvetica','bold');
+  doc.text(`${score}/30   (${pct}%)   APROBADO`,W/2,140,{align:'center'});
+  
+  // Regulatory note
+  doc.setTextColor(120,130,150);doc.setFontSize(8);doc.setFont('helvetica','italic');
+  doc.text('Esta constancia acredita únicamente la fase teórica. La habilitación en tipo requiere el vuelo de adaptación',W/2,151,{align:'center'});
+  doc.text('con Instructor de Vuelo habilitado conforme RAAC Parte 61 — ANAC República Argentina.',W/2,157,{align:'center'});
+  
+  // Date
+  const now=new Date();
+  const dateStr=now.toLocaleDateString('es-AR',{day:'2-digit',month:'long',year:'numeric'});
+  doc.setTextColor(180,190,210);doc.setFontSize(9);doc.setFont('helvetica','normal');
+  doc.text(`Buenos Aires, ${dateStr}`,W/2,165,{align:'center'});
+  
+  // Signature line
+  doc.setDrawColor(100,110,130);doc.setLineWidth(0.3);
+  doc.line(W/2-45,175,W/2+45,175);
+  
+  // Signature image (firma)
+  try{
+    doc.addImage(IMGS.firma,'PNG',W/2-35,158,70,22);
+  }catch(e){}
+  
+  doc.setTextColor(200,210,230);doc.setFontSize(9);doc.setFont('helvetica','bold');
+  doc.text('Eduardo J. Forgan',W/2,180,{align:'center'});
+  doc.setFont('helvetica','normal');doc.setFontSize(8);doc.setTextColor(140,150,170);
+  doc.text('Instructor de Vuelo de Helicópteros — Comandante',W/2,185,{align:'center'});
+  doc.text('Modena Air Service — I.V.H. / ANAC Argentina',W/2,190,{align:'center'});
+  
+  // Bottom gold bar text
+  doc.setTextColor(12,16,30);doc.setFontSize(7);doc.setFont('helvetica','normal');
+  doc.text(`Bell Model 206B JetRanger III — Manual de Procedimientos 206BIII P/G SPN 10/98 — ANAC / RAAC Parte 61 y 91`,W/2,H-11,{align:'center'});
+  
+  const safeName=(nombre).replace(/\s+/g,'_');
+
+  // Save locally
+  doc.save(`Certificado_Bell206B3_${safeName}.pdf`);
+
+  // Also send by email
+  sendCertificateEmails(doc, safeName, score, pct);
+}
+
+// ========= EMAIL SENDING =========
+async function sendCertificateEmails(doc, safeName, score, pct){
+  const statusEl = document.getElementById('email-status-msg');
+  if(!statusEl) return;
+
+  if(!EMAIL_CFG.publicKey || !EMAIL_CFG.serviceId || !EMAIL_CFG.templateId){
+    statusEl.className='email-status error';
+    statusEl.innerHTML='⚠ Email no configurado. Configure EmailJS en el Panel Administrador para enviar emails automáticos.';
+    statusEl.style.display='block';
+    return;
+  }
+
+  statusEl.className='email-status sending';
+  statusEl.innerHTML='📧 Enviando certificado por email... por favor espere.';
+  statusEl.style.display='block';
+
+  const now = new Date();
+  const dateStr = now.toLocaleDateString('es-AR',{day:'2-digit',month:'long',year:'numeric'});
+  const pdfBase64 = doc.output('datauristring');
+  const nombre = `${state.user.nombre} ${state.user.apellido}`;
+
+  const templateParams = {
+    to_name:     nombre,
+    to_email:    state.user.email,
+    licencia:    state.user.licencia,
+    score:       `${score}/30 (${pct}%)`,
+    fecha:       dateStr,
+    aeronave:    'Bell Model 206B JetRanger III',
+    instructor:  'Eduardo J. Forgan',
+    cc_email:    EMAIL_CFG.ccEmail,
+    pdf_nombre:  `Certificado_Bell206B3_${safeName}.pdf`,
+    pdf_base64:  pdfBase64,
+  };
+
+  try{
+    // Send to student
+    await emailjs.send(EMAIL_CFG.serviceId, EMAIL_CFG.templateId, {
+      ...templateParams,
+      reply_to: EMAIL_CFG.ccEmail,
+    });
+
+    // Send copy to instructor
+    await emailjs.send(EMAIL_CFG.serviceId, EMAIL_CFG.templateId, {
+      ...templateParams,
+      to_name:  'Eduardo J. Forgan',
+      to_email: EMAIL_CFG.ccEmail,
+      reply_to: state.user.email,
+      asunto_prefijo: '[COPIA] '
+    });
+
+    statusEl.className='email-status sent';
+    statusEl.innerHTML=`✅ Certificado enviado exitosamente a <strong>${state.user.email}</strong> y copia a <strong>${EMAIL_CFG.ccEmail}</strong>`;
+  } catch(err){
+    console.error('EmailJS error:', err);
+    statusEl.className='email-status error';
+    statusEl.innerHTML=`❌ Error al enviar email: ${err?.text||JSON.stringify(err)}. El certificado ya fue descargado localmente.`;
+  }
+}
+
+// ========= EMAIL CONFIG SAVE =========
+window.saveEmailConfig = function(){
+  const pk  = document.getElementById('ejs-pk').value.trim();
+  const svc = document.getElementById('ejs-svc').value.trim();
+  const tid = document.getElementById('ejs-tid').value.trim();
+  if(!pk||!svc||!tid){
+    document.getElementById('email-cfg-status').innerHTML='<span style="color:var(--red)">Por favor complete todos los campos.</span>';
+    return;
+  }
+  localStorage.setItem('ejsPK', pk);
+  localStorage.setItem('ejsSVC', svc);
+  localStorage.setItem('ejsTID', tid);
+  EMAIL_CFG.publicKey  = pk;
+  EMAIL_CFG.serviceId  = svc;
+  EMAIL_CFG.templateId = tid;
+  try{ emailjs.init({publicKey: pk}); }catch(e){}
+  document.getElementById('email-cfg-status').innerHTML='<span style="color:var(--green)">✅ Configuración guardada exitosamente.</span>';
+};
+
+// ========= EVENT HANDLERS =========
+window.startCourse=()=>{state.view='map';render();}
+window.goIntro=()=>{state.view='intro';render();}
+window.goRegister=()=>{state.view='register';render();}
+window.goMap=()=>{state.view='map';render();}
+window.goModule=(i)=>{state.currentModule=i;state.currentChapter=0;state.view='module';render();}
+window.setChapter=(i)=>{state.currentChapter=i;render();}
+window.prevChapter=()=>{if(state.currentChapter>0){state.currentChapter--;render();}}
+window.nextChapter=()=>{const m=MODULES[state.currentModule];if(state.currentChapter<m.chapters.length-1){state.currentChapter++;render();}}
+window.goExam=()=>{state.examAnswers=[];state.examQ=0;state.examReviewed=false;state.view='moduleExam';render();}
+window.backToModule=()=>{state.view='module';render();}
+window.setExamQ=(i)=>{state.examQ=i;render();}
+window.prevExamQ=()=>{if(state.examQ>0){state.examQ--;render();}}
+window.nextExamQ=()=>{const m=MODULES[state.currentModule];if(state.examQ<m.quiz.length-1){state.examQ++;render();}}
+window.selectAnswer=(oi)=>{if(!state.examReviewed){state.examAnswers[state.examQ]=oi;render();}}
+window.submitExam=()=>{state.examReviewed=true;render();}
+window.showExamResult=()=>{
+  const m=MODULES[state.currentModule];
+  const correct=m.quiz.filter((q,i)=>state.examAnswers[i]===q.ans).length;
+  if(correct>=4&&!state.completedModules.includes(state.currentModule)){
+    state.completedModules.push(state.currentModule);
+    state.moduleScores[state.currentModule]=correct;
+  }
+  state.view='examResult';render();
+}
+window.retryExam=()=>{state.examAnswers=[];state.examQ=0;state.examReviewed=false;state.view='moduleExam';render();}
+window.nextModule=()=>{
+  const next=state.currentModule+1;
+  if(next<MODULES.length){state.currentModule=next;state.currentChapter=0;state.examAnswers=[];state.examQ=0;state.examReviewed=false;state.view='module';render();}
+  else{state.view='map';render();}
+}
+window.startFinal=()=>{state.finalAnswers=[];state.finalQ=0;state.finalReviewed=false;state.view='finalExam';render();}
+window.setFinalQ=(i)=>{state.finalQ=i;render();}
+window.prevFinalQ=()=>{if(state.finalQ>0){state.finalQ--;render();}}
+window.nextFinalQ=()=>{if(state.finalQ<29){state.finalQ++;render();}}
+window.selectFinalAnswer=(oi)=>{if(!state.finalReviewed){state.finalAnswers[state.finalQ]=oi;render();}}
+window.submitFinal=()=>{state.finalReviewed=true;render();}
+window.showFinalResult=()=>{state.view='finalResult';render();}
+window.retryFinal=()=>{state.finalAnswers=[];state.finalQ=0;state.finalReviewed=false;state.view='finalExam';render();}
+window.guestMode=()=>{state.user=null;state.view='map';render();}
+window.logout=()=>{state.user=null;state.view='intro';render();}
+window.goRegister=()=>{state.view='register';render();}
+window.submitRegister=()=>{
+  const n=document.getElementById('reg-nombre').value.trim();
+  const ap=document.getElementById('reg-apellido').value.trim();
+  const lic=document.getElementById('reg-licencia').value.trim();
+  const email=document.getElementById('reg-email').value.trim();
+  if(!n||!ap||!lic||!email){
+    document.getElementById('reg-error').style.display='block';
+    document.getElementById('reg-error').textContent='Por favor complete todos los campos.';
+    return;
+  }
+  if(!email.includes('@')){
+    document.getElementById('reg-error').style.display='block';
+    document.getElementById('reg-error').textContent='Ingrese un correo electrónico válido.';
+    return;
+  }
+  state.user={nombre:n,apellido:ap,licencia:lic,email:email};
+  state.view='map';render();
+}
+window.openAdmin=()=>{state.adminOpen=true;render();}
+window.closeAdmin=()=>{state.adminOpen=false;const el=document.getElementById('admin-modal');if(el)el.remove();}
+window.checkAdmin=checkAdmin;
+window.downloadAdminKeys=downloadAdminKeys;
+window.generateCertificate=generateCertificate;
+
+render();
+
+</script><button id="theme-btn" title="Modo diurno/nocturno">🌙</button>
+<script>
+(function(){
+  var b=document.getElementById("theme-btn");
+  function a(t){document.body.classList.toggle("day",t==="day");b.textContent=t==="day"?"☀️":"🌙";}
+  a(localStorage.getItem("theme")||"night");
+  b.onclick=function(){var d=document.body.classList.contains("day");localStorage.setItem("theme",d?"night":"day");a(d?"night":"day");};
+})();
+</script>
+</body></html>
