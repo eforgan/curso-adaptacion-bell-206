@@ -2526,9 +2526,9 @@ function renderWeightBalance() {
             <div class="wb-col">
               <label>Pasajeros Traseros (lbs / ${((rlW + rcW + rrW) * 0.45359).toFixed(1)} kg total)</label>
               <div style="display:flex;gap:4px">
-                <input type="number" placeholder="Izq" value="${wb.rear_left}" oninput="updateWB('rear_left', this.value)" style="flex:1;margin-bottom:0" />
-                <input type="number" placeholder="Cen" value="${wb.rear_center}" oninput="updateWB('rear_center', this.value)" style="flex:1;margin-bottom:0" />
-                <input type="number" placeholder="Der" value="${wb.rear_right}" oninput="updateWB('rear_right', this.value)" style="flex:1;margin-bottom:0" />
+                <input type="number" id="wb-rear-left" placeholder="Izq" value="${wb.rear_left}" oninput="updateWB('rear_left', this.value)" style="flex:1;margin-bottom:0" />
+                <input type="number" id="wb-rear-center" placeholder="Cen" value="${wb.rear_center}" oninput="updateWB('rear_center', this.value)" style="flex:1;margin-bottom:0" />
+                <input type="number" id="wb-rear-right" placeholder="Der" value="${wb.rear_right}" oninput="updateWB('rear_right', this.value)" style="flex:1;margin-bottom:0" />
               </div>
             </div>
           </div>
@@ -2658,7 +2658,7 @@ function renderWeightBalance() {
 }
 
 window.updateWB = (field, val) => {
-  state.weight_balance[field] = parseFloat(val) || 0;
+  state.weight_balance[field] = val;
   render();
 };
 
@@ -2766,10 +2766,10 @@ function renderPerformance() {
         
         <div class="wb-input-group">
           <label>Altitud de Presión (ft / ${(pressAlt * 0.3048).toFixed(0)} m)</label>
-          <input type="number" value="${perf.alt_press}" oninput="updatePerf('alt_press', this.value)" style="margin-bottom:8px" />
+          <input type="number" id="perf-alt-press" value="${perf.alt_press}" oninput="updatePerf('alt_press', this.value)" style="margin-bottom:8px" />
           
           <label>Temperatura Exterior (OAT °C)</label>
-          <input type="number" value="${perf.oat}" oninput="updatePerf('oat', this.value)" style="margin-bottom:8px" />
+          <input type="number" id="perf-oat" value="${perf.oat}" oninput="updatePerf('oat', this.value)" style="margin-bottom:8px" />
           
           <div style="display:flex;align-items:center;gap:8px;margin:10px 0">
             <input type="checkbox" id="perf-antiice" ${perf.anti_ice?'checked':''} onchange="updatePerf('anti_ice', this.checked)" style="width:16px;height:16px" />
@@ -2836,7 +2836,7 @@ window.updatePerf = (field, val) => {
   } else if (field === 'doors') {
     state.performance.doors = val;
   } else {
-    state.performance[field] = parseFloat(val) || 0;
+    state.performance[field] = val;
   }
   render();
 };
@@ -2968,13 +2968,13 @@ function renderHVDiagram() {
               <label>Velocidad: <strong>${flightSpeed} MPH / ${(flightSpeed*1.60934).toFixed(0)} km/h</strong></label>
               <span class="metric">${(flightSpeed*0.868976).toFixed(0)} nudos (kts)</span>
             </div>
-            <input type="range" min="0" max="120" value="${flightSpeed}" oninput="updatePerf('flight_speed', this.value)" style="margin-bottom:12px;width:100%" />
+            <input type="range" id="perf-flight-speed" min="0" max="120" value="${flightSpeed}" oninput="updatePerf('flight_speed', this.value)" style="margin-bottom:12px;width:100%" />
             
             <div style="display:flex;justify-content:space-between">
               <label>Altura: <strong>${flightHeight} FT / ${(flightHeight*0.3048).toFixed(0)} m</strong></label>
               <span class="metric">${(flightHeight*0.3048).toFixed(1)} metros</span>
             </div>
-            <input type="range" min="0" max="600" step="5" value="${flightHeight}" oninput="updatePerf('flight_height', this.value)" style="width:100%" />
+            <input type="range" id="perf-flight-height" min="0" max="600" step="5" value="${flightHeight}" oninput="updatePerf('flight_height', this.value)" style="width:100%" />
           </div>
         </div>
         
@@ -3092,10 +3092,34 @@ function renderBody() {
 }
 
 function render(){
+  // Preserve focus and cursor coordinates/selection for inputs during re-renders
+  const activeElId = document.activeElement ? document.activeElement.id : null;
+  let start = null;
+  let end = null;
+  if (document.activeElement && (document.activeElement.tagName === 'INPUT' || document.activeElement.tagName === 'TEXTAREA')) {
+    try {
+      start = document.activeElement.selectionStart;
+      end = document.activeElement.selectionEnd;
+    } catch(e) {}
+  }
+
   const root=document.getElementById('root');
   
   root.className = 'app app-container';
   root.innerHTML = renderSidebar() + `<div class="main-content" style="flex:1">${renderBody()}</div>`;
+  
+  // Restore focus and selection range
+  if (activeElId) {
+    const el = document.getElementById(activeElId);
+    if (el) {
+      el.focus();
+      if (start !== null && end !== null) {
+        try {
+          el.setSelectionRange(start, end);
+        } catch(e) {}
+      }
+    }
+  }
   
   // Auto-trigger score pops / confetti on results
   if (state.view === 'examResult') {
