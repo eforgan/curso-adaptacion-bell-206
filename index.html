@@ -1274,16 +1274,16 @@ const defaultState = {
   activeChecklistTab: 'normales',
   activeChecklistId: 'norm_before_ext',
   weight_balance: {
-    empty_weight: 1604,
+    empty_weight: 727.6, // kg
     empty_arm: 111.0,
     empty_lat_arm: 0.0,
     oil_qty: 1.5, // gal
-    pilot: 170,
+    pilot: 77.1, // kg
     copilot: 0,
     rear_left: 0,
     rear_center: 0,
     rear_right: 0,
-    fuel: 50, // gal
+    fuel: 189.3, // L
     baggage: 0,
     cargo_hook: 0
   },
@@ -2396,16 +2396,28 @@ function renderSidebar() {
 
 function renderWeightBalance() {
   const wb = state.weight_balance;
-  const emptyW = parseFloat(wb.empty_weight) || 0;
-  const oilW = parseFloat(wb.oil_qty) * 7.5;
-  const pilotW = parseFloat(wb.pilot) || 0;
-  const copilotW = parseFloat(wb.copilot) || 0;
-  const rlW = parseFloat(wb.rear_left) || 0;
-  const rcW = parseFloat(wb.rear_center) || 0;
-  const rrW = parseFloat(wb.rear_right) || 0;
-  const fuelW = parseFloat(wb.fuel) * 6.7;
-  const baggageW = parseFloat(wb.baggage) || 0;
-  const hookW = parseFloat(wb.cargo_hook) || 0;
+  
+  const emptyW_kg = parseFloat(wb.empty_weight) || 0;
+  const oilW = parseFloat(wb.oil_qty) * 7.5; // oil stays in gallons, oilW in lbs
+  const pilotW_kg = parseFloat(wb.pilot) || 0;
+  const copilotW_kg = parseFloat(wb.copilot) || 0;
+  const rlW_kg = parseFloat(wb.rear_left) || 0;
+  const rcW_kg = parseFloat(wb.rear_center) || 0;
+  const rrW_kg = parseFloat(wb.rear_right) || 0;
+  const fuelL = parseFloat(wb.fuel) || 0;
+  const baggageW_kg = parseFloat(wb.baggage) || 0;
+  const hookW_kg = parseFloat(wb.cargo_hook) || 0;
+
+  // Convert kg/L input values to lbs for calculation
+  const emptyW = emptyW_kg * 2.20462262;
+  const pilotW = pilotW_kg * 2.20462262;
+  const copilotW = copilotW_kg * 2.20462262;
+  const rlW = rlW_kg * 2.20462262;
+  const rcW = rcW_kg * 2.20462262;
+  const rrW = rrW_kg * 2.20462262;
+  const fuelW = fuelL * (6.7 / 3.785411784); // JP-1 density conversion to lbs
+  const baggageW = baggageW_kg * 2.20462262;
+  const hookW = hookW_kg * 2.20462262;
   
   const totalW = emptyW + oilW + pilotW + copilotW + rlW + rcW + rrW + fuelW + baggageW + hookW;
   
@@ -2502,7 +2514,7 @@ function renderWeightBalance() {
         <div class="wb-input-group">
           <div class="wb-row">
             <div class="wb-col">
-              <label>Peso Vacío Básico (lbs / ${(emptyW * 0.45359).toFixed(1)} kg)</label>
+              <label>Peso Vacío Básico (kg / ${(emptyW_kg * 2.20462).toFixed(1)} lbs)</label>
               <input type="text" inputmode="decimal" id="wb-empty-weight" value="${wb.empty_weight}" oninput="updateWB('empty_weight', this.value)" />
             </div>
             <div class="wb-col">
@@ -2513,18 +2525,18 @@ function renderWeightBalance() {
           
           <div class="wb-row">
             <div class="wb-col">
-              <label>Piloto (Cabina Der) (lbs / ${(pilotW * 0.45359).toFixed(1)} kg)</label>
+              <label>Piloto (Cabina Der) (kg / ${(pilotW_kg * 2.20462).toFixed(1)} lbs)</label>
               <input type="text" inputmode="decimal" id="wb-pilot" value="${wb.pilot}" oninput="updateWB('pilot', this.value)" />
             </div>
             <div class="wb-col">
-              <label>Copiloto / Pasajero Del. (lbs / ${(copilotW * 0.45359).toFixed(1)} kg)</label>
+              <label>Copiloto / Pasajero Del. (kg / ${(copilotW_kg * 2.20462).toFixed(1)} lbs)</label>
               <input type="text" inputmode="decimal" id="wb-copilot" value="${wb.copilot}" oninput="updateWB('copilot', this.value)" />
             </div>
           </div>
           
           <div class="wb-row">
             <div class="wb-col">
-              <label>Pasajeros Traseros (lbs / ${((rlW + rcW + rrW) * 0.45359).toFixed(1)} kg total)</label>
+              <label>Pasajeros Traseros (kg / ${((rlW_kg + rcW_kg + rrW_kg) * 2.20462).toFixed(1)} lbs total)</label>
               <div style="display:flex;gap:4px">
                 <input type="text" inputmode="decimal" id="wb-rear-left" placeholder="Izq" value="${wb.rear_left}" oninput="updateWB('rear_left', this.value)" style="flex:1;margin-bottom:0" />
                 <input type="text" inputmode="decimal" id="wb-rear-center" placeholder="Cen" value="${wb.rear_center}" oninput="updateWB('rear_center', this.value)" style="flex:1;margin-bottom:0" />
@@ -2535,19 +2547,19 @@ function renderWeightBalance() {
           
           <div class="wb-row">
             <div class="wb-col">
-              <label>Combustible (Galones - Máx 91)</label>
+              <label>Combustible (Litros - Máx 344.5 L)</label>
               <input type="text" inputmode="decimal" id="wb-fuel" value="${wb.fuel}" oninput="updateWB('fuel', this.value)" />
-              <span class="metric" style="font-size:11px">Equivale a: ${(parseFloat(wb.fuel)*6.7).toFixed(1)} lbs / ${(parseFloat(wb.fuel)*3.04).toFixed(1)} kg / ${(parseFloat(wb.fuel)*3.785).toFixed(1)} L</span>
+              <span class="metric" style="font-size:11px">Equivale a: ${(fuelL / 3.78541).toFixed(1)} galones / ${(fuelL * 0.80).toFixed(1)} kg / ${(fuelL * 0.80 * 2.20462).toFixed(1)} lbs de JP-1</span>
             </div>
             <div class="wb-col">
-              <label>Equipaje (lbs / ${(baggageW * 0.45359).toFixed(1)} kg - Máx 250 lbs / 113 kg)</label>
+              <label>Equipaje (kg / ${(baggageW_kg * 2.20462).toFixed(1)} lbs - Máx 113.4 kg / 250 lbs)</label>
               <input type="text" inputmode="decimal" id="wb-baggage" value="${wb.baggage}" oninput="updateWB('baggage', this.value)" />
             </div>
           </div>
           
           <div class="wb-row">
             <div class="wb-col">
-              <label>Carga en Gancho (lbs / ${(hookW * 0.45359).toFixed(1)} kg - Máx 1200 lbs / 544 kg)</label>
+              <label>Carga en Gancho (kg / ${(hookW_kg * 2.20462).toFixed(1)} lbs - Máx 544.3 kg / 1200 lbs)</label>
               <input type="text" inputmode="decimal" id="wb-hook" value="${wb.cargo_hook}" oninput="updateWB('cargo_hook', this.value)" />
             </div>
             <div class="wb-col">
@@ -2651,8 +2663,8 @@ function renderWeightBalance() {
         </div>
       </div>
       
-      ${baggageW > 250 ? `<div class="danger-box" style="margin-top:10px"><p>⚠ EXCESO DE PESO EN PORTAEQUIPAJES: El compartimento intermedio está limitado a un máximo estricto de <strong>250 lbs (113.4 kg)</strong>.</p></div>`:''}
-      ${parseFloat(wb.fuel) > 91 ? `<div class="danger-box" style="margin-top:10px"><p>⚠ EXCESO DE COMBUSTIBLE: La capacidad máxima del tanque de vejiga es de <strong>91 galones (344.5 litros)</strong>.</p></div>`:''}
+      ${baggageW > 250 ? `<div class="danger-box" style="margin-top:10px"><p>⚠ EXCESO DE PESO EN PORTAEQUIPAJES: El compartimento intermedio está limitado a un máximo estricto de <strong>113.4 kg (250 lbs)</strong>.</p></div>`:''}
+      ${fuelL > 344.5 ? `<div class="danger-box" style="margin-top:10px"><p>⚠ EXCESO DE COMBUSTIBLE: La capacidad máxima del tanque de vejiga es de <strong>344.5 litros (91 galones)</strong>.</p></div>`:''}
     </div>
   </div>`;
 }
@@ -2677,16 +2689,16 @@ window.updateWB = (field, val) => {
 
 window.resetWeightBalance = () => {
   state.weight_balance = {
-    empty_weight: 1604,
+    empty_weight: 727.6, // kg
     empty_arm: 111.0,
     empty_lat_arm: 0.0,
     oil_qty: 1.5,
-    pilot: 170,
+    pilot: 77.1, // kg
     copilot: 0,
     rear_left: 0,
     rear_center: 0,
     rear_right: 0,
-    fuel: 50,
+    fuel: 189.3, // L
     baggage: 0,
     cargo_hook: 0
   };
@@ -2697,16 +2709,26 @@ function renderPerformance() {
   const perf = state.performance;
   const wb = state.weight_balance;
   
-  const emptyW = parseFloat(wb.empty_weight) || 0;
-  const oilW = parseFloat(wb.oil_qty) * 7.5;
-  const pilotW = parseFloat(wb.pilot) || 0;
-  const copilotW = parseFloat(wb.copilot) || 0;
-  const rlW = parseFloat(wb.rear_left) || 0;
-  const rcW = parseFloat(wb.rear_center) || 0;
-  const rrW = parseFloat(wb.rear_right) || 0;
-  const fuelW = parseFloat(wb.fuel) * 6.7;
-  const baggageW = parseFloat(wb.baggage) || 0;
-  const hookW = parseFloat(wb.cargo_hook) || 0;
+  const emptyW_kg = parseFloat(wb.empty_weight) || 0;
+  const oilW = parseFloat(wb.oil_qty) * 7.5; // oilW in lbs
+  const pilotW_kg = parseFloat(wb.pilot) || 0;
+  const copilotW_kg = parseFloat(wb.copilot) || 0;
+  const rlW_kg = parseFloat(wb.rear_left) || 0;
+  const rcW_kg = parseFloat(wb.rear_center) || 0;
+  const rrW_kg = parseFloat(wb.rear_right) || 0;
+  const fuelL = parseFloat(wb.fuel) || 0;
+  const baggageW_kg = parseFloat(wb.baggage) || 0;
+  const hookW_kg = parseFloat(wb.cargo_hook) || 0;
+  
+  const emptyW = emptyW_kg * 2.20462262;
+  const pilotW = pilotW_kg * 2.20462262;
+  const copilotW = copilotW_kg * 2.20462262;
+  const rlW = rlW_kg * 2.20462262;
+  const rcW = rcW_kg * 2.20462262;
+  const rrW = rrW_kg * 2.20462262;
+  const fuelW = fuelL * (6.7 / 3.785411784);
+  const baggageW = baggageW_kg * 2.20462262;
+  const hookW = hookW_kg * 2.20462262;
   
   const currentWeight = emptyW + oilW + pilotW + copilotW + rlW + rcW + rrW + fuelW + baggageW + hookW;
   
@@ -2867,16 +2889,26 @@ function renderHVDiagram() {
   const perf = state.performance;
   const wb = state.weight_balance;
   
-  const emptyW = parseFloat(wb.empty_weight) || 0;
-  const oilW = parseFloat(wb.oil_qty) * 7.5;
-  const pilotW = parseFloat(wb.pilot) || 0;
-  const copilotW = parseFloat(wb.copilot) || 0;
-  const rlW = parseFloat(wb.rear_left) || 0;
-  const rcW = parseFloat(wb.rear_center) || 0;
-  const rrW = parseFloat(wb.rear_right) || 0;
-  const fuelW = parseFloat(wb.fuel) * 6.7;
-  const baggageW = parseFloat(wb.baggage) || 0;
-  const hookW = parseFloat(wb.cargo_hook) || 0;
+  const emptyW_kg = parseFloat(wb.empty_weight) || 0;
+  const oilW = parseFloat(wb.oil_qty) * 7.5; // oilW in lbs
+  const pilotW_kg = parseFloat(wb.pilot) || 0;
+  const copilotW_kg = parseFloat(wb.copilot) || 0;
+  const rlW_kg = parseFloat(wb.rear_left) || 0;
+  const rcW_kg = parseFloat(wb.rear_center) || 0;
+  const rrW_kg = parseFloat(wb.rear_right) || 0;
+  const fuelL = parseFloat(wb.fuel) || 0;
+  const baggageW_kg = parseFloat(wb.baggage) || 0;
+  const hookW_kg = parseFloat(wb.cargo_hook) || 0;
+  
+  const emptyW = emptyW_kg * 2.20462262;
+  const pilotW = pilotW_kg * 2.20462262;
+  const copilotW = copilotW_kg * 2.20462262;
+  const rlW = rlW_kg * 2.20462262;
+  const rcW = rcW_kg * 2.20462262;
+  const rrW = rrW_kg * 2.20462262;
+  const fuelW = fuelL * (6.7 / 3.785411784);
+  const baggageW = baggageW_kg * 2.20462262;
+  const hookW = hookW_kg * 2.20462262;
   
   const currentWeight = emptyW + oilW + pilotW + copilotW + rlW + rcW + rrW + fuelW + baggageW + hookW;
   
