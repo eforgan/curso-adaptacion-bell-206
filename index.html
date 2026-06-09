@@ -682,7 +682,8 @@ const IMGS={
   height_velocity:"img/height_velocity.jpg",
   weight_balance:"img/weight_balance.jpg",
   emergency:"img/emergency.jpg",
-  firma:"img/firma.png"
+  firma:"img/firma.png",
+  bell206_in_flight:"img/bell206_in_flight.png"
 }
 
 // ========= EMAIL CONFIG =========
@@ -1360,7 +1361,9 @@ function renderIntro(){
   const greeting = state.user ? `<div class="badge badge-green" style="margin-bottom:10px;font-size:12px">✓ Bienvenido, ${state.user.nombre} ${state.user.apellido}</div>` : '';
   return `
   <div class="view-enter" style="text-align:center;padding:30px 0 20px;position:relative">
-    <div class="hero-heli">🚁</div>
+    <div class="hero-heli" style="font-size:0;line-height:0;filter:none;margin-bottom:12px">
+      <img src="${IMGS.bell206_in_flight}" style="width:100%;max-width:520px;height:auto;border-radius:var(--radius2);border:1.5px solid var(--border2);box-shadow:var(--shadow-card);display:inline-block" alt="Bell 206B JetRanger III en vuelo">
+    </div>
     <div class="tag" style="margin-top:14px;margin-bottom:6px">República Argentina · Regulación ANAC / RAAC</div>
     <h1 style="font-size:28px;margin:4px 0 2px">Curso de Adaptación</h1>
     <div style="font-size:17px;font-weight:600;color:var(--amber2);margin-bottom:10px;letter-spacing:-.01em">Bell Model 206B JetRanger III — B3</div>
