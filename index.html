@@ -3120,17 +3120,21 @@ function render(){
   root.className = 'app app-container';
   root.innerHTML = renderSidebar() + `<div class="main-content" style="flex:1">${renderBody()}</div>`;
   
-  // Restore focus and selection range
+  // Restore focus and selection range (both synchronously and deferred for paint cycle)
   if (activeElId) {
-    const el = document.getElementById(activeElId);
-    if (el) {
-      el.focus();
-      if (start !== null && end !== null) {
+    const restoreFocus = () => {
+      const el = document.getElementById(activeElId);
+      if (el) {
         try {
-          el.setSelectionRange(start, end);
+          el.focus();
+          if (start !== null && end !== null) {
+            el.setSelectionRange(start, end);
+          }
         } catch(e) {}
       }
-    }
+    };
+    restoreFocus();
+    setTimeout(restoreFocus, 0);
   }
   
   // Auto-trigger score pops / confetti on results
