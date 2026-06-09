@@ -1,0 +1,152 @@
+[
+  {
+    "q": "¿Cuál es el combustible usable del tanque tipo vejiga del JetRanger III (S/N 3567+)?",
+    "opts": ["91 gal <span class='metric'>(344 L)</span>", "83 galones", "76 gal <span class='metric'>(288 L)</span>", "70 galones"],
+    "ans": 2
+  },
+  {
+    "q": "¿Cuál es la potencia máxima continua del motor Allison 250-C20J (limitada para operación)?",
+    "opts": ["317 SHP <span class='metric'>(236 kW)</span>", "420 SHP <span class='metric'>(313 kW)</span>", "270 SHP <span class='metric'>(201 kW)</span>", "350 SHP"],
+    "ans": 2
+  },
+  {
+    "q": "La sección delantera del fuselaje tiene una capacidad aproximada de:",
+    "opts": ["16 ft³ <span class='metric'>(0,45 m³)</span>", "25 pies cúbicos", "40 ft³ <span class='metric'>(1,13 m³)</span>", "50 pies cúbicos"],
+    "ans": 2
+  },
+  {
+    "q": "¿Cuándo se deben instalar los amarres del rotor principal y de cola?",
+    "opts": ["Solo si hay tormenta eléctrica", "Con pronóstico de vientos fuertes, otros helicópteros en el área, o helicóptero desatendido", "Nunca, los rotores no necesitan amarre", "Solo en mantenimiento programado"],
+    "ans": 1
+  },
+  {
+    "q": "La velocidad aérea máxima para autorrotación estable es:",
+    "opts": ["80 MPH <span class='metric'>(129 km/h)</span> (69 nudos) IAS", "100 MPH <span class='metric'>(161 km/h)</span> (87 nudos) IAS", "115 MPH <span class='metric'>(185 km/h)</span> (100 nudos) IAS", "130 MPH (113 nudos) IAS"],
+    "ans": 2
+  },
+  {
+    "q": "Para vuelo con nieve volando o cayendo se debe tener instalado:",
+    "opts": ["Solo calefacción para el motor", "Sistema de separación de partículas y deflector", "Parabrisas especial blindado", "Protección de hielo para los rotores"],
+    "ans": 1
+  },
+  {
+    "q": "El estabilizador horizontal del JetRanger está construido de:",
+    "opts": ["Fibra de carbono", "Aluminio", "Acero inoxidable", "Material compuesto de fibra de vidrio"],
+    "ans": 1
+  },
+  {
+    "q": "Durante las operaciones nocturnas, ¿cómo se debe mantener la orientación?",
+    "opts": ["Exclusivamente por instrumentos", "Por referencia visual con objetos en tierra, luces terrestres o iluminación celeste", "Usando GPS y piloto automático", "No se permite vuelo nocturno en este helicóptero"],
+    "ans": 1
+  },
+  {
+    "q": "¿Cuál es el diámetro del rotor principal del Bell 206B JetRanger III?",
+    "opts": ["30 pies (9,14 m)", "33 pies 4\" (10,16 m)", "36 pies (10,97 m)", "28 pies (8,53 m)"],
+    "ans": 1
+  },
+  {
+    "q": "Para VNE con peso superior a 3,000 lb, por cada 1,000 ft de densidad altitud sobre 3,000 ft se disminuye:",
+    "opts": ["4.0 MPH <span class='metric'>(6.4 km/h)</span> (3.5 KIAS)", "6.0 MPH IAS", "8.0 MPH <span class='metric'>(12.9 km/h)</span> (7.0 nudos)", "10 MPH IAS"],
+    "ans": 2
+  },
+  {
+    "q": "¿Cuál es el combustible PRINCIPAL aprobado para el JetRanger III, válido para cualquier temperatura ambiente?",
+    "opts": ["AVGAS 100LL, solo para altitudes superiores a 5,000 pies", "ASTM Tipo Jet A (JP-5), solo por encima de 0°F (-17,8°C)", "ASTM Tipo Jet B (JP-4) — aprobado para cualquier temperatura", "Mezcla 80/87 AVGAS y Jet A-1, solo en emergencia"],
+    "ans": 2
+  },
+  {
+    "q": "En la inspección preflight, ¿qué se verifica de la tapa de la toma de combustible?",
+    "opts": ["Solo que no gotee", "Revisar visualmente el nivel y asegurar la tapa", "Abrirla para airear el tanque", "No requiere verificación diaria"],
+    "ans": 1
+  },
+  {
+    "q": "La turbina N2 de potencia debe estar al 100% de RPM antes del despegue:",
+    "opts": ["Durante el crucero a velocidad de crucero", "Con el colectivo abajo, como parte del pre-despegue", "Solo para despegues de alta altitud", "Al inicio del arranque del motor"],
+    "ans": 1
+  },
+  {
+    "q": "El pasador de arrastre del eje impulsor principal debe inspeccionarse buscando:",
+    "opts": ["Solo oxidación superficial", "Fugas de aceite por el sello", "Seguridad y evidencia de contacto con la placa de tape estático", "Solo desgaste por fricción"],
+    "ans": 2
+  },
+  {
+    "q": "¿Cuál es la velocidad máxima de vuelo permitida con las puertas DELANTERAS quitadas?",
+    "opts": ["100 mph — 87 nudos", "87 nudos — 100 mph", "69 nudos — 80 mph", "130 nudos — 150 mph"],
+    "ans": 2
+  },
+  {
+    "q": "La cubierta de la caja de engranajes del rotor de cola está hecha de:",
+    "opts": ["Fibra de vidrio", "Acero inoxidable", "Aleación de aluminio", "Material compuesto"],
+    "ans": 2
+  },
+  {
+    "q": "Para una verificación de potencia inaceptable en tierra, ¿cuándo se recomienda realizarla en vuelo?",
+    "opts": ["En cualquier condición de temperatura", "Cuando la altura, temperatura y peso permiten un vuelo estacionario seguro", "Solo en días fríos con temperatura negativa", "A máxima altitud posible"],
+    "ans": 1
+  },
+  {
+    "q": "El sistema hidráulico del JetRanger asiste principalmente a:",
+    "opts": ["Los frenos del tren de aterrizaje", "Los controles cíclico y colectivo (y pedales)", "Las puertas del compartimiento de carga", "El sistema de combustible"],
+    "ans": 1
+  },
+  {
+    "q": "Para drenar muestra del sumidero de combustible, el interruptor FUEL VALVE debe estar en posición:",
+    "opts": ["ON con el BAT OFF", "OFF, mientras BAT está ON y se sacan rompe-circuitos FUEL BOOST", "En cualquier posición", "Solo OFF durante el vuelo"],
+    "ans": 1
+  },
+  {
+    "q": "¿Cuántas bombas reforzadoras de combustible tiene el sistema del JetRanger III y dónde están ubicadas?",
+    "opts": ["1 bomba eléctrica en la línea principal de combustible", "2 bombas eléctricas en el fondo de la celda vejiga", "3 bombas: 2 principales y 1 de reserva en paralelo", "1 bomba mecánica accionada directamente por el motor N1"],
+    "ans": 1
+  },
+  {
+    "q": "Una advertencia WARNING en el manual del Bell 206B indica:",
+    "opts": ["Una nota de información general importante", "Un procedimiento que puede resultar en daño al equipo", "Un procedimiento que si no se sigue correctamente puede resultar en lesiones o muerte", "Una limitación operacional secundaria"],
+    "ans": 2
+  },
+  {
+    "q": "¿Qué muestra el indicador tacómetro doble del rotor en el panel de instrumentos?",
+    "opts": ["Solo las RPM del rotor principal en porcentaje", "La velocidad N2 (turbina de potencia) y las RPM del rotor principal", "Las velocidades N1 y N2 del motor simultáneamente", "La temperatura de aceite del rotor y las RPM del motor"],
+    "ans": 1
+  },
+  {
+    "q": "La puerta de carga del compartimiento de equipaje tiene un microswitch que activa:",
+    "opts": ["El cierre automático", "La luz de aviso en cabina", "La alarma de peso excesivo", "El interruptor de fuego"],
+    "ans": 1
+  },
+  {
+    "q": "¿Cuál es el límite máximo del CG lateral hacia el lado DERECHO (+) de la línea central del JetRanger III?",
+    "opts": ["2,5 pulgadas (63,5 mm) de la línea central", "3,0 pulgadas (76,2 mm) de la línea central", "5,0 pulgadas (127 mm) de la línea central", "4,0 pulgadas (101,6 mm) de la línea central"],
+    "ans": 3
+  },
+  {
+    "q": "La velocidad de máxima distancia de planeo (máximo planeo) en autorrotación es:",
+    "opts": ["60 MPH <span class='metric'>(97 km/h)</span> (52 nudos) IAS", "80 MPH <span class='metric'>(129 km/h)</span> (69 nudos) IAS", "100 MPH <span class='metric'>(161 km/h)</span> (87 nudos) IAS", "115 MPH <span class='metric'>(185 km/h)</span> (100 nudos) IAS"],
+    "ans": 1
+  },
+  {
+    "q": "Las palas del rotor principal del JetRanger III son:",
+    "opts": ["De fibra de carbono y no intercambiables", "De metal, individualmente intercambiables", "De aluminio en pares intercambiables únicamente", "De material compuesto permanentes"],
+    "ans": 1
+  },
+  {
+    "q": "Se prohíbe el vuelo extendido de reversa o lateral sin puertas porque:",
+    "opts": ["Aumenta excesivamente el consumo de combustible", "Existen restricciones de CG y límites de velocidad aerodinámica", "Se pueden perder objetos de la cabina", "El sistema hidráulico no opera correctamente"],
+    "ans": 1
+  },
+  {
+    "q": "Un CAUTION (precaución) en el manual indica:",
+    "opts": ["Lesiones personales o muerte si no se cumple", "Un procedimiento que si no se observa puede resultar en daño o destrucción del equipo", "Una nota informativa de operación", "Un requisito reglamentario"],
+    "ans": 1
+  },
+  {
+    "q": "¿Cuál es el fluido hidráulico aprobado para el JetRanger III y su cantidad total en el sistema?",
+    "opts": ["MIL-H-5606 — 2 pintas total (1 en depósito, 1 en sistema)", "ATF Dexron III — 1 cuarto de galón total", "MIL-H-83282 — 3 pintas total en circuito cerrado", "Aceite mineral ISO 46 — 1 litro total"],
+    "ans": 0
+  },
+  {
+    "q": "¿Qué se recomienda hacer antes de que el rotor toque el suelo en autorrotación?",
+    "opts": ["Aplicar colectivo al máximo", "Un toque nivelado antes de pasar el 70% de RPM del rotor, reduciendo el colectivo suavemente", "Aplicar freno de rotor inmediatamente", "Cerrar el acelerador completamente al tocar"],
+    "ans": 1
+  }
+]

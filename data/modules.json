@@ -1,0 +1,308 @@
+[
+  {
+    "id": 1,
+    "title": "Descripción General y Tripulación",
+    "subtitle": "Secciones 1 y 2 — Airframe, rotores, compartimientos",
+    "icon": "✈",
+    "chapters": [
+      {
+        "title": "1.1 — El JetRanger III: Descripción General",
+        "content": "<p>El <strong style=\"color:var(--amber2)\">Bell Model 206B JetRanger III</strong> es un helicóptero utilitario de motor sencillo diseñado para despegar y aterrizar en cualquier terreno razonablemente nivelado. La configuración estándar es para un piloto y cuatro pasajeros.</p>\n<img src=\"{{heli_overview}}\" class=\"fig-img\" alt=\"Helicóptero JetRanger III\">\n<p class=\"fig-caption\">Figura 1-1. Helicóptero JetRanger III — Secciones del fuselaje</p>\n<div class=\"info-box\"><p>Esta publicación es exclusivamente para capacitación en el Bell Model 206B-3. Para procedimientos y limitaciones actualizados, consultar los Manuales de Vuelo vigentes (BHT-206B-FM-1).</p></div\n<div class=\"chapter-title\" style=\"margin-top:12px\">Datos Técnicos Principales</div\n<div class=\"data-row\"><span class=\"data-label\">Motor</span><span class=\"data-value\">Allison 250-C20J (Rolls Royce)</span></div\n<div class=\"data-row\"><span class=\"data-label\">Potencia nominal</span><span class=\"data-value\">420 SHP <span class='metric'>(313 kW)</span></span></div\n<div class=\"data-row\"><span class=\"data-label\">Potencia despegue (limitada)</span><span class=\"data-value\">317 SHP <span class='metric'>(236 kW)</span> — 5 min</span></div\n<div class=\"data-row\"><span class=\"data-label\">Potencia continua (limitada)</span><span class=\"data-value\">270 SHP <span class='metric'>(201 kW)</span></span></div\n<div class=\"data-row\"><span class=\"data-label\">Peso vacío promedio</span><span class=\"data-value\">1,604 libras</span></div\n<div class=\"data-row\"><span class=\"data-label\">Peso bruto máximo (interno)</span><span class=\"data-value\">3,200 libras</span></div\n<div class=\"data-row\"><span class=\"data-label\">Peso bruto máximo (externo)</span><span class=\"data-value\">3,350 libras</span></div\n<img src=\"{{data_table}}\" class=\"fig-img\" alt=\"Información General 206B-III\">\n<p class=\"fig-caption\">Información General 206B-III — Velocidades, altitudes y pesos</p>"
+      },
+      {
+        "title": "1.2 — Rotor Principal y de Cola",
+        "content": "<div class=\"chapter-title\">Rotor Principal</div\n<p>El rotor principal es <strong style=\"color:var(--amber2)\">semi-rígido de subibaja (seesaw/underslung)</strong>, con el eje de cambio de paso por debajo del eje de aleteo. Tiene <strong style=\"color:var(--amber2)\">dos palas de metal intercambiables individualmente</strong>. Cada pala unida al cubo por horquilla, cojinetes de cambio de paso y barra de tensión-torsión.</p>\n<div class=\"data-row\"><span class=\"data-label\">Número de palas</span><span class=\"data-value\">2</span></div\n<div class=\"data-row\"><span class=\"data-label\">Diámetro</span><span class=\"data-value\">33 pies 4\" <span class='metric'>(10,16 m)</span></span></div\n<div class=\"data-row\"><span class=\"data-label\">Cuerda</span><span class=\"data-value\">13 pulgadas</span></div\n<div class=\"data-row\"><span class=\"data-label\">Torcimiento</span><span class=\"data-value\">-10 grados</span></div\n<div class=\"data-row\"><span class=\"data-label\">Proporción motor/rotor</span><span class=\"data-value\">15.23 a 1</span></div\n<div class=\"data-row\"><span class=\"data-label\">RPM a 100%</span><span class=\"data-value\">395</span></div\n<div class=\"chapter-title\" style=\"margin-top:12px\">Rotor de Cola</div\n<div class=\"data-row\"><span class=\"data-label\">Número de palas</span><span class=\"data-value\">2 — semi-rígido subibaja</span></div\n<div class=\"data-row\"><span class=\"data-label\">Diámetro</span><span class=\"data-value\">5 pies 5\" <span class='metric'>(1,65 m)</span></span></div\n<div class=\"data-row\"><span class=\"data-label\">RPM a 100%</span><span class=\"data-value\">2,560</span></div\n<div class=\"warn-box\"><p>Las RPM del rotor de cola no son indicadas directamente al piloto. Se controlan a través del régimen del motor N2.</p></div>"
+      },
+      {
+        "title": "1.3 — Fuselaje y Dimensiones",
+        "content": "<p>El fuselaje se divide en tres secciones:</p>\n<div class=\"data-row\"><span class=\"data-label\">Sección Delantera</span><span class=\"data-value\">Honeycomb aluminio — máx. resistencia y bajo ruido</span></div\n<div class=\"data-row\"><span class=\"data-label\">Sección Intermedia</span><span class=\"data-value\">Semimonocasco — plataforma motor + carga + equipo</span></div\n<div class=\"data-row\"><span class=\"data-label\">Cono de Cola</span><span class=\"data-value\">Monocasco — soporta eje, rotor cola, estabilizadores</span></div\n<img src=\"{{dimensions}}\" class=\"fig-img\" alt=\"Dimensiones Principales 206B\">\n<p class=\"fig-caption\">Figura 1-3. Dimensiones Principales del Bell 206B JetRanger III</p>\n<div class=\"data-row\"><span class=\"data-label\">Largo total fuselaje</span><span class=\"data-value\">39 pies 1\" <span class='metric'>(11,91 m)</span></span></div\n<div class=\"data-row\"><span class=\"data-label\">Altura total</span><span class=\"data-value\">9 pies 7.5\" <span class='metric'>(2,94 m)</span></span></div\n<div class=\"data-row\"><span class=\"data-label\">Separación patines (3,200 lb)</span><span class=\"data-value\">6 pies 3.5\" <span class='metric'>(1,92 m)</span></span></div\n<div class=\"data-row\"><span class=\"data-label\">Compartimiento principal de carga</span><span class=\"data-value\">40 ft³ <span class='metric'>(1,13 m³)</span></span></div\n<div class=\"data-row\"><span class=\"data-label\">Compartimiento de equipaje</span><span class=\"data-value\">16 ft³ <span class='metric'>(0,45 m³)</span> — máx. 250 libras</span></div>"
+      },
+      {
+        "title": "1.4 — Compartimiento de Tripulación y Estabilizadores",
+        "content": "<div class=\"chapter-title\">Compartimiento de Tripulación</div\n<p>La sección delantera tiene aproximadamente <strong style=\"color:var(--amber2)\">40 ft³ <span class='metric'>(1,13 m³)</span></strong> para acomodar pasajeros o carga. Las puertas traseras pueden quitarse para llevar objetos largos. Hay 16 ft³ <span class='metric'>(0,45 m³)</span> adicionales en la sección intermedia donde se pueden llevar 250 libras de equipaje.</p>\n<div class=\"chapter-title\" style=\"margin-top:12px\">Estabilizadores</div\n<p><strong style=\"color:var(--amber2)\">Estabilizador horizontal:</strong> Construido de aluminio, unido al cono de cola. Mantiene actitud casi nivelada a cualquier velocidad.</p>\n<p style=\"margin-top:8px\"><strong style=\"color:var(--amber2)\">Estabilizador vertical:</strong> La orilla de ataque está desviada <strong>5.5°</strong> hacia el exterior para reducir el empuje del rotor de cola en vuelos de avance, mejorando la habilidad de aterrizajes por pérdida de pedal. Es de núcleo de panal de abeja de aluminio y piel de aluminio.</p>\n<div class=\"info-box\"><p>El combustible y pasajeros se ubican <strong>debajo del rotor principal</strong> para minimizar los cambios en el centro de gravedad durante el consumo de combustible.</p></div>"
+      }
+    ],
+    "quiz": [
+      {
+        "q": "¿Cuál es la configuración estándar del Bell 206B JetRanger III?",
+        "opts": ["2 pilotos y 3 pasajeros", "1 piloto y 4 pasajeros", "2 pilotos y 4 pasajeros", "1 piloto y 3 pasajeros"],
+        "ans": 1
+      },
+      {
+        "q": "¿Qué tipo de rotor principal tiene el JetRanger III?",
+        "opts": ["Articulado, de 4 palas", "Rígido, de 2 palas", "Semi-rígido de subibaja (seesaw), de 2 palas", "Semi-rígido articulado, de 3 palas"],
+        "ans": 2
+      },
+      {
+        "q": "¿Dónde se ubica el tanque de combustible para minimizar cambios en el CG?",
+        "opts": ["Arriba del motor", "En el morro del helicóptero", "Debajo y detrás del asiento del pasajero", "En el cono de cola"],
+        "ans": 2
+      },
+      {
+        "q": "¿Cuál es la capacidad máxima del compartimiento de equipaje en la sección intermedia?",
+        "opts": ["40 ft³ <span class='metric'>(1,13 m³)</span> / sin límite de peso", "500 libras — 16 ft³ <span class='metric'>(0,45 m³)</span>", "250 libras — 16 ft³ <span class='metric'>(0,45 m³)</span>", "350 libras — 25 pies cúbicos"],
+        "ans": 2
+      },
+      {
+        "q": "¿Cuántos grados está desviada la orilla de ataque del estabilizador vertical hacia el exterior?",
+        "opts": ["3°", "10°", "5.5°", "7°"],
+        "ans": 2
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "title": "Limitaciones de Operación",
+    "subtitle": "Sección 3 — Velocidades, altitudes, tipo de vuelo",
+    "icon": "⚠",
+    "chapters": [
+      {
+        "title": "2.1 — Tipo de Operación y Tripulación",
+        "content": "<p>El helicóptero básico está aprobado para <strong style=\"color:var(--amber2)\">5 pasajeros</strong> y certificado para operaciones <strong style=\"color:var(--amber2)\">diurnas y nocturnas VFR cuando no hay hielo</strong>.</p>\n<div class=\"chapter-title\">Panel de Instrumentos</div\n<img src=\"{{instrument_panel}}\" class=\"fig-img\" alt=\"Panel de instrumentos\">\n<p class=\"fig-caption\">Figura 2-1. Panel de instrumentos estándar — The Standard JetRanger instrument panel and radio pedestal</p>\n<div class=\"chapter-title\" style=\"margin-top:12px\">Tripulación de Vuelo</div\n<p>La tripulación mínima consiste de <strong style=\"color:var(--amber2)\">un piloto, sentado en el asiento de la derecha</strong>. El asiento de la izquierda puede ser para un piloto adicional solo cuando están instalados los controles dobles aprobados.</p>\n<div class=\"warn-box\"><p>Las operaciones nocturnas se limitan a condiciones de contacto visual. La orientación debe mantenerse por referencia visual con objetos en tierra, por luces terrestres o adecuada iluminación celeste.</p></div>"
+      },
+      {
+        "title": "2.2 — Sistema Pitot/Estático",
+        "content": "<p>El tubo pitot está montado en la parte más delantera de la nariz de la cabina, al lado derecho de la línea central del helicóptero. La presión del aire estático se obtiene de dos ventilas estáticas localizadas en los paneles izquierdo y derecho abajo de la ventana inferior de la cabina.</p>\n<img src=\"{{pitot_static}}\" class=\"fig-img\" alt=\"Sistema Pitot/Estático\">\n<p class=\"fig-caption\">Figura 2-2. Sistema Pitot/Estático</p>\n<div class=\"chapter-title\" style=\"margin-top:12px\">Instrumentos de Propulsión</div\n<ul>\n<li>Indicador tacómetro doble del rotor y N2</li>\n<li>Indicador temperatura/presión aceite del motor</li>\n<li>Indicador tacómetro productora de gas N1</li>\n<li>Indicador presión/temp. aceite de transmisión</li>\n<li>Indicador de presión de combustible</li>\n<li>Torquímetro del motor</li>\n<li>Indicador de cantidad de combustible</li>\n<li>Indicador TOT (Temperatura de salida de turbina)</li>\n</ul>"
+      },
+      {
+        "title": "2.3 — Limitaciones de Velocidad (VNE) y Altitud",
+        "content": "<div class=\"chapter-title\">Peso bruto 3,000 lb o menos</div\n<div class=\"data-row\"><span class=\"data-label\">VNE nivel del mar a 3,000 ft densidad</span><span class=\"data-value\">150 MPH <span class='metric'>(241 km/h)</span> IAS (130 KIAS)</span></div\n<div class=\"data-row\"><span class=\"data-label\">Reducción c/1,000 ft sobre 3,000 ft dens.</span><span class=\"data-value\">4.0 MPH (3.5 KIAS)</span></div\n<div class=\"data-row\"><span class=\"data-label\">Altitud máxima</span><span class=\"data-value\">20,000 pies <span class='metric'>(6.096 m)</span> <span class='metric'>(6.096 m)</span> presión altitud</span></div\n<div class=\"chapter-title\" style=\"margin-top:12px\">Peso bruto por encima de 3,000 lb</div\n<div class=\"data-row\"><span class=\"data-label\">VNE nivel del mar a 3,000 ft densidad</span><span class=\"data-value\">140 MPH <span class='metric'>(225 km/h)</span> IAS (122 nudos)</span></div\n<div class=\"data-row\"><span class=\"data-label\">Reducción c/1,000 ft sobre 3,000 ft dens.</span><span class=\"data-value\">8.0 MPH (7.0 nudos)</span></div\n<div class=\"data-row\"><span class=\"data-label\">Altitud máxima</span><span class=\"data-value\">13,500 pies <span class='metric'>(4.115 m)</span> <span class='metric'>(4.115 m)</span> densidad altitud</span></div\n<div class=\"chapter-title\" style=\"margin-top:12px\">Otras Velocidades Limitantes</div\n<div class=\"data-row\"><span class=\"data-label\">Velocidad máxima para autorrotación estable</span><span class=\"data-value\">115 MPH <span class='metric'>(185 km/h)</span> (100 nudos)</span></div\n<div class=\"data-row\"><span class=\"data-label\">Velocidad máxima con puertas traseras quitadas</span><span class=\"data-value\">87 nudos (100 mph)</span></div\n<div class=\"data-row\"><span class=\"data-label\">Velocidad máxima con puertas delanteras quitadas</span><span class=\"data-value\">69 nudos (80 mph)</span></div\n<div class=\"warn-box\"><p>Se prohíbe usar intencionalmente los límites transitorios. Encender la luz anticolisión al volar cerca de o en humedad visible para evitar reflejos y vértigo.</p></div>"
+      },
+      {
+        "title": "2.4 — Limitaciones CG, Motor y Condiciones Especiales",
+        "content": "<img src=\"{{limitations}}\" class=\"fig-img\" alt=\"Limitaciones de CG y Motor\">\n<p class=\"fig-caption\">Limitaciones del Centro de Gravedad y Planta de Potencia</p>\n<div class=\"chapter-title\">Límites del CG Lateral</div\n<div class=\"data-row\"><span class=\"data-label\">Límite izquierdo (-)</span><span class=\"data-value\">3.0 pulgadas (76.2 mm) de línea central</span></div\n<div class=\"data-row\"><span class=\"data-label\">Límite derecho (+)</span><span class=\"data-value\">4.0 pulgadas (101.6 mm) de línea central</span></div\n<div class=\"chapter-title\" style=\"margin-top:12px\">Turbina de Potencia N2 — Límites RPM en Operación</div\n<div class=\"data-row\"><span class=\"data-label\">Mínimo (encendido)</span><span class=\"data-value\">97%</span></div\n<div class=\"data-row\"><span class=\"data-label\">Máximo (encendido)</span><span class=\"data-value\">100%</span></div\n<div class=\"danger-box\"><p>NO SE AUTORIZA USAR EL ACELERADOR PARA CONTROLAR RPM (excepciones: ver Sección 15, Procedimientos en Emergencias y Fallas).</p></div\n<div class=\"chapter-title\" style=\"margin-top:12px\">Vuelo Sin Puertas</div\n<div class=\"data-row\"><span class=\"data-label\">Carga externa máxima</span><span class=\"data-value\">3,350 libras (1,519.6 kg)</span></div\n<div class=\"data-row\"><span class=\"data-label\">Se prohíbe</span><span class=\"data-value\">Vuelo extendido de reversa o lateral</span></div>"
+      }
+    ],
+    "quiz": [
+      {
+        "q": "¿Cuál es la velocidad VNE para peso bruto de 3,000 libras o menos, a nivel del mar hasta 3,000 pies de densidad altitud?",
+        "opts": ["140 MPH <span class='metric'>(225 km/h)</span> IAS (122 nudos)", "150 MPH <span class='metric'>(241 km/h)</span> IAS (130 KIAS)", "130 MPH IAS (113 nudos)", "160 MPH IAS (139 nudos)"],
+        "ans": 1
+      },
+      {
+        "q": "¿Cuál es la altitud máxima de operación para pesos brutos menores de 3,000 libras?",
+        "opts": ["13,500 pies <span class='metric'>(4.115 m)</span> <span class='metric'>(4.115 m)</span> densidad altitud", "15,000 pies <span class='metric'>(1.524 m)</span> presión altitud", "20,000 pies <span class='metric'>(6.096 m)</span> <span class='metric'>(6.096 m)</span> presión altitud", "25,000 pies <span class='metric'>(1.524 m)</span> presión altitud"],
+        "ans": 2
+      },
+      {
+        "q": "¿Para qué tipo de operación está certificado el Bell 206B en su configuración básica?",
+        "opts": ["VFR y IFR, día y noche", "VFR día y noche sin hielo", "IFR día únicamente", "VFR día solamente"],
+        "ans": 1
+      },
+      {
+        "q": "¿En qué asiento debe sentarse el piloto mínimo requerido para operar el JetRanger III?",
+        "opts": ["Asiento de la izquierda", "Asiento trasero central", "Asiento de la derecha", "Cualquiera de los asientos delanteros"],
+        "ans": 2
+      },
+      {
+        "q": "¿Cuál es la carga externa máxima al volar sin puertas?",
+        "opts": ["2,500 libras (1,133 kg)", "3,350 libras (1,519.6 kg)", "3,000 libras (1,360.8 kg)", "4,000 libras (1,814 kg)"],
+        "ans": 1
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "title": "Planta de Potencia y Combustible",
+    "subtitle": "Secciones 5 y 6 — Motor Allison 250-C20J, sistema de combustible",
+    "icon": "⚙",
+    "chapters": [
+      {
+        "title": "3.1 — Motor Allison 250-C20J: Descripción y Componentes",
+        "content": "<p>El JetRanger III está equipado con el motor turboeje <strong style=\"color:var(--amber2)\">Allison 250-C20J</strong>, fabricado por Allison Engine Company, División de Rolls Royce. El motor tiene una capacidad de <strong style=\"color:var(--amber2)\">420 SHP <span class='metric'>(313 kW)</span></strong>, limitado para la operación.</p>\n<div class=\"chapter-title\">Componentes accionados por N1 (productora de gas):</div\n<ul>\n<li>Generador tacómetro de la productora de gas</li>\n<li>Conjunto de la bomba de combustible</li>\n<li>Generador/Arrancador</li>\n<li>Control de combustible de la productora de gas N1</li>\n<li>Conjunto de la bomba de aceite</li>\n</ul>\n<img src=\"{{engine_gear}}\" class=\"fig-img\" alt=\"N2 Tren de engranajes de turbina de potencia\">\n<p class=\"fig-caption\">Figura 5-4. N2 Tren de engranajes de turbina de potencia</p>\n<div class=\"info-box\"><p>El tren N2 da una reducción en la velocidad de N2 de 33,290 RPM en el rotor de la turbina de potencia a 6,016 RPM de salida a la unidad de rueda libre.</p></div>"
+      },
+      {
+        "title": "3.2 — Limitaciones del Motor",
+        "content": "<div class=\"chapter-title\">Límites TOT (Temperatura de Salida de Turbina)</div\n<div class=\"data-row\"><span class=\"data-label\">TOT máximo DESPEGUE (5 min)</span><span class=\"data-value\" style=\"color:var(--red)\">810°C</span></div\n<div class=\"data-row\"><span class=\"data-label\">TOT máximo CONTINUO</span><span class=\"data-value\">738°C</span></div\n<div class=\"data-row\"><span class=\"data-label\">TOT máximo TRANSITORIO (5 seg)</span><span class=\"data-value\">927°C</span></div\n<div class=\"chapter-title\" style=\"margin-top:12px\">Límites RPM y Torque</div\n<div class=\"data-row\"><span class=\"data-label\">N1 máximo</span><span class=\"data-value\">105%</span></div\n<div class=\"data-row\"><span class=\"data-label\">Torque máximo despegue</span><span class=\"data-value\">100% (5 minutos)</span></div\n<div class=\"data-row\"><span class=\"data-label\">Torque máximo transitorio</span><span class=\"data-value\">110% (5 segundos)</span></div\n<div class=\"data-row\"><span class=\"data-label\">Potencia máxima continua (85% torque)</span><span class=\"data-value\">270 SHP <span class='metric'>(201 kW)</span></span></div\n<div class=\"danger-box\"><p>NUNCA exceder los límites del motor. El TOT por encima del máximo continuo puede dañar irreparablemente los álabes de la turbina.</p></div\n<div class=\"warn-box\"><p>Días fríos → torque será el factor limitante. Días cálidos/grandes alturas → TOT será el factor limitante.</p></div>"
+      },
+      {
+        "title": "3.3 — Sistema de Combustible",
+        "content": "<img src=\"{{fuel_system}}\" class=\"fig-img\" alt=\"Sección 6 — Sistema de Combustible\">\n<p class=\"fig-caption\">Sistema de Combustible — Sección 6: celda vejiga debajo y detrás del asiento de pasajero</p>\n<div class=\"data-row\"><span class=\"data-label\">Capacidad total tanque (S/N 3567+)</span><span class=\"data-value\">91 gal <span class='metric'>(344 L)</span></span></div\n<div class=\"data-row\"><span class=\"data-label\">Capacidad usable</span><span class=\"data-value\">76 gal <span class='metric'>(288 L)</span></span></div\n<div class=\"data-row\"><span class=\"data-label\">Tipo de tanque</span><span class=\"data-value\">Vejiga, resistente a impactos</span></div\n<div class=\"data-row\"><span class=\"data-label\">Llenado</span><span class=\"data-value\">Desde el lado derecho</span></div\n<div class=\"data-row\"><span class=\"data-label\">Bombas reforzadoras</span><span class=\"data-value\">2 bombas eléctricas en el fondo de la celda</span></div\n<div class=\"chapter-title\" style=\"margin-top:12px\">Combustibles Aprobados</div\n<div class=\"data-row\"><span class=\"data-label\">Principal</span><span class=\"data-value\">ASTM Tipo Jet B (JP-4) — cualquier temperatura</span></div\n<div class=\"data-row\"><span class=\"data-label\">Alternativo &gt; 0°F (-17.8°C)</span><span class=\"data-value\">ASTM Tipo Jet A o A-1 (JP-5 o JP-8)</span></div\n<div class=\"data-row\"><span class=\"data-label\">Alternativo &lt; 0°F (-17.8°C)</span><span class=\"data-value\">Mezcla 80/87 AVGAS y Tipo Jet A y A-1</span></div>"
+      },
+      {
+        "title": "3.4 — Procedimiento de Drenaje de Combustible",
+        "content": "<p>Antes del primer vuelo del día se debe drenar y revisar la muestra de combustible del sumidero de la celda y del filtro del fuselaje.</p>\n<div class=\"data-row\"><span class=\"data-label\">Paso 1</span><span class=\"data-value\">Rompe-circuitos FUEL BOOST AFT y FWD — Fuera</span></div\n<div class=\"data-row\"><span class=\"data-label\">Paso 2</span><span class=\"data-value\">Interruptor BAT — ON</span></div\n<div class=\"data-row\"><span class=\"data-label\">Paso 3</span><span class=\"data-value\">Interruptor FUEL VALVE — OFF</span></div\n<div class=\"data-row\"><span class=\"data-label\">Paso 4</span><span class=\"data-value\">Botón drenaje de combustible — Oprimir, tomar muestra, soltar</span></div\n<div class=\"chapter-title\" style=\"margin-top:12px\">Filtro de Combustible del Fuselaje</div\n<div class=\"data-row\"><span class=\"data-label\">Paso 1</span><span class=\"data-value\">Interruptor FUEL VALVE — ON</span></div\n<div class=\"data-row\"><span class=\"data-label\">Paso 2</span><span class=\"data-value\">Rompe-circuitos FUEL BOOST AFT y FWD — Adentro</span></div\n<div class=\"data-row\"><span class=\"data-label\">Paso 3</span><span class=\"data-value\">Rompe circuito CAUTION LT — Adentro</span></div\n<div class=\"data-row\"><span class=\"data-label\">Paso 4</span><span class=\"data-value\">Válvula de drenaje del filtro — Abrir, obtener muestra, cerrar</span></div\n<div class=\"warn-box\"><p>No arrancar el motor si la muestra de combustible tiene agua, sedimentos o contaminación. Consultar a mantenimiento antes de proceder.</p></div>"
+      }
+    ],
+    "quiz": [
+      {
+        "q": "¿Cuál es el modelo y fabricante del motor del Bell 206B JetRanger III?",
+        "opts": ["Pratt & Whitney PT6B-37A", "Turbomeca Arrius 2B1", "Allison 250-C20J, División de Rolls Royce", "General Electric CT7-2D"],
+        "ans": 2
+      },
+      {
+        "q": "¿A cuántos SHP está limitado el motor para la operación de despegue?",
+        "opts": ["420 SHP <span class='metric'>(313 kW)</span>", "250 SHP", "270 SHP <span class='metric'>(201 kW)</span>", "317 SHP <span class='metric'>(236 kW)</span>"],
+        "ans": 3
+      },
+      {
+        "q": "¿Cuál es la capacidad total del tanque de combustible (S/N 3567 en adelante)?",
+        "opts": ["76 gal <span class='metric'>(288 L)</span>", "91 gal <span class='metric'>(344 L)</span>", "100 galones", "83 galones"],
+        "ans": 1
+      },
+      {
+        "q": "¿Cuál es el TOT máximo permitido durante el despegue?",
+        "opts": ["738°C", "927°C", "810°C", "850°C"],
+        "ans": 2
+      },
+      {
+        "q": "¿Cuál es el porcentaje máximo de N1 (turbina productora de gas)?",
+        "opts": ["100%", "110%", "107%", "105%"],
+        "ans": 3
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "title": "Fuselaje, Transmisión y Sistemas",
+    "subtitle": "Secciones 4, 7, 8, 9, 10, 11 — Estructura, hidráulico, eléctrico",
+    "icon": "🔧",
+    "chapters": [
+      {
+        "title": "4.1 — Transmisión y Tren Impulsor",
+        "content": "<p>El sistema de transmisión transmite la potencia del motor al rotor principal y de cola. El eje impulsor principal conecta la salida del motor con la caja de engranajes de la transmisión principal.</p>\n<img src=\"{{transmission}}\" class=\"fig-img\" alt=\"Transmisión y tren impulsor\">\n<p class=\"fig-caption\">Transmisión y tren impulsor — inspección de componentes críticos</p>\n<div class=\"chapter-title\">Puntos Críticos de Inspección en Preflight</div\n<div class=\"data-row\"><span class=\"data-label\">Pasador de arrastre</span><span class=\"data-value\">Seguridad y evidencia de contacto con placa tape estático</span></div\n<div class=\"data-row\"><span class=\"data-label\">Acople delantero eje impulsor</span><span class=\"data-value\">Condición y fugas de grasa — tiras café = calor excesivo</span></div\n<div class=\"data-row\"><span class=\"data-label\">Transmisión — aceite</span><span class=\"data-value\">Nivel y fugas en el área</span></div\n<div class=\"data-row\"><span class=\"data-label\">Montaje aislante</span><span class=\"data-value\">Condición</span></div\n<div class=\"warn-box\"><p>Las tiras indicadoras de calentamiento excesivo de color café en el acople delantero del eje impulsor principal indican posible falla grave. Reportar inmediatamente a mantenimiento, no realizar el vuelo.</p></div>"
+      },
+      {
+        "title": "4.2 — Fuselaje: Sección Intermedia y Cono de Cola",
+        "content": "<p>La <strong style=\"color:var(--amber2)\">sección intermedia</strong> es semimonocasco con plataforma del motor, compartimiento equipaje y compartimiento equipo. Cubierta por pieles de aleación de aluminio y carenaje de fibra de vidrio en el extremo inferior trasero.</p>\n<p style=\"margin-top:8px\">Hay un <strong style=\"color:var(--amber2)\">recipiente de titanio</strong> debajo del motor que sirve para recibir el goteo y como pared de fuego. Es curvo para permitir quitar accesorios sin remover el motor.</p>\n<div class=\"chapter-title\" style=\"margin-top:12px\">Puerta de Carga</div\n<p>Tiene un <strong style=\"color:var(--amber2)\">microswitch</strong> hacia la luz de aviso. Está a la izquierda del fuselaje con bisagras en el extremo delantero. Se abre a todo lo ancho y alto. Asegurada con dos cerraduras de botones y una cerradura con llave.</p>\n<div class=\"chapter-title\" style=\"margin-top:12px\">Cono de Cola</div\n<p>Estructura monocasco. Soporta al <strong style=\"color:var(--amber2)\">eje impulsor del rotor de cola, rotor de cola, caja de engranajes, estabilizador vertical y estabilizador horizontal</strong>.</p>\n<div class=\"data-row\"><span class=\"data-label\">Cubierta caja engranajes rotor cola</span><span class=\"data-value\">Aleación de aluminio</span></div\n<div class=\"data-row\"><span class=\"data-label\">Estabilizador horizontal</span><span class=\"data-value\">Aluminio — costilla interior fija al cono de cola</span></div>"
+      },
+      {
+        "title": "4.3 — Sistema Hidráulico",
+        "content": "<p>El sistema hidráulico del JetRanger proporciona asistencia hidráulica a los <strong style=\"color:var(--amber2)\">controles cíclico y colectivo</strong>, reduciendo el esfuerzo del piloto.</p>\n<img src=\"{{hydraulic}}\" class=\"fig-img\" alt=\"Verificación del sistema hidráulico\">\n<p class=\"fig-caption\">Verificación preliminar del sistema hidráulico — procedimiento correcto</p>\n<div class=\"chapter-title\">Verificación Hidráulica en Corrida de Motor</div\n<div class=\"data-row\"><span class=\"data-label\">Acelerador</span><span class=\"data-value\">Abierto a 70% RPM productora de gas</span></div\n<div class=\"data-row\"><span class=\"data-label\">Gobernador N2</span><span class=\"data-value\">Verificar rango 97 a 100% RPM</span></div\n<div class=\"data-row\"><span class=\"data-label\">Interruptor HYD SYSTEM o CTRL BOOST</span><span class=\"data-value\">OFF — luego ON</span></div\n<div class=\"info-box\"><p>Si el control cíclico se mueve por sí mismo o motoriza con el sistema hidráulico apagado, ello puede indicar una falla del sistema hidráulico. Consultar a mantenimiento.</p></div>\n<div class=\"chapter-title\" style=\"margin-top:12px\">Lubricante aprobado (sistema hidráulico)</div\n<div class=\"data-row\"><span class=\"data-label\">Especificación</span><span class=\"data-value\">MIL-H-5606 — 1 pinta en depósito, 1 pinta en sistema</span></div>"
+      },
+      {
+        "title": "4.4 — Sistema Eléctrico y Controles de Vuelo",
+        "content": "<div class=\"chapter-title\">Sistema Eléctrico</div\n<div class=\"data-row\"><span class=\"data-label\">Interruptor BAT</span><span class=\"data-value\">Alimentación principal de batería</span></div\n<div class=\"data-row\"><span class=\"data-label\">Interruptor GEN</span><span class=\"data-value\">Generador — carga normal 10-20%</span></div\n<div class=\"data-row\"><span class=\"data-label\">Carga máxima normal pre-despegue</span><span class=\"data-value\">Por debajo del 70%</span></div\n<div class=\"data-row\"><span class=\"data-label\">Interruptor INST LT (reóstato)</span><span class=\"data-value\">Iluminación de instrumentos</span></div\n<div class=\"chapter-title\" style=\"margin-top:12px\">Controles de Vuelo</div\n<div class=\"data-row\"><span class=\"data-label\">Cíclico</span><span class=\"data-value\">Control de actitud y velocidad horizontal. Fricción ajustable.</span></div\n<div class=\"data-row\"><span class=\"data-label\">Colectivo</span><span class=\"data-value\">Control de paso colectivo y potencia. Fricción ajustable.</span></div\n<div class=\"data-row\"><span class=\"data-label\">Pedales</span><span class=\"data-value\">Control de paso del rotor de cola (guiñada)</span></div\n<div class=\"data-row\"><span class=\"data-label\">Acelerador</span><span class=\"data-value\">En mango del colectivo, controla N2/RPM del motor</span></div>\n<div class=\"info-box\"><p>El torquímetro indica el porcentaje de torque del motor. Es el instrumento primario para verificación de potencia junto con el TOT e indicadores N1 y N2.</p></div>"
+      }
+    ],
+    "quiz": [
+      {
+        "q": "¿Para qué sirve el recipiente de titanio ubicado debajo del motor?",
+        "opts": ["Almacenar aceite extra de reserva", "Recibir el goteo y actuar como pared de fuego", "Soporte estructural del motor", "Ventilación del compartimiento motor"],
+        "ans": 1
+      },
+      {
+        "q": "¿Qué tipo de estructura es el cono de cola del JetRanger III?",
+        "opts": ["Semimonocasco", "Monocasco", "Estructura de panal de abeja", "Largueros y costillas"],
+        "ans": 1
+      },
+      {
+        "q": "¿Qué indica una tira indicadora de color café en el acople delantero del eje impulsor?",
+        "opts": ["Que el aceite debe cambiarse", "Evidencia de calentamiento excesivo — no volar", "Lubricación insuficiente reciente", "Alineación incorrecta del eje"],
+        "ans": 1
+      },
+      {
+        "q": "¿Cuántos cojinetes y pernos conectan cada pala del rotor de cola al yugo común?",
+        "opts": ["3 cojinetes y 2 pernos", "2 cojinetes y 2 pernos", "4 cojinetes y 4 pernos", "1 cojinete y 4 pernos"],
+        "ans": 1
+      },
+      {
+        "q": "¿Cuál es la carga normal del generador durante la operación?",
+        "opts": ["50 al 70%", "Por encima del 80%", "10 al 20%", "30 al 50%"],
+        "ans": 2
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "title": "Rendimiento, Peso y Balance",
+    "subtitle": "Secciones 12 y 13 — Verificación de potencia, datos de desempeño",
+    "icon": "📊",
+    "chapters": [
+      {
+        "title": "5.1 — Verificación de Potencia",
+        "content": "<p>Los datos de rendimiento se aplican al motor <strong style=\"color:var(--amber2)\">250-C20B/C20J</strong>. La gráfica indica el porcentaje mínimo de torque que debe haber disponible de un motor que cumple los requerimientos mínimos de Allison.</p>\n<img src=\"{{power_check}}\" class=\"fig-img\" alt=\"Power Check Chart\">\n<p class=\"fig-caption\">Figura 12-1. Gráfica de Verificación de Potencia — Motor Allison 250-C20B/C20J</p>\n<div class=\"chapter-title\">Método preferido — ascenso a 60 MPH (52 nudos)</div\n<p>Se pueden hacer verificaciones de potencia exactas en un ascenso a <strong style=\"color:var(--amber2)\">60 mph <span class='metric'>(97 km/h)</span> (52 nudos) IAS</strong> agregando <strong style=\"color:var(--amber2)\">2% a la lectura de la gráfica de porcentaje de torque</strong>.</p>\n<div class=\"warn-box\"><p>Para verificación de potencia, asegurar que ENGINE DEICING/ANTI-ICING y el switch GEN estén OFF. Levantar colectivo hasta TOT estabilizado o alcanzar límite de torque. Anotar OAT, TOT, presión, altitud, torque y N1.</p></div>"
+      },
+      {
+        "title": "5.2 — Régimen de Ascenso",
+        "content": "<p>El <strong style=\"color:var(--amber2)\">régimen de ascenso</strong> en la gráfica se denomina \"TAPELINE RATE OF CLIMB\". Mide el régimen real en un día estándar con gradiente vertical de temperatura estándar.</p>\n<img src=\"{{rate_of_climb}}\" class=\"fig-img\" alt=\"Rate of Climb Chart\">\n<p class=\"fig-caption\">Figura 12-2. Rate of Climb — Máximo, potencia de despegue, Anti-ice OFF o ON (unidades inglesas)</p>\n<div class=\"chapter-title\">Corrección por Anti-Hielo</div\n<div class=\"data-row\"><span class=\"data-label\">Anti-Hielo OFF — R/C base</span><span class=\"data-value\">Leer directamente de la gráfica</span></div\n<div class=\"data-row\"><span class=\"data-label\">Con Anti-Hielo ON (en el ejemplo)</span><span class=\"data-value\">Disminuir ΔR/C = 240 ft/min</span></div\n<div class=\"data-row\"><span class=\"data-label\">Ejemplo: Anti-ice OFF 890 ft/min</span><span class=\"data-value\">Anti-ice ON = 890 − 240 = 650 ft/min <span class='metric'>(198 m/min)</span></span></div\n<div class=\"data-row\"><span class=\"data-label\">Operación sin puertas</span><span class=\"data-value\">Reducir datos base en 350 ft/min</span></div>\n<div class=\"info-box\"><p>Generador: 22.3 Amps. Condición: N2 = 100% RPM, V IND = 60 MPH (52 KIAS).</p></div>"
+      },
+      {
+        "title": "5.3 — Techo de Vuelo Estacionario: IGE y OGE",
+        "content": "<p>Las gráficas de Techo de Vuelo Estacionario muestran el desempeño en vuelo estacionario (peso bruto permitido) en condiciones de presión altitud y OAT. Se dividen en dos áreas:</p>\n<ul>\n<li><strong style=\"color:var(--amber2)\">ÁREA A (blanca):</strong> Control demostrado con vientos de lado y de cola de hasta 20 mph (17 nudos)</li>\n<li><strong style=\"color:var(--amber2)\">ÁREA B (sombreada):</strong> Solo vientos calmados o fuera del Área Crítica de Viento Azimuth</li>\n</ul>\n<img src=\"{{wind_azimuth}}\" class=\"fig-img\" alt=\"Critical Wind Azimuth\">\n<p class=\"fig-caption\">Figura 12-3. Área crítica de viento relativo Azimuth</p>\n<div class=\"danger-box\"><p>El TOT del motor se incrementa notablemente en vuelo estacionario a favor del viento (downwind). Evitar este vuelo al operar cerca de los límites de TOT.</p></div>\n<img src=\"{{hover_ige}}\" class=\"fig-img\" alt=\"Hover Ceiling IGE\">\n<p class=\"fig-caption\">Figura 12-4. Techo de vuelo estacionario con efecto en tierra (IGE) — Potencia de despegue, 0° a 46°C, Anti-ice OFF</p>\n<img src=\"{{hover_oge}}\" class=\"fig-img\" alt=\"Hover Ceiling OGE\">\n<p class=\"fig-caption\">Figura 12-5. Techo de vuelo estacionario fuera del efecto en tierra (OGE) — Potencia de despegue, 0° a 46°C, Anti-ice OFF</p>\n<div class=\"warn-box\"><p>Con Anti-Hielo ON: IGE restar 220 lb (99.8 kg) — OGE restar 295 lb (133.8 kg) del peso bruto. Condiciones: Generador 22.3 A, altura de patines 2 ft (IGE) y 40 ft (OGE), N2 100%.</p></div>"
+      },
+      {
+        "title": "5.4 — Diagrama Altura-Velocidad y Peso/Balance",
+        "content": "<p>El <strong style=\"color:var(--amber2)\">Diagrama Altura-Velocidad (H-V)</strong> define las condiciones desde las cuales se puede hacer un aterrizaje seguro en superficie plana, nivelada y firme después de una falla del motor. Es válido solo cuando el peso bruto no excede los límites de Altitud vs Peso Bruto.</p>\n<img src=\"{{height_velocity}}\" class=\"fig-img\" alt=\"Height-Velocity Diagram\">\n<p class=\"fig-caption\">Figura 12-6. Diagrama Altura-Velocidad — Superficies lisas, niveladas y firmes</p>\n<div class=\"danger-box\"><p>EVITAR OPERAR EN EL ÁREA SOMBREADA. Las condiciones dentro del área sombreada no permiten garantizar un aterrizaje seguro después de una falla del motor.</p></div>\n<div class=\"chapter-title\" style=\"margin-top:12px\">Peso y Balance — Ejemplo de Cálculo</div\n<img src=\"{{weight_balance}}\" class=\"fig-img\" alt=\"Tabla Peso y Balance\">\n<p class=\"fig-caption\">Sección 13. Tabla de Peso y Balance — Ejemplo de vuelo de salida y retorno (PESO / CG / MOMENTO)</p>\n<div class=\"data-row\"><span class=\"data-label\">Peso bruto máximo (interno)</span><span class=\"data-value\">3,200 libras (1,451.5 kg)</span></div\n<div class=\"data-row\"><span class=\"data-label\">Peso bruto máximo (externo)</span><span class=\"data-value\">3,350 libras (1,519.6 kg)</span></div\n<div class=\"data-row\"><span class=\"data-label\">CG lateral máximo izquierdo</span><span class=\"data-value\">3.0 pulgadas (76.2 mm)</span></div\n<div class=\"data-row\"><span class=\"data-label\">CG lateral máximo derecho</span><span class=\"data-value\">4.0 pulgadas (101.6 mm)</span></div>\n<div class=\"info-box\"><p>El CG se mueve agregando o quitando peso. Siempre verificar el Manual de Peso y Balance específico de la aeronave para los límites exactos del CG y la envolvente de vuelo aprobada.</p></div>"
+      }
+    ],
+    "quiz": [
+      {
+        "q": "¿Cuál es el peso bruto máximo del Bell 206B JetRanger III (operación interna)?",
+        "opts": ["2,850 libras", "3,000 libras", "3,200 libras (1,451.5 kg)", "3,500 libras"],
+        "ans": 2
+      },
+      {
+        "q": "¿Cuál es el límite de torque para la operación de despegue?",
+        "opts": ["85% tiempo ilimitil", "100% máximo 5 minutos", "95% máximo 10 minutos", "110% máximo 2 minutos"],
+        "ans": 1
+      },
+      {
+        "q": "Para una verificación de potencia más exacta en ascenso, ¿qué velocidad y corrección se aplica?",
+        "opts": ["80 mph (69 nudos) sin corrección", "100 mph menos 5% de torque", "60 mph <span class='metric'>(97 km/h)</span> (52 nudos) agregando 2% al torque leído", "70 mph sin corrección"],
+        "ans": 2
+      },
+      {
+        "q": "¿Cuál es el TOT máximo para operación continua?",
+        "opts": ["810°C", "850°C", "700°C", "738°C"],
+        "ans": 3
+      },
+      {
+        "q": "Para pesos superiores a 3,000 libras, ¿cuál es la altitud máxima de densidad?",
+        "opts": ["20,000 pies <span class='metric'>(6.096 m)</span>", "15,000 pies <span class='metric'>(1.524 m)</span>", "13,500 pies <span class='metric'>(4.115 m)</span>", "10,000 pies"],
+        "ans": 2
+      }
+    ]
+S},
+  {
+    "id": 6,
+    "title": "Procedimientos Normales y de Emergencia",
+    "subtitle": "Secciones 14 y 15 — Arranque, vuelo, autorrotación, fallas",
+    "icon": "🚁",
+    "chapters": [
+      {
+        "title": "6.1 — Inspección Preflight (Puntos Clave)",
+        "content": "<p>La inspección preflight es obligatoria antes de cada vuelo. Incluye verificaciones sistemáticas de todos los sistemas.</p>\n<div class=\"chapter-title\">Área de Transmisión</div\n<div class=\"data-row\"><span class=\"data-label\">Transmisión</span><span class=\"data-value\">Nivel de aceite y fugas</span></div\n<div class=\"data- la-label\">Montaje aislante</span><span class=\"data-value\">Condición</span></div\n<div class=\"data-row\"><span class=\"data-label\">Pasador de arrastre</span><span class=\"data-value\">Seguridad y evidencia de contacto con placa tape estático</span></div\n<div class=\"data-row\"><span class=\"data-label\">Acople delantero eje impulsor</span><span class=\"data-value\">Condición, fugas de grasa, tiras indicadoras</span></div\n<div class=\"data-row\"><span class=\"data-label\">Cubierta de inducción de aire</span><span class=\"data-value\">Asegurada</span></div\n<div class=\"data-row\"><span class=\"data-label\">Toma y cámara del motor</span><span class=\"data-value\">Condición, libre de obstrucciones</span></div\n<div class=\"data-row\"><span class=\"data-label\">Tapa de la toma de combustible</span><span class=\"data-value\">Revisar nivel visualmente, asegurar la tapa</span></div\n<div class=\"data-row\"><span class=\"data-label\">Puerta de acceso</span><span class=\"data-value\">Asegurada</span></div\n<div class=\"warn-box\"><p>Instalar los amarres del rotor principal y de cola si hay: pronóstico de vientos fuertes, otros helicópteros operando en el área, o si se va a dejar el helicóptero desatendido.</p></div>"
+      },
+      {
+        "title": "6.2 — Arranque del Motor y Pre-Despegue",
+        "content": "<div class=\"chapter-title\">Secuencia Antes de Despegar</div\n<div class=\"data-row\"><span class=\"data-label\">Equipo eléctrico</span><span class=\"data-value\">Verificar y restablecer (reset) según se requiera</span></div\n<div class=\"data-row\"><span class=\"data-label\">Iluminación — INST LT (reóstato)</span><span class=\"data-value\">Según se desee</span></div\n<div class=\"data-row\"><span class=\"data-label\">Radio</span><span class=\"data-value\">Probar que funcione</span></div\n<div class=\"data-row\"><span class=\"data-label\">Acelerador</span><span class=\"data-value\">TODO ABIERTO</span></div\n<div class=\"data-row\"><span class=\"data-label\">Instrumentos de potencia y vuelo</span><span class=\"data-value\">En el rango normal de operación</span></div\n<div class=\"data-row\"><span class=\"data-label\">Carga del generador</span><span class=\"data-value\">Abajo de 70% (normal: 10-20%)</span></div\n<div class=\"data-row\"><span class=\"data-label\">Turbina de potencia N2</span><span class=\"data-value\">100% con el colectivo abajo</span></div\n<div class=\"chapter-title\" style=\"margin-top:12px\">Despegue</div\n<div class=\"data-row\"><span class=\"data-label\">Colectivo</span><span class=\"data-value\">Aumentar para pasar a vuelo estacionario</span></div\n<div class=\"data-row\"><span class=\"data-label\">Control direccional</span><span class=\"data-value\">Mantener el rumbo deseado</span></div\n<div class=\"data-row\"><span class=\"data-label\">Cíclico</span><span class=\"data-value\">Aplicar lo necesario para acelerar suavemente</span></div\n<div class=\"data-row\"><span class=\"data-label\">Colectivo</span><span class=\"data-value\">Aplicar lo necesario para obtener razón de ascenso y velocidad deseada — monitorear límites del motor</span></div>"
+      },
+      {
+        "title": "6.3 — Falla del Motor y Autorrotación",
+        "content": "<div class=\"danger-box\"><p>REDUCIR LA VELOCIDAD DE AVANCE A LA VELOCIDAD DESEADA. VELOCIDAD MÍNIMA DESCENSO: 60 MPH (52 NUDOS) IAS. VELOCIDAD MÁXIMA DISTANCIA DE PLANEO: 80 MPH (69 NUDOS) IAS.</p></div\n<img src=\"{{emergency}}\" class=\"fig-img\" alt=\"Procedimientos de emergencia\">\n<p class=\"fig-caption\">Sección 15 — Procedimientos de emergencia: fallas del motor y autorrotación</p>\n<div class=\"chapter-title\">Procedimiento de Falla del Motor y Autorrotación</div\n<div class=\"data-row\"><span class=\"data-label\">Paso del colectivo</span><span class=\"data-value\">Ajustar para mantener RPM rotor 90% a 107%</span></div\n<div class=\"data-row\"><span class=\"data-label\">A baja altura</span><span class=\"data-value\">Cerrar acelerador y ejecutar el flare para reducir velocidad</span></div\n<div class=\"data-row\"><span class=\"data-label\">Durante el flare</span><span class=\"data-value\">Aplicar pitch al colectivo para reducir aún más la velocidad</span></div\n<div class=\"data-row\"><span class=\"data-label\">Toque nivelado</span><span class=\"data-value\">Antes de pasar el 70% de RPM del rotor</span></div\n<div class=\"data-row\"><span class=\"data-label\">Velocidad máx. autorrotación estable</span><span class=\"data-value\">115 MPH <span class='metric'>(185 km/h)</span> (100 nudos)</span></div\n<div class=\"warn-box\"><p>Se recomienda hacer un toque nivelado antes de pasar el 70% de RPM del rotor. Al tocar tierra, el paso del colectivo debe reducirse suavemente mientras se mantiene el cíclico en neutral o centrado. DEBE EVITARSE CORRIDA EXCESIVA EN TIERRA CON EL COLECTIVO ARRIBA, O CUALQUIER TENDENCIA A FLOTAR POR LARGA DISTANCIA ANTES DE TOCAR EL SUELO.</p></div>"
+      },
+      {
+        "title": "6.4 — Fallas Especiales y Post-Aterrizaje",
+        "content own": "<div class=\"chapter-title\">Arranque del Motor en el Aire</div\n<div class=\"danger-box\"><p>Cuando se cree que la causa de la falla del motor es mecánica, NO intente volver a arrancar.</p></div\n<div class=\"data-row\"><span class=\"data-label\">Solo intentar si</span><span class=\"data-value\">La falla NO parece ser mecánica</span></div\n<div class=\"data-row\"><span class=\"data-label\">Precaución</span><span class=\"data-value\">NO intentar arrancar arriba de 12,000 pies <span class='metric'>(610 m)</span> <span class='metric'>(3.658 m)</span> (TOT aumenta demasiado rápido)</span></div\n<div class=\"chapter-title\" style=\"margin-top:12px\">Falla del Control de Combustible/Gobernador</div\n<div class=\"data-row\"><span class=\"data-label\">Si motor se acelera</span><span class=\"data-value\">Controlar potencia con el acelerador</span></div\n<div class=\"data-row\"><span class=\"data-label\">Si motor se desacelera</span><span class=\"data-value\">Mantener RPM con el paso del colectivo</span></div\n<div class=\"chapter-title\" style=\"margin-top:12px\">Falla del Rotor de Cola — Pérdida Total de Empuje</div\n<div class=\"data-row\"><span class=\"data-label\">Acción inmediata</span><span class=\"data-value\">Reducir acelerador a marcha lenta, entrar en autorrotación</span></div\n<div class=\"data-row\"><span class=\"data-label\">Velocidad mínima durante descenso</span><span class=\"data-value\">50 nudos <span class='metric'>(93 km/h)</span> (58 mph) IAS</span></div\n<div class=\"chapter-title\" style=\"margin-top:12px\">Después del Aterrizaje Forzoso</div\n<p>El piloto debe <strong style=\"color:var(--amber2)\">permanecer en los controles hasta que el rotor se haya detenido totalmente</strong>. Al salir, instalar amarres y cubiertas protectoras (toma del motor, escape y tubo pitot).</p>"
+      }
+    ],
+    "quiz": [
+      {
+        "q": "Durante la autorrotación, ¿cuál es el rango de RPM de rotor que se debe mantener?",
+        "opts": ["80% a 100%", "100% a 110%", "90% a 107%", "85% a 95%"],
+        "ans": 2
+      },
+      {
+        "q": "¿Cuál es la velocidad aérea mínima para el descenso en autorrotación?",
+        "opts": ["40 MPH (35 nudos) IAS", "60 MPH <span class='metric'>(97 km/h)</span> (52 nudos) IAS", "80 MPH <span class='metric'>(129 km/h)</span> (69 nudos) IAS", "100 MPH <span class='metric'>(161 km/h)</span> (87 nudos) IAS"],
+        "ans": 1
+      },
+      {
+        "q": "Según el procedimiento pre-despegue, ¿en qué posición debe estar el acelerador?",
+        "opts": ["Media apertura", "70% apertura", "Todo abierto", "Lo necesario para mantener RPM 100%"],
+        "ans": 2
+      },
+      {
+        "q": "¿Cuándo se debe intentar un arranque del motor en el aire?",
+        "opts": ["Siempre que el rotor esté girando", "Solo si la falla NO parece ser mecánica", "Siempre que la altitud lo permita", "Solo debajo de 2,000 pies <span class='metric'>(610 m)</span> AGL"],
+        "ans": 1
+      },
+      {
+        "q": "¿Qué debe hacer el piloto después de un aterrizaje de emergencia?",
+        "opts": ["Salir inmediatamente del helicóptero", "Cortar el motor y salir de inmediato", "Permanecer en los controles hasta que el rotor se haya detenido totalmente", "Abrir las puertas y esperar ayuda"],
+        "ans": 2
+      }
+    ]
+  }
+]
