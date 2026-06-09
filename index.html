@@ -401,46 +401,78 @@ body.day .glow-orb{opacity:.1}
   background:linear-gradient(90deg,transparent,var(--border2),transparent);
 }
 
-/* ── NAV BAR ───────────────────────────────────────── */
-.nav-bar {
-  display: flex;
-  justify-content: space-around;
+/* ── SIDEBAR LAYOUT ────────────────────────────────── */
+.app-container {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 20px;
+  max-width: 1100px !important;
+  margin: 0 auto;
+}
+@media (max-width: 768px) {
+  .app-container {
+    grid-template-columns: 1fr;
+  }
+}
+.sidebar {
   background: var(--bg2);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
   border: 1px solid var(--border2);
-  border-radius: var(--radius);
-  padding: 8px;
-  margin-bottom: 20px;
-  gap: 8px;
-  box-shadow: var(--shadow-card);
+  border-radius: var(--radius2);
+  padding: 20px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  height: fit-content;
   position: sticky;
-  top: 10px;
+  top: 18px;
+  box-shadow: var(--shadow-card);
   z-index: 50;
 }
-.nav-btn {
+.sidebar-title {
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--amber2);
+  margin-bottom: 12px;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 10px;
+  letter-spacing: -0.01em;
+}
+.sidebar-btn {
   background: transparent;
   border: 1.5px solid transparent;
   color: var(--text2);
-  padding: 8px 16px;
-  border-radius: calc(var(--radius) - 4px);
+  padding: 10px 14px;
+  border-radius: var(--radius);
   cursor: pointer;
   font-weight: 600;
-  font-size: 13px;
+  font-size: 13.5px;
   transition: all 0.2s;
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
+  text-align: left;
+  width: 100%;
 }
-.nav-btn:hover {
+.sidebar-btn:hover {
   color: var(--text);
   background: var(--bg3);
 }
-.nav-btn.active {
+.sidebar-btn.active {
   color: var(--amber2);
   border-color: var(--amber);
-  background: rgba(240,165,0,0.1);
-  box-shadow: 0 0 12px rgba(240,165,0,0.15);
+  background: rgba(240, 165, 0, 0.08);
+  box-shadow: 0 0 10px rgba(240, 165, 0, 0.1);
+}
+.sidebar-profile {
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+  font-size: 11px;
+  color: var(--text3);
+  text-align: center;
 }
 
 /* ── PESO Y BALANCEO ───────────────────────────────── */
@@ -1944,81 +1976,29 @@ window.saveEmailConfig = function(){
   document.getElementById('email-cfg-status').innerHTML='<span style="color:var(--green)">✅ Configuración guardada exitosamente.</span>';
 };
 
-// ========= EVENT HANDLERS =========
-window.startCourse=()=>{state.view='map';render();}
-window.goIntro=()=>{state.view='intro';render();}
-window.goRegister=()=>{state.view='register';render();}
-window.goMap=()=>{state.view='map';render();}
-window.goModule=(i)=>{state.currentModule=i;state.currentChapter=0;state.view='module';render();}
-window.setChapter=(i)=>{state.currentChapter=i;render();}
-window.prevChapter=()=>{if(state.currentChapter>0){state.currentChapter--;render();}}
-window.nextChapter=()=>{const m=MODULES[state.currentModule];if(state.currentChapter<m.chapters.length-1){state.currentChapter++;render();}}
-window.goExam=()=>{state.examAnswers=[];state.examQ=0;state.examReviewed=false;state.view='moduleExam';render();}
-window.backToModule=()=>{state.view='module';render();}
-window.setExamQ=(i)=>{state.examQ=i;render();}
-window.prevExamQ=()=>{if(state.examQ>0){state.examQ--;render();}}
-window.nextExamQ=()=>{const m=MODULES[state.currentModule];if(state.examQ<m.quiz.length-1){state.examQ++;render();}}
-window.selectAnswer=(oi)=>{if(!state.examReviewed){state.examAnswers[state.examQ]=oi;render();}}
-window.submitExam=()=>{state.examReviewed=true;render();}
-window.showExamResult=()=>{
-  const m=MODULES[state.currentModule];
-  const correct=m.quiz.filter((q,i)=>state.examAnswers[i]===q.ans).length;
-  if(correct>=4&&!state.completedModules.includes(state.currentModule)){
-    state.completedModules.push(state.currentModule);
-    state.moduleScores[state.currentModule]=correct;
-  }
-  state.view='examResult';render();
-}
-window.retryExam=()=>{state.examAnswers=[];state.examQ=0;state.examReviewed=false;state.view='moduleExam';render();}
-window.nextModule=()=>{
-  const next=state.currentModule+1;
-  if(next<MODULES.length){state.currentModule=next;state.currentChapter=0;state.examAnswers=[];state.examQ=0;state.examReviewed=false;state.view='module';render();}
-  else{state.view='map';render();}
-}
-window.startFinal=()=>{state.finalAnswers=[];state.finalQ=0;state.finalReviewed=false;state.view='finalExam';render();}
-window.setFinalQ=(i)=>{state.finalQ=i;render();}
-window.prevFinalQ=()=>{if(state.finalQ>0){state.finalQ--;render();}}
-window.nextFinalQ=()=>{if(state.finalQ<29){state.finalQ++;render();}}
-window.selectFinalAnswer=(oi)=>{if(!state.finalReviewed){state.finalAnswers[state.finalQ]=oi;render();}}
-window.submitFinal=()=>{state.finalReviewed=true;render();}
-window.showFinalResult=()=>{state.view='finalResult';render();}
-window.retryFinal=()=>{state.finalAnswers=[];state.finalQ=0;state.finalReviewed=false;state.view='finalExam';render();}
-window.guestMode=()=>{state.user=null;state.view='map';render();}
-window.logout=()=>{state.user=null;state.view='intro';render();}
-window.goRegister=()=>{state.view='register';render();}
-window.submitRegister=()=>{
-  const n=document.getElementById('reg-nombre').value.trim();
-  const ap=document.getElementById('reg-apellido').value.trim();
-  const lic=document.getElementById('reg-licencia').value.trim();
-  const email=document.getElementById('reg-email').value.trim();
-  if(!n||!ap||!lic||!email){
-    document.getElementById('reg-error').style.display='block';
-    document.getElementById('reg-error').textContent='Por favor complete todos los campos.';
-    return;
-  }
-  if(!email.includes('@')){
-    document.getElementById('reg-error').style.display='block';
-    document.getElementById('reg-error').textContent='Ingrese un correo electrónico válido.';
-    return;
-  }
-  state.user={nombre:n,apellido:ap,licencia:lic,email:email};
-  state.view='map';render();
-}
-window.openAdmin=()=>{state.adminOpen=true;render();}
-window.closeAdmin=()=>{state.adminOpen=false;const el=document.getElementById('admin-modal');if(el)el.remove();}
-window.checkAdmin=checkAdmin;
-window.downloadAdminKeys=downloadAdminKeys;
-window.generateCertificate=generateCertificate;
-
-// ── NEW RENDER AND COMPUTERS IMPLEMENTATION ──────────
-function renderNavBar() {
+// ========= EVENT Hfunction renderSidebar() {
+  const u = state.user;
+  const nameStr = u ? `${u.nombre} ${u.apellido}` : "Invitado";
+  const licStr = u ? u.licencia : "Sin registro";
+  
   return `
-  <div class="nav-bar">
-    <button class="nav-btn ${state.view==='map'||state.view==='module'||state.view==='moduleExam'||state.view==='examResult'?'active':''}" onclick="setView('map')">🗺️ Módulos</button>
-    <button class="nav-btn ${state.view==='weight_balance'?'active':''}" onclick="setView('weight_balance')">⚖️ Peso y Balance</button>
-    <button class="nav-btn ${state.view==='performance'?'active':''}" onclick="setView('performance')">📊 Performance</button>
-    <button class="nav-btn ${state.view==='checklists'?'active':''}" onclick="setView('checklists')">📋 Chequeos</button>
-    <button class="nav-btn" onclick="setView('intro')">🏠 Inicio</button>
+  <div class="sidebar">
+    <div class="sidebar-title">🚁 Bell 206B Ground School</div>
+    
+    <button class="sidebar-btn ${state.view==='map'||state.view==='module'||state.view==='moduleExam'||state.view==='examResult'?'active':''}" onclick="setView('map')">🗺️ Módulos del Curso</button>
+    <button class="sidebar-btn ${state.view==='weight_balance'?'active':''}" onclick="setView('weight_balance')">⚖️ Peso y Balanceo</button>
+    <button class="sidebar-btn ${state.view==='performance'?'active':''}" onclick="setView('performance')">📊 Calculador Perf.</button>
+    <button class="sidebar-btn ${state.view==='hv_diagram'?'active':''}" onclick="setView('hv_diagram')">📈 Curva Hombre Muerto</button>
+    <button class="sidebar-btn ${state.view==='checklists'?'active':''}" onclick="setView('checklists')">📋 Listas de Chequeo</button>
+    
+    <div style="flex-grow:1"></div>
+    
+    <button class="sidebar-btn" onclick="setView('intro')">🏠 Volver al Inicio</button>
+    
+    <div class="sidebar-profile">
+      <div style="font-weight:700;color:var(--text)">${nameStr}</div>
+      <div style="font-size:10px;margin-top:2px">${licStr}</div>
+    </div>
   </div>`;
 }
 
@@ -2378,61 +2358,10 @@ function renderPerformance() {
   const canHoverOGE = currentWeight <= maxOGE;
   const powerOk = tqRequired <= 100;
 
-  // --- HEIGHT VELOCITY (DEAD MAN'S CURVE) DYNAMIC PARAMETERS ---
-  const flightHeight = perf.flight_height !== undefined ? perf.flight_height : 150;
-  const flightSpeed = perf.flight_speed !== undefined ? perf.flight_speed : 60;
-
-  // Factor F to expand the avoid area based on density altitude and weight
-  const F = 1.0 + Math.max(0, densAlt / 10000) * 0.18 + Math.max(0, (currentWeight - 2500) / 1000) * 0.15;
-
-  const getX = (v) => 40 + (v / 120) * 220;
-  const getY = (h) => 190 - (h / 600) * 160;
-
-  // Mapped points for high altitude avoid area
-  const hPoints = [
-    {x: 0, y: 10},
-    {x: 22 * F, y: 80},
-    {x: 46 * F, y: 250},
-    {x: 49 * F, y: 400 * F > 520 ? 520 : 400 * F},
-    {x: 32 * F, y: 480 * F > 550 ? 550 : 480 * F},
-    {x: 0, y: 520 * F > 560 ? 560 : 520 * F}
-  ];
-  const hPath = `M ${getX(hPoints[0].x)} ${getY(hPoints[0].y)} ` + 
-                hPoints.slice(1).map(p => `L ${getX(p.x)} ${getY(p.y)}`).join(' ') + 
-                ` L ${getX(0)} ${getY(hPoints[5].y)} Z`;
-
-  // Mapped points for low altitude high speed avoid area
-  const lPoints = [
-    {x: 80 / F, y: 0},
-    {x: 90 / F, y: 15},
-    {x: 120, y: 15},
-    {x: 120, y: 0}
-  ];
-  const lPath = `M ${getX(lPoints[0].x)} ${getY(lPoints[0].y)} L ${getX(lPoints[1].x)} ${getY(lPoints[1].y)} L ${getX(lPoints[2].x)} ${getY(lPoints[2].y)} L ${getX(lPoints[3].x)} ${getY(lPoints[3].y)} Z`;
-
-  // Avoid checks
-  let avoidSpeedLimit = 0;
-  const h = flightHeight;
-  if (h >= 10 && h < 80) {
-    avoidSpeedLimit = 0 + ((h - 10) / 70) * 22 * F;
-  } else if (h >= 80 && h < 250) {
-    avoidSpeedLimit = 22 * F + ((h - 80) / 170) * 24 * F;
-  } else if (h >= 250 && h < 400 * F) {
-    avoidSpeedLimit = 46 * F + ((h - 250) / (400 * F - 250)) * 3 * F;
-  } else if (h >= 400 * F && h < 480 * F) {
-    avoidSpeedLimit = 49 * F - ((h - 400 * F) / (80 * F)) * 17 * F;
-  } else if (h >= 480 * F && h <= 520 * F) {
-    avoidSpeedLimit = 32 * F - ((h - 480 * F) / (40 * F)) * 32 * F;
-  }
-
-  const isInsideAvoid1 = flightSpeed < avoidSpeedLimit && h >= 10 && h <= 520 * F;
-  const isInsideAvoid2 = h < 15 && flightSpeed > (80 / F);
-  const isDeadMan = isInsideAvoid1 || isInsideAvoid2;
-
   return `
   <div class="view-enter">
     <div class="flex-between" style="margin-bottom:14px">
-      <h2>📊 Computadora de Rendimiento</h2>
+      <h2>📊 Cálculos de Rendimiento (Performance)</h2>
       <span class="badge badge-blue">Peso actual para cálculo: ${currentWeight.toFixed(0)} lbs</span>
     </div>
     
@@ -2459,21 +2388,6 @@ function renderPerformance() {
             <option value="front_off" ${perf.doors==='front_off'?'selected':''}>Puertas delanteras quitadas (-450 ft/min R/C)</option>
             <option value="all_off" ${perf.doors==='all_off'?'selected':''}>Todas las puertas quitadas (-600 ft/min R/C)</option>
           </select>
-        </div>
-
-        <h3 style="margin-top:16px;margin-bottom:12px;color:var(--amber2)">🚁 Perfil de Vuelo Actual</h3>
-        <div class="wb-input-group">
-          <div style="display:flex;justify-content:space-between">
-            <label>Velocidad Aérea: <strong>${flightSpeed} MPH</strong></label>
-            <span style="font-size:11px;color:var(--text3)">0 - 120 MPH</span>
-          </div>
-          <input type="range" min="0" max="120" value="${flightSpeed}" oninput="updatePerf('flight_speed', this.value)" style="width:100%;margin-bottom:12px" />
-
-          <div style="display:flex;justify-content:space-between">
-            <label>Altura sobre el Suelo: <strong>${flightHeight} FT</strong></label>
-            <span style="font-size:11px;color:var(--text3)">0 - 600 FT</span>
-          </div>
-          <input type="range" min="0" max="600" step="5" value="${flightHeight}" oninput="updatePerf('flight_height', this.value)" style="width:100%" />
         </div>
       </div>
       
@@ -2507,49 +2421,14 @@ function renderPerformance() {
           </div>
         </div>
         
-        <div class="card" style="display:flex;flex-direction:column;align-items:center;padding:14px">
-          <h3 style="font-size:13px;margin-bottom:6px;color:var(--text2)">Curva del Hombre Muerto (H-V Diagram)</h3>
-          <svg width="280" height="200" style="background:#0a0f1d;border-radius:8px;border:1px solid var(--border)">
-            <!-- Gridlines Y-axis (Height) -->
-            <line x1="40" y1="${getY(100)}" x2="270" y2="${getY(100)}" stroke="rgba(255,255,255,0.06)" stroke-width="0.5" />
-            <line x1="40" y1="${getY(200)}" x2="270" y2="${getY(200)}" stroke="rgba(255,255,255,0.06)" stroke-width="0.5" />
-            <line x1="40" y1="${getY(300)}" x2="270" y2="${getY(300)}" stroke="rgba(255,255,255,0.06)" stroke-width="0.5" />
-            <line x1="40" y1="${getY(400)}" x2="270" y2="${getY(400)}" stroke="rgba(255,255,255,0.06)" stroke-width="0.5" />
-            <line x1="40" y1="${getY(500)}" x2="270" y2="${getY(500)}" stroke="rgba(255,255,255,0.06)" stroke-width="0.5" />
-
-            <!-- Gridlines X-axis (Speed) -->
-            <line x1="${getX(20)}" y1="20" x2="${getX(20)}" y2="190" stroke="rgba(255,255,255,0.06)" stroke-width="0.5" />
-            <line x1="${getX(40)}" y1="20" x2="${getX(40)}" y2="190" stroke="rgba(255,255,255,0.06)" stroke-width="0.5" />
-            <line x1="${getX(60)}" y1="20" x2="${getX(60)}" y2="190" stroke="rgba(255,255,255,0.06)" stroke-width="0.5" />
-            <line x1="${getX(80)}" y1="20" x2="${getX(80)}" y2="190" stroke="rgba(255,255,255,0.06)" stroke-width="0.5" />
-            <line x1="${getX(100)}" y1="20" x2="${getX(100)}" y2="190" stroke="rgba(255,255,255,0.06)" stroke-width="0.5" />
-            
-            <!-- Axis Labels -->
-            <text x="35" y="195" fill="var(--text3)" font-size="8" text-anchor="middle">0</text>
-            <text x="${getX(40)}" y="195" fill="var(--text3)" font-size="8" text-anchor="middle">40</text>
-            <text x="${getX(80)}" y="195" fill="var(--text3)" font-size="8" text-anchor="middle">80</text>
-            <text x="${getX(120)}" y="195" fill="var(--text3)" font-size="8" text-anchor="middle">120 MPH</text>
-            
-            <text x="35" y="${getY(0)}" fill="var(--text3)" font-size="8" text-anchor="end">0</text>
-            <text x="35" y="${getY(200)}" fill="var(--text3)" font-size="8" text-anchor="end">200</text>
-            <text x="35" y="${getY(400)}" fill="var(--text3)" font-size="8" text-anchor="end">400</text>
-            <text x="35" y="${getY(600)}" fill="var(--text3)" font-size="8" text-anchor="end">600 ft</text>
-
-            <!-- Draw Avoid Areas (Shaded red area) -->
-            <path d="${hPath}" fill="rgba(255,69,96,0.18)" stroke="var(--red)" stroke-width="1.5" />
-            <path d="${lPath}" fill="rgba(255,69,96,0.18)" stroke="var(--red)" stroke-width="1.5" />
-
-            <!-- Current Flight State Dot -->
-            <circle cx="${getX(flightSpeed)}" cy="${getY(flightHeight)}" r="5.5" fill="${isDeadMan ? 'var(--red)' : 'var(--green)'}" />
-            <circle cx="${getX(flightSpeed)}" cy="${getY(flightHeight)}" r="9" fill="none" stroke="${isDeadMan ? 'var(--red)' : 'var(--green)'}" stroke-width="1">
-              <animate attributeName="r" values="5.5;12;5.5" dur="1.5s" repeatCount="indefinite"/>
-              <animate attributeName="opacity" values="1;0;1" dur="1.5s" repeatCount="indefinite"/>
-            </circle>
-          </svg>
-          
-          <div style="margin-top:10px;text-align:center;font-weight:700;font-size:12px;color:${isDeadMan?'var(--red)':'var(--green)'}">
-            ${isDeadMan ? '⚠ DENTRO DE CURVA EVITAR (H-V AVOID ZONE)' : '✅ OPERACIÓN SEGURA EN AUTORROTACIÓN'}
-          </div>
+        <div class="card">
+          <h3 style="font-size:13px;margin-bottom:8px">Análisis de Capacidad Operativa</h3>
+          <p style="font-size:13px;line-height:1.6">
+            Para el peso actual de <strong>${currentWeight.toFixed(0)} lbs</strong> en la atmósfera especificada:<br>
+            • Estacionario IGE: ${canHoverIGE?'<span style="color:var(--green)">✓ Posible</span>':'<span style="color:var(--red)">✗ Peso excede capacidad IGE</span>'}<br>
+            • Estacionario OGE: ${canHoverOGE?'<span style="color:var(--green)">✓ Posible</span>':'<span style="color:var(--red)">✗ Peso excede capacidad OGE</span>'}<br>
+            • Límite de Torque: ${powerOk?'<span style="color:var(--green)">✓ Dentro de límites motor</span>':'<span style="color:var(--red)">✗ Excede 100% Torque (¡Peligro!)</span>'}
+          </p>
         </div>
       </div>
     </div>
@@ -2566,6 +2445,161 @@ window.updatePerf = (field, val) => {
   }
   render();
 };
+
+function renderHVDiagram() {
+  const perf = state.performance;
+  const wb = state.weight_balance;
+  
+  const emptyW = parseFloat(wb.empty_weight) || 0;
+  const oilW = parseFloat(wb.oil_qty) * 7.5;
+  const pilotW = parseFloat(wb.pilot) || 0;
+  const copilotW = parseFloat(wb.copilot) || 0;
+  const rlW = parseFloat(wb.rear_left) || 0;
+  const rcW = parseFloat(wb.rear_center) || 0;
+  const rrW = parseFloat(wb.rear_right) || 0;
+  const fuelW = parseFloat(wb.fuel) * 6.7;
+  const baggageW = parseFloat(wb.baggage) || 0;
+  const hookW = parseFloat(wb.cargo_hook) || 0;
+  
+  const currentWeight = emptyW + oilW + pilotW + copilotW + rlW + rcW + rrW + fuelW + baggageW + hookW;
+  
+  const pressAlt = parseFloat(perf.alt_press) || 0;
+  const oat = parseFloat(perf.oat) || 0;
+  const isaTemp = 15 - 0.0019816 * pressAlt;
+  const densAlt = pressAlt + 120 * (oat - isaTemp);
+  
+  const flightHeight = perf.flight_height !== undefined ? perf.flight_height : 150;
+  const flightSpeed = perf.flight_speed !== undefined ? perf.flight_speed : 60;
+  
+  const F = 1.0 + Math.max(0, densAlt / 10000) * 0.18 + Math.max(0, (currentWeight - 2500) / 1000) * 0.15;
+  
+  const getX = (v) => 40 + (v / 120) * 220;
+  const getY = (h) => 190 - (h / 600) * 160;
+  
+  const hPoints = [
+    {x: 0, y: 10},
+    {x: 22 * F, y: 80},
+    {x: 46 * F, y: 250},
+    {x: 49 * F, y: 400 * F > 520 ? 520 : 400 * F},
+    {x: 32 * F, y: 480 * F > 550 ? 550 : 480 * F},
+    {x: 0, y: 520 * F > 560 ? 560 : 520 * F}
+  ];
+  const hPath = `M ${getX(hPoints[0].x)} ${getY(hPoints[0].y)} ` + 
+                hPoints.slice(1).map(p => `L ${getX(p.x)} ${getY(p.y)}`).join(' ') + 
+                ` L ${getX(0)} ${getY(hPoints[5].y)} Z`;
+                
+  const lPoints = [
+    {x: 80 / F, y: 0},
+    {x: 90 / F, y: 15},
+    {x: 120, y: 15},
+    {x: 120, y: 0}
+  ];
+  const lPath = `M ${getX(lPoints[0].x)} ${getY(lPoints[0].y)} L ${getX(lPoints[1].x)} ${getY(lPoints[1].y)} L ${getX(lPoints[2].x)} ${getY(lPoints[2].y)} L ${getX(lPoints[3].x)} ${getY(lPoints[3].y)} Z`;
+  
+  let avoidSpeedLimit = 0;
+  const h = flightHeight;
+  if (h >= 10 && h < 80) {
+    avoidSpeedLimit = 0 + ((h - 10) / 70) * 22 * F;
+  } else if (h >= 80 && h < 250) {
+    avoidSpeedLimit = 22 * F + ((h - 80) / 170) * 24 * F;
+  } else if (h >= 250 && h < 400 * F) {
+    avoidSpeedLimit = 46 * F + ((h - 250) / (400 * F - 250)) * 3 * F;
+  } else if (h >= 400 * F && h < 480 * F) {
+    avoidSpeedLimit = 49 * F - ((h - 400 * F) / (80 * F)) * 17 * F;
+  } else if (h >= 480 * F && h <= 520 * F) {
+    avoidSpeedLimit = 32 * F - ((h - 480 * F) / (40 * F)) * 32 * F;
+  }
+  
+  const isInsideAvoid1 = flightSpeed < avoidSpeedLimit && h >= 10 && h <= 520 * F;
+  const isInsideAvoid2 = h < 15 && flightSpeed > (80 / F);
+  const isDeadMan = isInsideAvoid1 || isInsideAvoid2;
+  
+  return `
+  <div class="view-enter">
+    <div class="flex-between" style="margin-bottom:14px">
+      <h2>📈 Gráfico de Altura-Velocidad (Hombre Muerto)</h2>
+      <span class="badge ${isDeadMan?'badge-red':'badge-green'}">${isDeadMan?'⚠️ ZONA EVITAR':'✅ OPERACIÓN SEGURA'}</span>
+    </div>
+    
+    <div style="display:grid;grid-template-columns:1.2fr 1fr;gap:20px">
+      <div class="card" style="display:flex;flex-direction:column;align-items:center;padding:20px">
+        <h3 style="font-size:14px;margin-bottom:10px;color:var(--text2)">Curva de Altura vs Velocidad Relativa</h3>
+        
+        <svg width="320" height="240" style="background:#0a0f1d;border-radius:12px;border:1px solid var(--border)">
+          <line x1="40" y1="${getY(100)}" x2="310" y2="${getY(100)}" stroke="rgba(255,255,255,0.06)" stroke-width="0.5" />
+          <line x1="40" y1="${getY(200)}" x2="310" y2="${getY(200)}" stroke="rgba(255,255,255,0.06)" stroke-width="0.5" />
+          <line x1="40" y1="${getY(300)}" x2="310" y2="${getY(300)}" stroke="rgba(255,255,255,0.06)" stroke-width="0.5" />
+          <line x1="40" y1="${getY(400)}" x2="310" y2="${getY(400)}" stroke="rgba(255,255,255,0.06)" stroke-width="0.5" />
+          <line x1="40" y1="${getY(500)}" x2="310" y2="${getY(500)}" stroke="rgba(255,255,255,0.06)" stroke-width="0.5" />
+          
+          <line x1="${getX(20)}" y1="20" x2="${getX(20)}" y2="220" stroke="rgba(255,255,255,0.06)" stroke-width="0.5" />
+          <line x1="${getX(40)}" y1="20" x2="${getX(40)}" y2="220" stroke="rgba(255,255,255,0.06)" stroke-width="0.5" />
+          <line x1="${getX(60)}" y1="20" x2="${getX(60)}" y2="220" stroke="rgba(255,255,255,0.06)" stroke-width="0.5" />
+          <line x1="${getX(80)}" y1="20" x2="${getX(80)}" y2="220" stroke="rgba(255,255,255,0.06)" stroke-width="0.5" />
+          <line x1="${getX(100)}" y1="20" x2="${getX(100)}" y2="220" stroke="rgba(255,255,255,0.06)" stroke-width="0.5" />
+          
+          <text x="35" y="225" fill="var(--text3)" font-size="8" text-anchor="middle">0</text>
+          <text x="${getX(40)}" y="225" fill="var(--text3)" font-size="8" text-anchor="middle">40</text>
+          <text x="${getX(80)}" y="225" fill="var(--text3)" font-size="8" text-anchor="middle">80</text>
+          <text x="${getX(120)}" y="225" fill="var(--text3)" font-size="8" text-anchor="middle">120</text>
+          
+          <text x="35" y="${getY(0)}" fill="var(--text3)" font-size="8" text-anchor="end">0</text>
+          <text x="35" y="${getY(200)}" fill="var(--text3)" font-size="8" text-anchor="end">200</text>
+          <text x="35" y="${getY(400)}" fill="var(--text3)" font-size="8" text-anchor="end">400</text>
+          <text x="35" y="${getY(600)}" fill="var(--text3)" font-size="8" text-anchor="end">600 ft</text>
+          
+          <path d="${hPath}" fill="rgba(255,69,96,0.22)" stroke="var(--red)" stroke-width="1.8" />
+          <path d="${lPath}" fill="rgba(255,69,96,0.22)" stroke="var(--red)" stroke-width="1.8" />
+          
+          <circle cx="${getX(flightSpeed)}" cy="${getY(flightHeight)}" r="6" fill="${isDeadMan?'var(--red)':'var(--green)'}" />
+          <circle cx="${getX(flightSpeed)}" cy="${getY(flightHeight)}" r="10" fill="none" stroke="${isDeadMan?'var(--red)':'var(--green)'}" stroke-width="1">
+            <animate attributeName="r" values="6;13;6" dur="1.5s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values="1;0;1" dur="1.5s" repeatCount="indefinite"/>
+          </circle>
+        </svg>
+        
+        <div style="margin-top:14px;font-size:11px;color:var(--text3);text-align:center">
+          Eje X: Velocidad (MPH) | Eje Y: Altura sobre el suelo (Pies)
+        </div>
+      </div>
+      
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <div class="card">
+          <h3 style="margin-bottom:10px;color:var(--amber2)">🕹️ Control de Vuelo</h3>
+          <p style="font-size:12.5px;color:var(--text2);margin-bottom:12px">Mueve los deslizadores para simular tu perfil de vuelo:</p>
+          
+          <div class="wb-input-group">
+            <div style="display:flex;justify-content:space-between">
+              <label>Velocidad: <strong>${flightSpeed} MPH</strong></label>
+              <span class="metric">${(flightSpeed*0.868976).toFixed(0)} nudos</span>
+            </div>
+            <input type="range" min="0" max="120" value="${flightSpeed}" oninput="updatePerf('flight_speed', this.value)" style="margin-bottom:12px;width:100%" />
+            
+            <div style="display:flex;justify-content:space-between">
+              <label>Altura: <strong>${flightHeight} FT</strong></label>
+              <span class="metric">${(flightHeight*0.3048).toFixed(1)} metros</span>
+            </div>
+            <input type="range" min="0" max="600" step="5" value="${flightHeight}" oninput="updatePerf('flight_height', this.value)" style="width:100%" />
+          </div>
+        </div>
+        
+        <div class="card" style="border-left: 4px solid ${isDeadMan?'var(--red)':'var(--green)'}">
+          <h3 style="margin-bottom:8px;color:${isDeadMan?'var(--red)':'var(--green)'}">
+            ${isDeadMan ? '⚠️ ESTADO CRÍTICO: EVITAR' : '✅ ESTADO DE VUELO SEGURO'}
+          </h3>
+          <p style="font-size:13px;line-height:1.6;color:var(--text2)">
+            ${isDeadMan 
+              ? 'Te encuentras dentro de la **envolvente de evitación de altura-velocidad**. En caso de falla de motor, la energía del rotor y la velocidad no permitirán realizar una transición segura a autorrotación para amortiguar el impacto.' 
+              : 'Te encuentras en una zona segura de operación. En caso de falla de motor, dispones de la altura necesaria para acelerar o la velocidad necesaria para ejecutar una guiñada y planeo correctos hacia un aterrizaje forzoso controlado.'}
+          </p>
+          <div style="background:var(--bg3);border-radius:var(--radius);padding:8px;margin-top:10px;font-size:11px;color:var(--text3)">
+            Factor de Ensanchamiento de Curva: <strong>${F.toFixed(2)}x</strong> (Escala según altitud de densidad y peso bruto actual).
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>`;
+}
 
 function renderChecklists() {
   const activeTab = state.activeChecklistTab;
@@ -2646,44 +2680,52 @@ window.resetActiveChecklist = () => {
   render();
 };
 
+function renderBody() {
+  if(state.view==='intro') return renderIntro();
+  if(state.view==='register') return renderRegister();
+  if(state.view==='module') return renderModule();
+  if(state.view==='moduleExam') return renderModuleExam();
+  if(state.view==='examResult') return renderExamResult();
+  if(state.view==='map') return renderMap();
+  if(state.view==='finalExam') return renderFinalExam();
+  if(state.view==='finalResult') return renderFinalResult();
+  if(state.view==='weight_balance') return renderWeightBalance();
+  if(state.view==='performance') return renderPerformance();
+  if(state.view==='hv_diagram') return renderHVDiagram();
+  if(state.view==='checklists') return renderChecklists();
+  return '';
+}
+
 function render(){
   const root=document.getElementById('root');
   
-  let headerHtml = '';
-  if (state.view !== 'intro' && state.view !== 'register') {
-    headerHtml = renderNavBar();
+  if (state.view === 'intro' || state.view === 'register') {
+    root.className = 'app';
+    root.innerHTML = renderBody();
+  } else {
+    root.className = 'app app-container';
+    root.innerHTML = renderSidebar() + `<div class="main-content" style="flex:1">${renderBody()}</div>`;
+    
+    // Auto-trigger score pops / confetti on results
+    if (state.view === 'examResult') {
+      const m=MODULES[state.currentModule];
+      const correct=m.quiz.filter((q,i)=>state.examAnswers[i]===q.ans).length;
+      if(correct>=4) setTimeout(launchConfetti, 300);
+    } else if (state.view === 'finalResult') {
+      const correct=FINAL_EXAM.filter((q,i)=>state.finalAnswers[i]===q.ans).length;
+      if(correct>=24) setTimeout(()=>launchConfetti(true), 400);
+    }
   }
-
-  let bodyHtml = '';
-  if(state.view==='intro') bodyHtml=renderIntro();
-  else if(state.view==='register') bodyHtml=renderRegister();
-  else if(state.view==='module') bodyHtml=renderModule();
-  else if(state.view==='moduleExam') bodyHtml=renderModuleExam();
-  else if(state.view==='examResult'){
-    bodyHtml=renderExamResult();
-    const m=MODULES[state.currentModule];
-    const correct=m.quiz.filter((q,i)=>state.examAnswers[i]===q.ans).length;
-    if(correct>=4) setTimeout(launchConfetti,300);
-  }
-  else if(state.view==='map') bodyHtml=renderMap();
-  else if(state.view==='finalExam') bodyHtml=renderFinalExam();
-  else if(state.view==='finalResult'){
-    bodyHtml=renderFinalResult();
-    const correct=FINAL_EXAM.filter((q,i)=>state.finalAnswers[i]===q.ans).length;
-    if(correct>=24) setTimeout(()=>launchConfetti(true),400);
-  }
-  else if(state.view==='weight_balance') bodyHtml=renderWeightBalance();
-  else if(state.view==='performance') bodyHtml=renderPerformance();
-  else if(state.view==='checklists') bodyHtml=renderChecklists();
-
-  root.innerHTML = headerHtml + bodyHtml;
 
   if(state.adminOpen) showAdminPanel();
   saveState();
   
-  if(root.firstElementChild) root.firstElementChild.classList.add('view-enter');
+  if(root.querySelector('.main-content > div') || root.firstElementChild) {
+    const el = root.querySelector('.main-content > div') || root.firstElementChild;
+    el.classList.add('view-enter');
+  }
   
-  root.querySelectorAll('.btn').forEach(btn=>{
+  root.querySelectorAll('.btn, .sidebar-btn').forEach(btn=>{
     btn.addEventListener('click',function(e){
       const r=document.createElement('span');
       r.className='ripple';
