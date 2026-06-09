@@ -2658,6 +2658,13 @@ function renderWeightBalance() {
 }
 
 window.updateWB = (field, val) => {
+  // Store the ID of the field we are editing to ensure we can restore focus/cursor
+  let id = 'wb-' + field.replace(/_/g, '-');
+  if (field.startsWith('rear_')) {
+    id = 'wb-rear-' + field.substring(5);
+  }
+  state.currentlyEditingId = id;
+
   // Allow only numbers, one decimal point, and negative sign
   val = val.replace(/[^0-9.-]/g, '');
   const parts = val.split('.');
@@ -2837,6 +2844,9 @@ function renderPerformance() {
 }
 
 window.updatePerf = (field, val) => {
+  let id = 'perf-' + field.replace(/_/g, '-');
+  state.currentlyEditingId = id;
+
   if (field === 'anti_ice') {
     state.performance.anti_ice = val;
   } else if (field === 'doors') {
@@ -3105,15 +3115,20 @@ function renderBody() {
 
 function render(){
   // Preserve focus and cursor coordinates/selection for inputs during re-renders
-  const activeElId = document.activeElement ? document.activeElement.id : null;
+  const activeEl = document.activeElement;
+  const activeElId = state.currentlyEditingId || (activeEl ? activeEl.id : null);
   let start = null;
   let end = null;
-  if (document.activeElement && (document.activeElement.tagName === 'INPUT' || document.activeElement.tagName === 'TEXTAREA')) {
+  
+  if (activeEl && (activeEl.tagName === 'INPUT' || activeEl.tagName === 'TEXTAREA')) {
     try {
-      start = document.activeElement.selectionStart;
-      end = document.activeElement.selectionEnd;
+      start = activeEl.selectionStart;
+      end = activeEl.selectionEnd;
     } catch(e) {}
   }
+  
+  // Reset currentlyEditingId
+  state.currentlyEditingId = null;
 
   const root=document.getElementById('root');
   
@@ -3127,9 +3142,17 @@ function render(){
       if (el) {
         try {
           el.focus();
-          if (start !== null && end !== null) {
-            el.setSelectionRange(start, end);
+          
+          let posStart = (start !== null) ? start : el.value.length;
+          let posEnd = (end !== null) ? end : el.value.length;
+          
+          // Force cursor to the end if it reset to 0 but the value is not empty (anti-reverse typing)
+          if (posStart === 0 && el.value.length > 0) {
+            posStart = el.value.length;
+            posEnd = el.value.length;
           }
+          
+          el.setSelectionRange(posStart, posEnd);
         } catch(e) {}
       }
     };
