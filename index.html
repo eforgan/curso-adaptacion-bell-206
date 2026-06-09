@@ -2503,22 +2503,22 @@ function renderWeightBalance() {
           <div class="wb-row">
             <div class="wb-col">
               <label>Peso Vacío Básico (lbs / ${(emptyW * 0.45359).toFixed(1)} kg)</label>
-              <input type="number" id="wb-empty-weight" value="${wb.empty_weight}" oninput="updateWB('empty_weight', this.value)" />
+              <input type="text" inputmode="decimal" id="wb-empty-weight" value="${wb.empty_weight}" oninput="updateWB('empty_weight', this.value)" />
             </div>
             <div class="wb-col">
               <label>Estación CG (in / ${(parseFloat(wb.empty_arm) * 2.54).toFixed(1)} cm)</label>
-              <input type="number" step="0.1" id="wb-empty-arm" value="${wb.empty_arm}" oninput="updateWB('empty_arm', this.value)" />
+              <input type="text" inputmode="decimal" id="wb-empty-arm" value="${wb.empty_arm}" oninput="updateWB('empty_arm', this.value)" />
             </div>
           </div>
           
           <div class="wb-row">
             <div class="wb-col">
               <label>Piloto (Cabina Der) (lbs / ${(pilotW * 0.45359).toFixed(1)} kg)</label>
-              <input type="number" id="wb-pilot" value="${wb.pilot}" oninput="updateWB('pilot', this.value)" />
+              <input type="text" inputmode="decimal" id="wb-pilot" value="${wb.pilot}" oninput="updateWB('pilot', this.value)" />
             </div>
             <div class="wb-col">
               <label>Copiloto / Pasajero Del. (lbs / ${(copilotW * 0.45359).toFixed(1)} kg)</label>
-              <input type="number" id="wb-copilot" value="${wb.copilot}" oninput="updateWB('copilot', this.value)" />
+              <input type="text" inputmode="decimal" id="wb-copilot" value="${wb.copilot}" oninput="updateWB('copilot', this.value)" />
             </div>
           </div>
           
@@ -2526,9 +2526,9 @@ function renderWeightBalance() {
             <div class="wb-col">
               <label>Pasajeros Traseros (lbs / ${((rlW + rcW + rrW) * 0.45359).toFixed(1)} kg total)</label>
               <div style="display:flex;gap:4px">
-                <input type="number" id="wb-rear-left" placeholder="Izq" value="${wb.rear_left}" oninput="updateWB('rear_left', this.value)" style="flex:1;margin-bottom:0" />
-                <input type="number" id="wb-rear-center" placeholder="Cen" value="${wb.rear_center}" oninput="updateWB('rear_center', this.value)" style="flex:1;margin-bottom:0" />
-                <input type="number" id="wb-rear-right" placeholder="Der" value="${wb.rear_right}" oninput="updateWB('rear_right', this.value)" style="flex:1;margin-bottom:0" />
+                <input type="text" inputmode="decimal" id="wb-rear-left" placeholder="Izq" value="${wb.rear_left}" oninput="updateWB('rear_left', this.value)" style="flex:1;margin-bottom:0" />
+                <input type="text" inputmode="decimal" id="wb-rear-center" placeholder="Cen" value="${wb.rear_center}" oninput="updateWB('rear_center', this.value)" style="flex:1;margin-bottom:0" />
+                <input type="text" inputmode="decimal" id="wb-rear-right" placeholder="Der" value="${wb.rear_right}" oninput="updateWB('rear_right', this.value)" style="flex:1;margin-bottom:0" />
               </div>
             </div>
           </div>
@@ -2536,23 +2536,23 @@ function renderWeightBalance() {
           <div class="wb-row">
             <div class="wb-col">
               <label>Combustible (Galones - Máx 91)</label>
-              <input type="number" id="wb-fuel" value="${wb.fuel}" max="91" oninput="updateWB('fuel', this.value)" />
+              <input type="text" inputmode="decimal" id="wb-fuel" value="${wb.fuel}" oninput="updateWB('fuel', this.value)" />
               <span class="metric" style="font-size:11px">Equivale a: ${(parseFloat(wb.fuel)*6.7).toFixed(1)} lbs / ${(parseFloat(wb.fuel)*3.04).toFixed(1)} kg / ${(parseFloat(wb.fuel)*3.785).toFixed(1)} L</span>
             </div>
             <div class="wb-col">
               <label>Equipaje (lbs / ${(baggageW * 0.45359).toFixed(1)} kg - Máx 250 lbs / 113 kg)</label>
-              <input type="number" id="wb-baggage" value="${wb.baggage}" max="250" oninput="updateWB('baggage', this.value)" />
+              <input type="text" inputmode="decimal" id="wb-baggage" value="${wb.baggage}" oninput="updateWB('baggage', this.value)" />
             </div>
           </div>
           
           <div class="wb-row">
             <div class="wb-col">
               <label>Carga en Gancho (lbs / ${(hookW * 0.45359).toFixed(1)} kg - Máx 1200 lbs / 544 kg)</label>
-              <input type="number" id="wb-hook" value="${wb.cargo_hook}" max="1200" oninput="updateWB('cargo_hook', this.value)" />
+              <input type="text" inputmode="decimal" id="wb-hook" value="${wb.cargo_hook}" oninput="updateWB('cargo_hook', this.value)" />
             </div>
             <div class="wb-col">
               <label>Aceite de Motor (Galones)</label>
-              <input type="number" step="0.1" id="wb-oil" value="${wb.oil_qty}" oninput="updateWB('oil_qty', this.value)" />
+              <input type="text" inputmode="decimal" id="wb-oil" value="${wb.oil_qty}" oninput="updateWB('oil_qty', this.value)" />
               <span class="metric" style="font-size:11px">Equivale a: ${(parseFloat(wb.oil_qty)*7.5).toFixed(1)} lbs / ${(parseFloat(wb.oil_qty)*3.4).toFixed(1)} kg / ${(parseFloat(wb.oil_qty)*3.785).toFixed(1)} L</span>
             </div>
           </div>
@@ -2658,6 +2658,12 @@ function renderWeightBalance() {
 }
 
 window.updateWB = (field, val) => {
+  // Allow only numbers, one decimal point, and negative sign
+  val = val.replace(/[^0-9.-]/g, '');
+  const parts = val.split('.');
+  if (parts.length > 2) {
+    val = parts[0] + '.' + parts.slice(1).join('');
+  }
   state.weight_balance[field] = val;
   render();
 };
@@ -2766,10 +2772,10 @@ function renderPerformance() {
         
         <div class="wb-input-group">
           <label>Altitud de Presión (ft / ${(pressAlt * 0.3048).toFixed(0)} m)</label>
-          <input type="number" id="perf-alt-press" value="${perf.alt_press}" oninput="updatePerf('alt_press', this.value)" style="margin-bottom:8px" />
+          <input type="text" inputmode="decimal" id="perf-alt-press" value="${perf.alt_press}" oninput="updatePerf('alt_press', this.value)" style="margin-bottom:8px" />
           
           <label>Temperatura Exterior (OAT °C)</label>
-          <input type="number" id="perf-oat" value="${perf.oat}" oninput="updatePerf('oat', this.value)" style="margin-bottom:8px" />
+          <input type="text" inputmode="decimal" id="perf-oat" value="${perf.oat}" oninput="updatePerf('oat', this.value)" style="margin-bottom:8px" />
           
           <div style="display:flex;align-items:center;gap:8px;margin:10px 0">
             <input type="checkbox" id="perf-antiice" ${perf.anti_ice?'checked':''} onchange="updatePerf('anti_ice', this.checked)" style="width:16px;height:16px" />
@@ -2836,6 +2842,12 @@ window.updatePerf = (field, val) => {
   } else if (field === 'doors') {
     state.performance.doors = val;
   } else {
+    // Allow only numbers, one decimal point, and negative sign
+    val = val.replace(/[^0-9.-]/g, '');
+    const parts = val.split('.');
+    if (parts.length > 2) {
+      val = parts[0] + '.' + parts.slice(1).join('');
+    }
     state.performance[field] = val;
   }
   render();
