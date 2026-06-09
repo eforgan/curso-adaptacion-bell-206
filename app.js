@@ -947,7 +947,7 @@ function renderIntro(){
   return `
   <div class="view-enter" style="text-align:center;padding:30px 0 20px;position:relative">
     <div class="hero-heli" style="font-size:0;line-height:0;filter:none;margin-bottom:12px">
-      <img src="${IMGS.bell206_in_flight}" style="width:100%;max-width:520px;height:auto;border-radius:var(--radius2);border:1.5px solid var(--border2);box-shadow:var(--shadow-card);display:inline-block" alt="Bell 206B JetRanger III en vuelo">
+      <img src="${IMGS.bell206_in_flight}" class="cover-img" alt="Bell 206B JetRanger III en vuelo">
     </div>
     <div class="tag" style="margin-top:14px;margin-bottom:6px">República Argentina · Regulación ANAC / RAAC</div>
     <h1 style="font-size:28px;margin:4px 0 2px">Curso de Adaptación</h1>

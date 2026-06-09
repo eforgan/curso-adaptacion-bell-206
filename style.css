@@ -385,13 +385,30 @@ body,.card,input{transition:background .3s,color .3s,border-color .3s}
 
 /* ── HERO INTRO ───────────────────────────────────── */
 .hero-heli{
-  font-size:64px;
-  animation:heliFloat 3s ease-in-out infinite;
-  display:inline-block;filter:drop-shadow(0 0 20px rgba(240,165,0,.5));
+  display:inline-block;
+  position: relative;
+  padding: 5px;
 }
-@keyframes heliFloat{
-  0%,100%{transform:translateY(0) rotate(-2deg)}
-  50%{transform:translateY(-10px) rotate(2deg)}
+
+.cover-img {
+  width: 100%;
+  max-width: 520px;
+  height: auto;
+  border-radius: var(--radius2);
+  border: 2px solid transparent;
+  display: inline-block;
+  animation: framePulse 2.5s infinite alternate ease-in-out;
+}
+
+@keyframes framePulse {
+  0% {
+    border-color: rgba(240, 165, 0, 0.3);
+    box-shadow: 0 0 15px rgba(240, 165, 0, 0.2), inset 0 0 10px rgba(240, 165, 0, 0.1);
+  }
+  100% {
+    border-color: rgba(240, 165, 0, 1);
+    box-shadow: 0 0 35px rgba(240, 165, 0, 0.6), inset 0 0 20px rgba(240, 165, 0, 0.3);
+  }
 }
 
 /* ── GLOW ORBS (decorativos) ──────────────────────── */
