@@ -640,8 +640,19 @@ body.day .glow-orb{opacity:.1}
 <div class="glow-orb amber"></div>
 <div class="glow-orb blue"></div>
 <div class="app" id="root"></div>
-<button class="admin-link" onclick="openAdmin()" title="Panel Administrador">⚙</button>
 <script>
+window.onerror = function(message, source, lineno, colno, error) {
+  const root = document.getElementById('root');
+  if (root) {
+    root.innerHTML = `<div style="padding: 24px; color: #ff5555; background: rgba(255,0,0,0.1); border: 2px solid #ff5555; border-radius: 8px; font-family: monospace; margin: 20px; z-index: 9999; position: relative;">
+      <h3>Runtime Error Detected</h3>
+      <p><strong>Error:</strong> ${message}</p>
+      <p><strong>Location:</strong> ${source} (Line ${lineno}:${colno})</p>
+      <pre style="margin-top: 10px; padding: 10px; background: rgba(0,0,0,0.5); border-radius: 4px; overflow-x: auto;">${error ? error.stack : ''}</pre>
+    </div>`;
+  }
+  return false;
+};
 
 const IMGS={
   heli_overview:"img/heli_overview.jpg",
