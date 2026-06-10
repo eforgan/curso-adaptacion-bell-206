@@ -581,6 +581,24 @@ const defaultState = {
 
 let state = { ...defaultState };
 
+window.showToast = function(message, type = 'success') {
+  let container = document.getElementById('toast-container');
+  if (!container) {
+    container = document.createElement('div');
+    container.id = 'toast-container';
+    container.className = 'toast-container';
+    document.body.appendChild(container);
+  }
+  const toast = document.createElement('div');
+  toast.className = `toast ${type}`;
+  toast.innerText = message;
+  container.appendChild(toast);
+  setTimeout(() => {
+    toast.classList.add('fade-out');
+    setTimeout(() => toast.remove(), 300);
+  }, 4000);
+};
+
 function loadState(){
   try{
     const s = localStorage.getItem('bell206_state');
@@ -909,7 +927,7 @@ window.openFullscreenViewer = (pageNum) => {
         <button class="btn btn-sm btn-danger" onclick="window.closeFullscreenViewer()">✖ Cerrar</button>
       </div>
       <div id="fs-img-container" style="width:100%;height:100%;overflow:auto;display:flex;justify-content:center;align-items:flex-start;background:#0d1117;border-radius:12px;border:1px solid rgba(255,255,255,0.1)">
-        <img id="fs-manual-img" src="" style="max-height:95%;width:auto;transition:transform 0.2s;transform-origin:top center" alt="Manual de vuelo en pantalla completa">
+        <img id="fs-manual-img" src="" loading="lazy" style="max-height:95%;width:auto;transition:transform 0.2s;transform-origin:top center" alt="Manual de vuelo en pantalla completa">
       </div>
     `;
     document.body.appendChild(modal);
@@ -1150,7 +1168,7 @@ function renderModule(){
         </div>
 
         <div class="manual-img-container" id="manual-img-container">
-          <img src="img/fm_pages/page_${state.activeViewerPage}.jpg" class="manual-img" id="manual-page-img" style="transform: scale(${state.viewerZoom});" alt="Página ${state.activeViewerPage} del Manual de Vuelo">
+          <img src="img/fm_pages/page_${state.activeViewerPage}.jpg" loading="lazy" class="manual-img" id="manual-page-img" style="transform: scale(${state.viewerZoom});" alt="Página ${state.activeViewerPage} del Manual de Vuelo">
         </div>
         <div class="viewer-controls">
           <button class="viewer-btn" onclick="window.adjustZoom(0.15)">🔍+ Zoom</button>
@@ -1813,13 +1831,13 @@ window.fetchFirebaseStudents = async function() {
 
 window.exportFirebaseCSV = async function() {
   if (!db) {
-    alert("Base de datos no configurada.");
+    showToast("Base de datos no configurada o no iniciada.", "error");
     return;
   }
   try {
     const snapshot = await db.collection('alumnos').orderBy('fecha_registro', 'desc').get();
     if(snapshot.empty) {
-      alert("No hay alumnos para exportar.");
+      showToast("No hay alumnos para exportar.", "error");
       return;
     }
     
@@ -1841,7 +1859,7 @@ window.exportFirebaseCSV = async function() {
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
   } catch(e) {
-    alert("Error exportando: " + e.message);
+    showToast("Error exportando: " + e.message, "error");
   }
 };
 

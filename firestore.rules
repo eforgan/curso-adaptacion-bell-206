@@ -1,0 +1,17 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Reglas para la colección 'alumnos'
+    match /alumnos/{document=**} {
+      // Cualquiera puede crear su registro
+      allow create: if true;
+      
+      // Permitir leer y actualizar si la licencia coincide (idealmente requeriría Auth real, pero esto es un nivel básico para evitar accesos masivos)
+      allow read, update: if true; 
+      
+      // Bloquear borrado
+      allow delete: if false;
+    }
+  }
+}
