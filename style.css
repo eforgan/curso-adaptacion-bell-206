@@ -400,7 +400,7 @@ label{font-size:13px;color:var(--text2);display:block;margin-bottom:5px;font-wei
   .wb-grid, .perf-grid {
     grid-template-columns: 1fr;
   }
-  .sidebar { width: 100%; border-right: none; border-bottom: 1px solid var(--border); position: relative; top: auto; z-index: 10; }
+  .sidebar { width: 100%; border-right: none; border-bottom: 1px solid var(--border); position: relative !important; top: auto !important; z-index: 10; }
   .app-container { flex-direction: column; display: flex; }
   .main-content { padding: 15px; }
 }
