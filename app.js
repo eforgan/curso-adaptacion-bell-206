@@ -1077,7 +1077,7 @@ function renderMap(){
             <div style="font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.06em">Módulo ${m.id} · ${m.chapters.length} capítulos</div>
             <div style="font-size:14px;font-weight:500;color:${done?'#2ecc71':'var(--text)'}">${m.title}</div>
             <div style="font-size:12px;color:var(--text3)">${m.subtitle}</div>
-            <div style="font-size:11px;color:var(--text3);margin-top:3px">${m.chapters.map(c=>`<span style="margin-right:8px;opacity:.7">${c.title.split('—')[0]?.trim()}</span>`).join('')}</div>
+            <div style="font-size:11px;color:var(--text3);margin-top:3px">${m.chapters.map(c=>`<span style="margin-right:8px;opacity:.7">${c.title.split('—')[0] ? c.title.split('—')[0].trim() : ''}</span>`).join('')}</div>
           </div>
         </div>
         <div style="text-align:right;min-width:60px">
@@ -1141,7 +1141,7 @@ function renderModule(){
   </div>
   <div style="display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap">
   ${m.chapters.map((c,i)=>`
-    <button onclick="setChapter(${i})" style="padding:6px 12px;border-radius:20px;border:1.5px solid ${i===state.currentChapter?'var(--amber)':'var(--border2)'};background:${i===state.currentChapter?'#2a1e00':'var(--bg3)'};color:${i===state.currentChapter?'var(--amber)':'var(--text3)'};cursor:pointer;font-size:12px;font-family:inherit" title="${c.title}">${c.title.split('—')[0]?.trim()||`${m.id}.${i+1}`}</button>
+    <button onclick="setChapter(${i})" style="padding:6px 12px;border-radius:20px;border:1.5px solid ${i===state.currentChapter?'var(--amber)':'var(--border2)'};background:${i===state.currentChapter?'#2a1e00':'var(--bg3)'};color:${i===state.currentChapter?'var(--amber)':'var(--text3)'};cursor:pointer;font-size:12px;font-family:inherit" title="${c.title}">${(c.title.split('—')[0] ? c.title.split('—')[0].trim() : null)||`${m.id}.${i+1}`}</button>
   `).join('')}
   </div>
 
@@ -1739,7 +1739,7 @@ async function sendCertificateEmails(doc, safeName, score, pct){
   } catch(err){
     console.error('EmailJS error:', err);
     statusEl.className='email-status error';
-    statusEl.innerHTML=`❌ Error al enviar email: ${err?.text||JSON.stringify(err)}. El certificado ya fue descargado localmente.`;
+    statusEl.innerHTML=`❌ Error al enviar email: ${(err && err.text)||JSON.stringify(err)}. El certificado ya fue descargado localmente.`;
   }
 }
 
