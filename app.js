@@ -1089,13 +1089,33 @@ function renderMap(){
     </div>`;
   }).join('')}
   </div>
-  ${allDone?`
-  <div style="background:#1e2e1a;border:1px solid #2a5a2a;border-radius:var(--radius2);padding:18px;text-align:center;margin-top:8px">
-    <div style="font-size:28px;margin-bottom:8px">🏆</div>
-    <h3 style="color:var(--green);margin-bottom:8px">¡Todos los módulos completados!</h3>
-    <p style="margin-bottom:14px">Está habilitado para rendir el Examen Final Integrador (30 preguntas)</p>
-    <button class="btn btn-green" onclick="startFinal()">Rendir Examen Final ★</button>
-  </div>`:`
+  ${allDone? (function(){
+    const finalCorrect = FINAL_EXAM.filter((q,i) => state.finalAnswers[i] === q.ans).length;
+    const finalPassed = finalCorrect >= 24;
+    const pct = Math.round((finalCorrect/30)*100);
+    if(finalPassed) {
+      return `
+      <div style="background:#1e2e1a;border:1px solid #2a5a2a;border-radius:var(--radius2);padding:18px;text-align:center;margin-top:8px">
+        <div style="font-size:28px;margin-bottom:8px">🎓</div>
+        <h3 style="color:var(--green);margin-bottom:8px">¡Curso Completado con Éxito!</h3>
+        <p style="margin-bottom:14px">Ha aprobado el Examen Final con ${finalCorrect}/30 (${pct}%).</p>
+        ${state.user ? `
+        <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+          <button class="btn btn-primary" onclick="generateCertificate(${finalCorrect},${pct}, 'download')">📄 Descargar Certificado</button>
+          <button class="btn btn-green" onclick="generateCertificate(${finalCorrect},${pct}, 'email')">✉️ Enviar por Email</button>
+        </div>` : '<div class="warn-box"><p>Para obtener el certificado PDF debe estar registrado.</p></div>'}
+      </div>`;
+    } else {
+      return `
+      <div style="background:#1e2e1a;border:1px solid #2a5a2a;border-radius:var(--radius2);padding:18px;text-align:center;margin-top:8px">
+        <div style="font-size:28px;margin-bottom:8px">🏆</div>
+        <h3 style="color:var(--green);margin-bottom:8px">¡Todos los módulos completados!</h3>
+        <p style="margin-bottom:14px">Está habilitado para rendir el Examen Final Integrador (30 preguntas)</p>
+        <button class="btn btn-green" onclick="startFinal()">Rendir Examen Final ★</button>
+        ${state.finalAnswers.length > 0 ? `<div style="margin-top:12px"><button class="btn btn-sm" onclick="showFinalResult()">Ver último resultado</button></div>` : ''}
+      </div>`;
+    }
+  })() :`
   <div class="info-box" style="margin-top:8px"><p>Complete todos los módulos para acceder al Examen Final. Debe aprobar cada examen de módulo con mínimo <strong>4/5 (80%)</strong> de respuestas correctas para avanzar al siguiente módulo. El Examen Final requiere <strong>24/30 (80%)</strong>.</p></div>`}
   `;
 }
@@ -1347,7 +1367,10 @@ function renderFinalResult(){
     `:'<div class="warn-box"><p>Para obtener el certificado PDF debe estar registrado. Si cursó como invitado, regístrese e ingrese nuevamente para obtener su certificado.</p></div>'}
     <div class="warn-box" style="margin-top:12px"><p>Esta constancia acredita la parte teórica del Curso de Adaptación. Para la habilitación en tipo deberá completar el vuelo de adaptación con un Instructor de Vuelo habilitado conforme RAAC Parte 61.</p></div>
   </div>
-  ${state.user?`<div style="text-align:center;margin-top:12px"><button class="btn btn-primary" onclick="generateCertificate(${correct},${pct})" style="padding:12px 28px;font-size:15px">📄 Descargar y Enviar Certificado</button></div><div id="email-status-msg" class="email-status" style="display:none"></div>`:''}`:''}
+  ${state.user?`<div style="text-align:center;margin-top:12px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+    <button class="btn btn-primary" onclick="generateCertificate(${correct},${pct}, 'download')" style="padding:12px 28px;font-size:15px">📄 Descargar Certificado (PDF)</button>
+    <button class="btn btn-green" onclick="generateCertificate(${correct},${pct}, 'email')" style="padding:12px 28px;font-size:15px">✉️ Enviar por Email</button>
+  </div><div id="email-status-msg" class="email-status" style="display:none"></div>`:''}`:''}
   <div class="card" style="margin:14px 0">
     <div class="flex-between" style="margin-bottom:10px">
       <h3>Revisión Completa</h3>
@@ -1525,7 +1548,7 @@ function downloadAdminKeys(){
 }
 
 // ========= CERTIFICATE =========
-function generateCertificate(score, pct){
+function generateCertificate(score, pct, action = 'both'){
   const {jsPDF}=window.jspdf;
   const doc=new jsPDF({orientation:'landscape',unit:'mm',format:'a4'});
   const W=297,H=210;
@@ -1630,11 +1653,13 @@ function generateCertificate(score, pct){
   
   const safeName=(nombre).replace(/\s+/g,'_');
 
-  // Save locally
-  doc.save(`Certificado_Bell206B3_${safeName}.pdf`);
-
-  // Also send by email
-  sendCertificateEmails(doc, safeName, score, pct);
+  if (action === 'download' || action === 'both') {
+    doc.save(`Certificado_Bell206B3_${safeName}.pdf`);
+  }
+  
+  if (action === 'email' || action === 'both') {
+    sendCertificateEmails(doc, safeName, score, pct);
+  }
 }
 
 // ========= EMAIL SENDING =========
