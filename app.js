@@ -1553,12 +1553,12 @@ function generateCertificate(score, pct, action = 'both'){
   const doc=new jsPDF({orientation:'landscape',unit:'mm',format:'a4'});
   const W=297,H=210;
   
-  // Background deep navy
-  doc.setFillColor(12,16,30);
+  // Background light gray
+  doc.setFillColor(245,247,250);
   doc.rect(0,0,W,H,'F');
   
-  // Outer border gold double line
-  doc.setDrawColor(218,165,32);doc.setLineWidth(2.5);
+  // Outer border dark blue/gray double line
+  doc.setDrawColor(40,50,70);doc.setLineWidth(2.5);
   doc.rect(10,10,W-20,H-20);
   doc.setLineWidth(0.5);
   doc.rect(13,13,W-26,H-26);
@@ -1566,70 +1566,71 @@ function generateCertificate(score, pct, action = 'both'){
   
   // Top decorative bar
   doc.setFillColor(220,160,30);doc.rect(8,8,W-16,8,'F');
-  doc.setFillColor(12,16,30);doc.rect(11,11,W-22,2,'F');
+  doc.setFillColor(40,50,70);doc.rect(11,11,W-22,2,'F');
   
   // Bottom bar
   doc.setFillColor(220,160,30);doc.rect(8,H-16,W-16,8,'F');
   
-  // Header text in gold bar
+  // Header text in top bar
   doc.setTextColor(12,16,30);
   doc.setFontSize(9);doc.setFont('helvetica','bold');
   doc.text('MODENA AIR SERVICE — CENTRO DE CAPACITACIÓN Y ENTRENAMIENTO — ANAC ARGENTINA',W/2,13.5,{align:'center'});
   
   // Course type tag
-  doc.setFillColor(30,40,70);
-  doc.roundedRect(W/2-60,22,120,8,2,2,'F');
-  doc.setTextColor(150,180,255);doc.setFontSize(8);doc.setFont('helvetica','normal');
+  doc.setFillColor(220,225,235);
+  doc.setDrawColor(180,190,200);doc.setLineWidth(0.3);
+  doc.roundedRect(W/2-60,22,120,8,2,2,'FD');
+  doc.setTextColor(60,70,90);doc.setFontSize(8);doc.setFont('helvetica','bold');
   doc.text('CERTIFICADO DE APROBACIÓN — FASE TEÓRICA',W/2,27.5,{align:'center'});
   
   // Main title
-  doc.setTextColor(218,165,32);doc.setFontSize(32);doc.setFont('times','italic');
+  doc.setTextColor(30,40,60);doc.setFontSize(32);doc.setFont('times','italic');
   doc.text('Curso de Adaptación',W/2,50,{align:'center'});
   
   // Helicopter model
-  doc.setTextColor(245,200,66);doc.setFontSize(20);
+  doc.setTextColor(200,140,20);doc.setFontSize(20);doc.setFont('times','bold');
   doc.text('Bell Model 206B JetRanger III',W/2,62,{align:'center'});
   
   // Divider line
-  doc.setDrawColor(220,160,30);doc.setLineWidth(0.5);
+  doc.setDrawColor(200,160,50);doc.setLineWidth(0.5);
   doc.line(40,68,W-40,68);
   
   // "Se certifica que" text
-  doc.setTextColor(180,190,210);doc.setFontSize(12);doc.setFont('helvetica','normal');
+  doc.setTextColor(80,90,110);doc.setFontSize(12);doc.setFont('helvetica','normal');
   doc.text('Se certifica que el/la piloto',W/2,78,{align:'center'});
   
   // Name
   const nombre=`${state.user.nombre} ${state.user.apellido}`;
-  doc.setTextColor(255,255,255);doc.setFontSize(26);doc.setFont('times','bold');
+  doc.setTextColor(20,25,35);doc.setFontSize(26);doc.setFont('times','bold');
   doc.text(nombre,W/2,92,{align:'center'});
   
   // License
-  doc.setTextColor(180,190,210);doc.setFontSize(11);doc.setFont('helvetica','normal');
+  doc.setTextColor(60,70,90);doc.setFontSize(11);doc.setFont('helvetica','normal');
   doc.text(`Licencia ANAC N°: ${state.user.licencia}`,W/2,101,{align:'center'});
   
   // Completion text
   doc.setFontSize(11);
   doc.text('ha completado satisfactoriamente la Fase Teórica del Curso de Adaptación al',W/2,112,{align:'center'});
-  doc.setTextColor(245,200,66);doc.setFont('helvetica','bold');
+  doc.setTextColor(40,50,70);doc.setFont('helvetica','bold');
   doc.text('helicóptero Bell Model 206B JetRanger III (B3)',W/2,120,{align:'center'});
   
   // Score box
-  doc.setFillColor(25,35,60);doc.setDrawColor(100,140,220);doc.setLineWidth(0.5);
+  doc.setFillColor(255,255,255);doc.setDrawColor(160,170,180);doc.setLineWidth(0.5);
   doc.roundedRect(W/2-50,125,100,16,3,3,'FD');
-  doc.setTextColor(150,180,255);doc.setFontSize(9);doc.setFont('helvetica','normal');
+  doc.setTextColor(80,90,110);doc.setFontSize(9);doc.setFont('helvetica','normal');
   doc.text('Resultado Examen Final Integrador',W/2,131,{align:'center'});
-  doc.setTextColor(100,220,140);doc.setFontSize(14);doc.setFont('helvetica','bold');
+  doc.setTextColor(20,140,60);doc.setFontSize(14);doc.setFont('helvetica','bold');
   doc.text(`${score}/30   (${pct}%)   APROBADO`,W/2,140,{align:'center'});
   
   // Regulatory note
-  doc.setTextColor(120,130,150);doc.setFontSize(8);doc.setFont('helvetica','italic');
+  doc.setTextColor(100,110,120);doc.setFontSize(8);doc.setFont('helvetica','italic');
   doc.text('Esta constancia acredita únicamente la fase teórica. La habilitación en tipo requiere el vuelo de adaptación',W/2,151,{align:'center'});
   doc.text('con Instructor de Vuelo habilitado conforme RAAC Parte 61 — ANAC República Argentina.',W/2,157,{align:'center'});
   
   // Date
   const now=new Date();
   const dateStr=now.toLocaleDateString('es-AR',{day:'2-digit',month:'long',year:'numeric'});
-  doc.setTextColor(180,190,210);doc.setFontSize(9);doc.setFont('helvetica','normal');
+  doc.setTextColor(60,70,90);doc.setFontSize(9);doc.setFont('helvetica','normal');
   doc.text(`Buenos Aires, ${dateStr}`,W/2,165,{align:'center'});
   
   // Signature line
@@ -1641,9 +1642,9 @@ function generateCertificate(score, pct, action = 'both'){
     doc.addImage(IMGS.firma,'PNG',W/2-35,158,70,22);
   }catch(e){}
   
-  doc.setTextColor(200,210,230);doc.setFontSize(9);doc.setFont('helvetica','bold');
+  doc.setTextColor(40,50,70);doc.setFontSize(9);doc.setFont('helvetica','bold');
   doc.text('Eduardo J. Forgan',W/2,180,{align:'center'});
-  doc.setFont('helvetica','normal');doc.setFontSize(8);doc.setTextColor(140,150,170);
+  doc.setFont('helvetica','normal');doc.setFontSize(8);doc.setTextColor(80,90,110);
   doc.text('Instructor de Vuelo de Helicópteros — Comandante',W/2,185,{align:'center'});
   doc.text('Modena Air Service — I.V.H. / ANAC Argentina',W/2,190,{align:'center'});
   
