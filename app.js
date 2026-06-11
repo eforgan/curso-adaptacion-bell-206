@@ -1897,7 +1897,7 @@ function renderSidebar() {
   let progressHtml = '';
   if (u) {
     const totalModules = MODULES.length;
-    const completed = state.completedModules.length;
+    const completed = (state.completedModules || []).length;
     const pct = Math.round((completed / totalModules) * 100);
     progressHtml = `
       <div style="padding: 0 15px 15px 15px; border-bottom: 1px solid var(--border); margin-bottom: 15px;">
